@@ -1,0 +1,41 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\xuhai\\.ohos\\config\\auto_debug_BlendHarmony_com.blend.harmony_80086000140665193.cer",
+          "storePassword": "0000001A6224C3538FB433056A42B81E1A22D6942B1FF691B09763EB59A0A8FB8EFA9FE1ADEFA3BE170B",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A2C8AC184632DD9B1F1BA8ECF9204A3DB9326AC656926B4306EAD1E95FABCEB5604D249893D20",
+          "profile": "C:\\Users\\xuhai\\.ohos\\config\\auto_debug_BlendHarmony_com.blend.harmony_80086000140665193.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\xuhai\\.ohos\\config\\auto_debug_BlendHarmony_com.blend.harmony_80086000140665193.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 9,
+    "compatibleSdkVersion": 9,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
