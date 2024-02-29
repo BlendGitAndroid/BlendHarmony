@@ -1,3 +1,4 @@
+import router from '@ohos.router'
 @Entry
 @Component
 struct Index {
@@ -9,6 +10,9 @@ struct Index {
         Text(this.message)
           .fontSize(50)
           .fontWeight(FontWeight.Bold)
+          .onClick(() => {
+            router.pushUrl({url: 'rank/pages/RankPage'})
+          })
       }
       .width('100%')
     }
