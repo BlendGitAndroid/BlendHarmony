@@ -4,6 +4,8 @@
     "rank/pages/RankPage",
     "toDoList/pages/ToDoListPage",
     "router/pages/IndexPage",
-    "router/pages/SecondPage"
+    "router/pages/SecondPage",
+    "simpleComponents/pages/LoginPage",
+    "simpleComponents/pages/MainPage"
   ]
 }

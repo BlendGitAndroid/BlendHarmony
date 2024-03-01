@@ -29,6 +29,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'router/pages/IndexPage'})
           })
+
+        Text("简单的页面")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'simpleComponents/pages/LoginPage'})
+          })
       }
       .width('100%')
     }
