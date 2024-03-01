@@ -355,6 +355,22 @@
     {
       "name": "input_target_name",
       "value": "请输入子目标名称"
+    },
+    {
+      "name": "secondPage",
+      "value": "pages/play"
+    },
+    {
+      "name": "slider_startTime",
+      "value": "00:00"
+    },
+    {
+      "name": "simple_video_back",
+      "value": "视频"
+    },
+    {
+      "name": "empty",
+      "value": "empty"
     }
   ]
 }

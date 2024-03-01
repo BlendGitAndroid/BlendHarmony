@@ -7,6 +7,8 @@
     "router/pages/SecondPage",
     "simpleComponents/pages/LoginPage",
     "simpleComponents/pages/MainPage",
-    "targetManager/pages/MainPage"
+    "targetManager/pages/MainPage",
+    "simpleVideo/pages/SimpleVideoIndex",
+    "simpleVideo/pages/SimpleVideoPlay"
   ]
 }

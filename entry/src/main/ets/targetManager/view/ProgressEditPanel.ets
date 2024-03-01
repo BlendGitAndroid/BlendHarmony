@@ -18,21 +18,21 @@ import { CommonConstants } from '../common/constant/CommonConstant';
 @Component
 export default struct ProgressEditPanel {
   @Link sliderMode: number;
-  @Prop slidingProgress: number = 0;
+  @Prop slidingProgress: number;
   onCancel?: () => void;
   onClickOK?: (progress: number) => void;
 
   build() {
     Column() {
       Row() {
+        // 滑动条组件，通常用于快速调节设置值，如音量调节、亮度调节等应用场景。
         Slider({
           value: this.slidingProgress,
           min: CommonConstants.SLIDER_MIN_VALUE,
           max: CommonConstants.SLIDER_MAX_VALUE,
-          style: SliderStyle.InSet,
-          step: CommonConstants.SLIDER_STEP
-        })
-          .width(CommonConstants.SLIDER_INNER_WIDTH)
+          style: SliderStyle.InSet, // 滑块在滑轨内
+          step: CommonConstants.SLIDER_STEP // 设置Slider滑动步长
+        }).width(CommonConstants.SLIDER_INNER_WIDTH)
           .onChange((value: number, mode: SliderChangeMode) => {
             this.slidingProgress = Math.floor(value);
             this.sliderMode = mode;
@@ -50,16 +50,15 @@ export default struct ProgressEditPanel {
       Row() {
         CustomButton({
           buttonText: $r('app.string.cancel_button')
-        })
-          .onClick(() => {
+        }).onClick(() => {
             if (this.onCancel !== undefined) {
               this.onCancel();
             }
           })
+
         CustomButton({
           buttonText: $r('app.string.confirm_button')
-        })
-          .onClick(() => {
+        }).onClick(() => {
             if (this.onClickOK !== undefined) {
               this.onClickOK(this.slidingProgress);
             }
@@ -86,7 +85,7 @@ struct CustomButton {
       .backgroundColor(this.buttonColor)
       .borderRadius(CommonConstants.LIST_RADIUS)
       .textAlign(TextAlign.Center)
-      .onTouch((event?: TouchEvent) => {
+      .onTouch((event?: TouchEvent) => {  // 添加touch事件
         if (event !== undefined && event.type === TouchType.Down) {
           this.buttonColor = $r('app.color.custom_button_color');
         }

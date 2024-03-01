@@ -45,6 +45,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'targetManager/pages/MainPage'})
           })
+
+        Text("Video组件的使用")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'simpleVideo/pages/SimpleVideoIndex'})
+          })
       }
       .width('100%')
     }

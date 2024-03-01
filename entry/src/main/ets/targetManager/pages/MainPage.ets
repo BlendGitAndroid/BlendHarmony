@@ -24,11 +24,18 @@ import promptAction from '@ohos.promptAction';
 @Entry
 @Component
 struct MainPage {
+
   @State targetData: Array<TaskItemBean> = DataModel.getData();
   @State totalTasksNumber: number = 0;
   @State completedTasksNumber: number = 0;
   @State latestUpdateDate: string = CommonConstants.DEFAULT_PROGRESS_VALUE;
+
+  // @Provide和@Consume，应用于与后代组件的双向数据同步，应用于状态数据在多个层级之间传递的场景。
+  // @Watch应用于对状态变量的监听。如果开发者需要关注某个状态变量的值是否改变，可以使用@Watch为状态变量设置回调函数。
+  // overAllProgressChanged这个变量更改,就会调用 onProgressChanged 函数
   @Provide @Watch('onProgressChanged') overAllProgressChanged: boolean = false;
+
+  // CustomDialogController来控制自定义弹窗的显示和隐藏
   dialogController: CustomDialogController = new CustomDialogController({
     builder: AddTargetDialog({
       onClickOk: (value: string): void => this.saveTask(value)

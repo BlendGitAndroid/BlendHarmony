@@ -17,9 +17,10 @@ import { CommonConstants } from '../common/constant/CommonConstant';
 
 @Component
 export default struct TargetInformation {
-  @Prop latestUpdateDate: string = '';
-  @Prop totalTasksNumber: number = 0;
-  @Prop completedTasksNumber: number = 0;
+
+  @Prop latestUpdateDate: string;
+  @Prop totalTasksNumber: number;
+  @Prop completedTasksNumber: number;
 
   build() {
     Column() {
@@ -87,10 +88,11 @@ export default struct TargetInformation {
             .fontWeight(CommonConstants.FONT_WEIGHT)
         }
 
+        // 进度条组件，用于显示内容加载或操作处理等进度。
         Progress({
           value: this.completedTasksNumber,
           total: this.totalTasksNumber,
-          type: ProgressType.Ring
+          type: ProgressType.Ring // 环形无刻度样式，环形圆环逐渐显示至完全填充效果。
         })
           .color($r('app.color.main_blue'))
           .style({
@@ -109,7 +111,8 @@ export default struct TargetInformation {
 /**
  * Custom Transparent Text Styles
  */
-@Extend(Text) function opacityTextStyle() {
+@Extend(Text)
+function opacityTextStyle() {
   .fontSize($r('app.float.text_font'))
   .fontColor($r('app.color.title_black_color'))
   .opacity(CommonConstants.OPACITY)

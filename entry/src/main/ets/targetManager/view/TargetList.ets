@@ -19,11 +19,14 @@ import DataModel, { TaskItemBean } from '../viewmodel/DataModel';
 
 @Component
 export default struct TargetList {
+  // 从父组件继承的
   @Consume overAllProgressChanged: boolean;
+
   @State isEditMode: boolean = false;
   @State selectArray: Array<boolean> = [];
   @State clickIndex: number = CommonConstants.DEFAULT_CLICK_INDEX;
   @State selectAll: boolean = false;
+
   @Link targetData: Array<TaskItemBean>;
   onAddClick?: () => void;
 
@@ -75,20 +78,21 @@ export default struct TargetList {
         right: $r('app.float.list_padding_right')
       })
 
+      // @Link子组件从父组件初始化@State的语法为Comp({ aLink: this.aState })。同样Comp({aLink: $aState})也支持。
       List({ space: CommonConstants.LIST_SPACE }) {
         ForEach(this.targetData, (item: TaskItemBean, index: number | undefined) => {
           ListItem() {
             TargetListItem({
               taskItem: item,
               index: index,
-              selectArr: $selectArray,
-              isEditMode: this.isEditMode,
-              clickIndex: $clickIndex
+              selectArr: $selectArray,  // 这里也是$修饰,表示是引用
+              isEditMode: this.isEditMode,  // 这里是另外的一种写法
+              clickIndex: $clickIndex // 在父组件中使用子组件时，将父组件的clickIndex传递给子组件的clickIndex。其中父组件的clickIndex加上$表示传递的是引用。
             })
           }
         }, (item: TaskItemBean) => JSON.stringify(item))
       }
-      .edgeEffect(EdgeEffect.None)
+      .edgeEffect(EdgeEffect.None)  // 不设置滑动效果
       .margin({ top: $r('app.float.list_margin_top') })
       .width(CommonConstants.FULL_WIDTH)
       .height(CommonConstants.LIST_HEIGHT)

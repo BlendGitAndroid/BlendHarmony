@@ -24,10 +24,10 @@ export default struct TargetListItem {
   @State latestProgress?: number = 0;
   @State updateDate?: string = '';
   @Link selectArr: Array<boolean>;
-  @Prop isEditMode: boolean = false;
+  @Prop isEditMode: boolean;
   @Link @Watch('onClickIndexChanged') clickIndex: number;
   @State isExpanded: boolean = false;
-  @Consume overAllProgressChanged: boolean;
+  @Consume overAllProgressChanged: boolean; // 从父组件接收的参数
   @State sliderMode: number = CommonConstants.DEFAULT_SLIDER_MODE;
   public index: number = 0;
 
@@ -51,6 +51,7 @@ export default struct TargetListItem {
         this.TargetItem()
         if (this.isExpanded) {
           Blank()
+          // 滑动条
           ProgressEditPanel({
             slidingProgress: this.latestProgress,
             onCancel: () => this.isExpanded = false,
@@ -64,13 +65,12 @@ export default struct TargetListItem {
               this.isExpanded = false;
             },
             sliderMode: $sliderMode
+          }).transition({ // 组件内转场主要通过transition属性配置转场参数，在组件插入和删除时显示过渡动效
+            scale: {
+              x: CommonConstants.TRANSITION_ANIMATION_X,
+              y: CommonConstants.TRANSITION_ANIMATION_Y
+            }
           })
-            .transition({
-              scale: {
-                x: CommonConstants.TRANSITION_ANIMATION_X,
-                y: CommonConstants.TRANSITION_ANIMATION_Y
-              }
-            })
         }
       }
       .padding({
@@ -82,7 +82,7 @@ export default struct TargetListItem {
       .height(this.isExpanded ? $r('app.float.expanded_item_height') : $r('app.float.list_item_height'))
       .width(CommonConstants.FULL_WIDTH)
       .opacity(
-        this.latestProgress === CommonConstants.SLIDER_MAX_VALUE ?
+          this.latestProgress === CommonConstants.SLIDER_MAX_VALUE ?
         CommonConstants.OPACITY : CommonConstants.NO_OPACITY
       )
       .borderRadius(CommonConstants.LIST_RADIUS)
