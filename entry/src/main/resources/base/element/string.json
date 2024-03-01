@@ -79,6 +79,14 @@
     {
       "name": "page_title",
       "value": "待办"
+    },
+    {
+      "name": "next",
+      "value": "Next"
+    },
+    {
+      "name": "back",
+      "value": "Back"
     }
   ]
 }

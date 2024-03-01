@@ -11,7 +11,7 @@ struct Index {
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
           .onClick(() => {
-            router.pushUrl({url: 'rank/pages/RankPage'})
+            router.pushUrl({url: 'rank/pages/RankPage'}, router.RouterMode.Single)  // 单实例模式
           })
 
         Text("代办列表")
@@ -20,6 +20,14 @@ struct Index {
           .margin(10)
           .onClick(() => {
             router.pushUrl({url: 'toDoList/pages/ToDoListPage'})
+          })
+
+        Text("路由")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'router/pages/IndexPage'})
           })
       }
       .width('100%')

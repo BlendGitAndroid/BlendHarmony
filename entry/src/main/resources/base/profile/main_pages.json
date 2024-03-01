@@ -2,6 +2,8 @@
   "src": [
     "pages/Index",
     "rank/pages/RankPage",
-    "toDoList/pages/ToDoListPage"
+    "toDoList/pages/ToDoListPage",
+    "router/pages/IndexPage",
+    "router/pages/SecondPage"
   ]
 }
