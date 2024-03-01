@@ -24,8 +24,10 @@ import Setting from "../view/Setting"
 @Component
 struct MainPage {
   @State currentIndex: number = CommonConstants.HOME_TAB_INDEX;
+
   private tabsController: TabsController = new TabsController();
 
+  // 自定义tabBar的内容
   @Builder TabBuilder(title: string, index: number, selectedImg: Resource, normalImg: Resource) {
     Column() {
       Image(this.currentIndex === index ? selectedImg : normalImg)
@@ -40,7 +42,9 @@ struct MainPage {
     .height($r('app.float.mainPage_barHeight'))
     .width(CommonConstants.FULL_PARENT)
     .onClick(() => {
+      // 点击更改
       this.currentIndex = index;
+      // 调用changeIndex方法进行页签内容切换
       this.tabsController.changeIndex(this.currentIndex);
     })
   }
@@ -71,6 +75,7 @@ struct MainPage {
     .barHeight($r('app.float.mainPage_barHeight'))
     .barMode(BarMode.Fixed)
     .onChange((index: number) => {
+      // 滑动点击
       this.currentIndex = index;
     })
   }

@@ -37,6 +37,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'simpleComponents/pages/LoginPage'})
           })
+
+        Text("管理组件状态")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'targetManager/pages/MainPage'})
+          })
       }
       .width('100%')
     }

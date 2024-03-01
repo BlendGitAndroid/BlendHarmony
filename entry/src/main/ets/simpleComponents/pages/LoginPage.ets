@@ -17,6 +17,7 @@ import prompt from '@ohos.promptAction';
 import router from '@ohos.router';
 import CommonConstants from '../common/constants/CommonConstants';
 
+// 用于扩展原生组件样式
 @Extend(TextInput)
 function inputStyle() {
   .placeholderColor($r('app.color.placeholder_color'))
@@ -86,6 +87,7 @@ struct LoginPage {
   }
 
   build() {
+    // 交叉轴默认是居中对齐
     Column() {
       Image($r('app.media.logo'))
         .width($r('app.float.logo_image_size'))
@@ -149,13 +151,16 @@ struct LoginPage {
           .margin({ top: $r('app.float.login_progress_margin_top') })
       }
 
+      // 空白的替换
       Blank()
+
       Text($r('app.string.other_login_method'))
         .fontColor($r('app.color.other_login_text_color'))
         .fontSize($r('app.float.little_text_size'))
         .fontWeight(FontWeight.Medium)
         .margin({ top: $r('app.float.other_login_margin_top'), bottom: $r('app.float.other_login_margin_bottom') })
-      Row({ space: CommonConstants.LOGIN_METHODS_SPACE }) {
+
+      Row({ space: CommonConstants.LOGIN_METHODS_SPACE }) { // space：子组件在主轴方向上的间距
         this.imageButton($r('app.media.login_method1'))
         this.imageButton($r('app.media.login_method2'))
         this.imageButton($r('app.media.login_method3'))

@@ -6,6 +6,7 @@
     "router/pages/IndexPage",
     "router/pages/SecondPage",
     "simpleComponents/pages/LoginPage",
-    "simpleComponents/pages/MainPage"
+    "simpleComponents/pages/MainPage",
+    "targetManager/pages/MainPage"
   ]
 }
