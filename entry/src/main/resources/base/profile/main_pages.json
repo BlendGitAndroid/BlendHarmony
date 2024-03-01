@@ -9,6 +9,7 @@
     "simpleComponents/pages/MainPage",
     "targetManager/pages/MainPage",
     "simpleVideo/pages/SimpleVideoIndex",
-    "simpleVideo/pages/SimpleVideoPlay"
+    "simpleVideo/pages/SimpleVideoPlay",
+    "multipleDialog/pages/HomePage"
   ]
 }

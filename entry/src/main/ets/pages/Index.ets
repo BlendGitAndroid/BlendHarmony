@@ -53,6 +53,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'simpleVideo/pages/SimpleVideoIndex'})
           })
+
+        Text("给应用添加弹窗")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'multipleDialog/pages/HomePage'})
+          })
       }
       .width('100%')
     }
