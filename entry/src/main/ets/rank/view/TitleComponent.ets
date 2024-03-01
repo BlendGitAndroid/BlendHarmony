@@ -14,10 +14,13 @@
  */
 
 import AppContext from '@ohos.app.ability.common';
+import router from '@ohos.router';
 import { FontSize, TitleBarStyle, WEIGHT } from '../common/constants/Constants';
 
 @Component
 export struct TitleComponent {
+
+  // @Link装饰的变量可以和父组件的@State变量建立双向数据绑定，需要注意的是：@Link变量不能在组件内部进行初始化。
   @Link isRefreshData: boolean; // User click the button to decide whether to switch data.
   @State title: Resource = $r('app.string.title_default');
 
@@ -29,8 +32,7 @@ export struct TitleComponent {
           .width(TitleBarStyle.IMAGE_BACK_SIZE)
           .margin({ right: TitleBarStyle.IMAGE_BACK_MARGIN_RIGHT })
           .onClick(() => {
-            let handler = getContext(this) as AppContext.UIAbilityContext;
-            handler.terminateSelf();
+            router.back()
           })
         Text(this.title)
           .fontSize(FontSize.LARGE)
@@ -56,6 +58,6 @@ export struct TitleComponent {
       right: TitleBarStyle.BAR_MARGIN_HORIZONTAL })
     .margin({ top: TitleBarStyle.BAR_MARGIN_TOP })
     .height(TitleBarStyle.BAR_HEIGHT)
-    .justifyContent(FlexAlign.SpaceAround)
+    .justifyContent(FlexAlign.SpaceAround)  // 均匀分布
   }
 }

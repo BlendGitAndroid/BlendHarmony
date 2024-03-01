@@ -23,7 +23,8 @@ import { APP_EXIT_INTERVAL, Style, TIME, TITLE, WEIGHT } from '../common/constan
 
 let rankModel: RankViewModel = new RankViewModel();
 
-@Entry
+// ArkTS通过struct声明组件名，并通过@Component和@Entry装饰器，来构成一个自定义组件。
+@Entry  // 一个页面有且仅有一个@Entry入口
 @Component
 struct RankPage {
   @State dataSource1: RankData[] = [];
@@ -33,11 +34,13 @@ struct RankPage {
   // It will record the time of clicking back button of system navigation.
   private clickBackTimeRecord: number = 0;
 
+  // 创建自定义组件的新实例后，在执行其build()函数之前执行
   aboutToAppear() {
     this.dataSource1 = rankModel.loadRankDataSource1();
     this.dataSource2 = rankModel.loadRankDataSource2();
   }
 
+  // 当用户点击返回按钮时触发，仅@Entry装饰的自定义组件生效
   onBackPress() {
     if (this.isShowToast()) {
       prompt.showToast({
@@ -59,28 +62,30 @@ struct RankPage {
       // Title component in the top.
       TitleComponent({ isRefreshData: $isSwitchDataSource, title: TITLE })
       // The head style of List component.
+      // 这里可以不写构造函数，但是可以通过构造函数传参？
       ListHeaderComponent({
         paddingValue: {
           left: Style.RANK_PADDING,
           right: Style.RANK_PADDING
         },
         widthValue: Style.CONTENT_WIDTH
-      })
-        .margin({
+      }).margin({
           top: Style.HEADER_MARGIN_TOP,
           bottom: Style.HEADER_MARGIN_BOTTOM
         })
       // The style of List component.
-      this.RankList(Style.CONTENT_WIDTH)
+      this.RankList(Style.CONTENT_WIDTH)  // 使用时只需要使用this关键字访问@Builder装饰的函数名，即可快速创建布局。
     }
     .backgroundColor($r('app.color.background'))
     .height(WEIGHT)
     .width(WEIGHT)
   }
 
+  // @Builder装饰器，来修饰一个函数，快速生成布局内容，从而可以避免重复的UI描述内容
   @Builder RankList(widthValue: Length) {
     Column() {
       List() {
+        // 循环渲染
         ForEach(this.isSwitchDataSource ? this.dataSource1 : this.dataSource2,
           (item: RankData, index?: number) => {
             ListItem() {
