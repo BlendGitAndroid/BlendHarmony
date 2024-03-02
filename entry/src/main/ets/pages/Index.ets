@@ -77,6 +77,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'webComponent/pages/MainPage'})
           })
+
+        Text("使用HTTP访问网络")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'httpRequest/pages/Index'})
+          })
       }
       .width('100%')
     }

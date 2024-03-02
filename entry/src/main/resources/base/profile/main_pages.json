@@ -13,6 +13,7 @@
     "multipleDialog/pages/HomePage",
     "animateRefresh/pages/TabIndex",
     "webComponent/pages/MainPage",
-    "webComponent/pages/WebPage"
+    "webComponent/pages/WebPage",
+    "httpRequest/pages/Index"
   ]
 }
