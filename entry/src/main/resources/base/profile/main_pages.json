@@ -10,6 +10,7 @@
     "targetManager/pages/MainPage",
     "simpleVideo/pages/SimpleVideoIndex",
     "simpleVideo/pages/SimpleVideoPlay",
-    "multipleDialog/pages/HomePage"
+    "multipleDialog/pages/HomePage",
+    "animateRefresh/pages/TabIndex"
   ]
 }

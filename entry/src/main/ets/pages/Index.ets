@@ -61,6 +61,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'multipleDialog/pages/HomePage'})
           })
+
+        Text("给应用添加动画")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'animateRefresh/pages/TabIndex'})
+          })
       }
       .width('100%')
     }
