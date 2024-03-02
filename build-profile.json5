@@ -36,6 +36,10 @@
           ]
         }
       ]
+    },
+    {
+      "name": "buttonLibrary",
+      "srcPath": "./buttonLibrary"
     }
   ]
 }

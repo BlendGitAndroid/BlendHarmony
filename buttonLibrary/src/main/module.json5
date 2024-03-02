@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "buttonLibrary",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}
