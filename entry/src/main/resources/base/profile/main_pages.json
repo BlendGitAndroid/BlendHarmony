@@ -11,6 +11,8 @@
     "simpleVideo/pages/SimpleVideoIndex",
     "simpleVideo/pages/SimpleVideoPlay",
     "multipleDialog/pages/HomePage",
-    "animateRefresh/pages/TabIndex"
+    "animateRefresh/pages/TabIndex",
+    "webComponent/pages/MainPage",
+    "webComponent/pages/WebPage"
   ]
 }

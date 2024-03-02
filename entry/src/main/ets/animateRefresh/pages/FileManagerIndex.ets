@@ -24,6 +24,8 @@ import DimensionUtil from '../common/utils/DimensionUtil';
 @Component
 export default struct FileManagerIndex {
   @Provide(RefreshConstants.REFRESH_STATE_TAG) state: number = RefreshState.REFRESHING;
+
+  // 屏幕实例。描述display对象的属性和方法。
   private deviceDisplay: display.Display = display.getDefaultDisplaySync();
 
   @Builder

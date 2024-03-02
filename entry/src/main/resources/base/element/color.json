@@ -215,6 +215,22 @@
     {
       "name": "index_tab_font_color",
       "value": "#007DFF"
+    },
+    {
+      "name": "blue",
+      "value": "#007DFF"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "navy_blue",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "text_value_font_color",
+      "value": "#182431"
     }
   ]
 }
