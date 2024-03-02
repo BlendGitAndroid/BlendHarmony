@@ -10,6 +10,6 @@
   "version": "1.0.0",
   "dependencies": {
     "@ohos/lottie": "^2.0.9",
-    "@ohos/library": "file:./buttonLibrary"
+    "@ohos/buttonLibrary": "file:./buttonLibrary"
   }
 }

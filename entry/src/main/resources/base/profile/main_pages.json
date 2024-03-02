@@ -16,6 +16,7 @@
     "webComponent/pages/WebPage",
     "httpRequest/pages/Index",
     "dataPreferences/pages/HomePage",
-    "dataPreferences/pages/SetFontSizePage"
+    "dataPreferences/pages/SetFontSizePage",
+    "thirdParty/pages/MainPage"
   ]
 }
