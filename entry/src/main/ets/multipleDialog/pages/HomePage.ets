@@ -33,6 +33,8 @@ struct HomePage {
   @State sex: string = '';
   @State hobbies: string = '';
   private sexArray: Resource = $r('app.strarray.sex_array');
+
+  // 自定义弹窗
   customDialogController: CustomDialogController = new CustomDialogController({
     builder: CustomDialogWidget({
       hobbies: $hobbies
@@ -64,6 +66,12 @@ struct HomePage {
         this.sex = sexValue;
       }
     });
+  }
+
+  onBackPress() {
+    let context = getContext(this) as Context.UIAbilityContext;
+    CommonUtils.alertDialog(context);
+    return true
   }
 
   build() {

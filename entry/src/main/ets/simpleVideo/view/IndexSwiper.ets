@@ -25,16 +25,18 @@ import { ParamItem } from '../viewmodel/ParamItem';
 export struct SwiperVideo {
   build() {
     Column() {
+      // 滑块视图容器，提供子组件滑动轮播显示的能力。
       Swiper() {
         ForEach(SWIPER_VIDEOS, (item: SwiperVideoItem) => {
           SwiperItem({ imageSrc: item.image, source: $rawfile('videoTest.mp4') })
         }, (item: SwiperVideoItem) => JSON.stringify(item))
       }
+      .borderRadius(MARGIN_FONT_SIZE.FIRST_MARGIN)
       .autoPlay(true)
     }
     .height(STRING_PERCENT.INDEX_SWIPER_HEIGHT_PERCENT)
     .width(STRING_PERCENT.INDEX_COMPONENT_WITH_PERCENT)
-    .backgroundColor($r('app.color.white'))
+    .backgroundColor($r('app.color.index_backgroundColor'))
     .margin({
       left: STRING_PERCENT.INDEX_SWIPER_LEFT_RIGHT_MARGIN,
       right: STRING_PERCENT.INDEX_SWIPER_LEFT_RIGHT_MARGIN,
@@ -54,9 +56,9 @@ struct SwiperItem {
   }
 
   build() {
+    // 路由容器组件，提供路由跳转能力。
     Navigator({ target: SECOND_PAGE, type: NavigationType.Push }) {
       Image(this.imageSrc)
-        .borderRadius(MARGIN_FONT_SIZE.FIRST_MARGIN)
     }
     .params(this.paramItem)
   }

@@ -18,11 +18,12 @@ import HobbyItem from '../viewmodel/HobbyItem';
 import CommonUtils from '../common/utils/CommonUtils';
 import CommonConstants from '../common/constants/CommonConstants';
 
+// 自定义弹窗的界面可以通过装饰器@CustomDialog定义的组件来实现
 @CustomDialog
 export default struct CustomDialogWidget {
   @State hobbyItems: HobbyItem[] = [];
   @Link hobbies: string;
-  private controller?: CustomDialogController;
+  private controller?: CustomDialogController; // 结合CustomDialogController来控制自定义弹窗的显示和隐藏
 
   aboutToAppear() {
     let context: Context = getContext(this);
@@ -30,6 +31,7 @@ export default struct CustomDialogWidget {
       Logger.error(CommonConstants.TAG_CUSTOM, 'context or resourceManager is null');
       return;
     }
+
     let manager = context.resourceManager;
     manager.getStringArrayValue($r('app.strarray.hobbies_data').id, (error, hobbyArray) => {
       if (!CommonUtils.isEmpty(error)) {

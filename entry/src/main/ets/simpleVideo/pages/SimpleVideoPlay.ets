@@ -28,15 +28,19 @@ import {
 @Entry
 @Component
 struct Play {
+
   private source: string = (router.getParams() as Record<string, Object>).source as string;
   private startIconResource: Resource = $r('app.media.ic_public_play');
   private backIconResource: Resource = $r("app.media.ic_back_white");
+
   @Provide isPlay: boolean = false;
   @Provide isOpacity: boolean = false;
-  controller: VideoController = new VideoController();
   @Provide isLoading: boolean = false;
   @Provide progressVal: number = 0;
   @Provide flag: boolean = false;
+
+  controller: VideoController = new VideoController();
+
 
   aboutToAppear() {
     this.source;

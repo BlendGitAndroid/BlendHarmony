@@ -17,6 +17,7 @@ import Context from '@ohos.app.ability.common';
 import Logger from './Logger';
 import CommonConstants from '../constants/CommonConstants';
 import HobbyItem from '../../viewmodel/HobbyItem';
+import router from '@ohos.router';
 
 /**
  * This is a pop-up window tool class, which is used to encapsulate dialog code.
@@ -44,7 +45,7 @@ export class CommonUtils {
         value: $r('app.string.definite_button'),
         action: () => {
           // Exiting the app.
-          context.terminateSelf();
+          router.back()
           Logger.info(CommonConstants.TAG_COMMON_UTILS, 'Callback definite button is clicked');
         }
       }
@@ -59,7 +60,7 @@ export class CommonUtils {
     DatePickerDialog.show({
       start: new Date(CommonConstants.START_TIME),
       end: new Date(),
-      selected: new Date(CommonConstants.SELECT_TIME),
+      selected: new Date(Date.now()),
       lunar: false,
       onAccept: (value: DatePickerResult) => {
         let year: number = Number(value.year);
