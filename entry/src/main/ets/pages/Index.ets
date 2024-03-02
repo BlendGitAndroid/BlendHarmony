@@ -85,6 +85,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'httpRequest/pages/Index'})
           })
+
+        Text("保存应用数据")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'dataPreferences/pages/HomePage'})
+          })
       }
       .width('100%')
     }
