@@ -619,6 +619,50 @@
     {
       "name": "outer_button_pause",
       "value": "暂停"
+    },
+    {
+      "name": "notification_title",
+      "value": "文件下载"
+    },
+    {
+      "name": "button_download",
+      "value": "下载"
+    },
+    {
+      "name": "button_pause",
+      "value": "暂停"
+    },
+    {
+      "name": "button_resume",
+      "value": "继续"
+    },
+    {
+      "name": "button_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "button_finish",
+      "value": "打开"
+    },
+    {
+      "name": "notification_title_download",
+      "value": "下载中"
+    },
+    {
+      "name": "notification_title_pause",
+      "value": "已暂停下载"
+    },
+    {
+      "name": "notification_title_finish",
+      "value": "下载完成"
+    },
+    {
+      "name": "invalid_button_toast",
+      "value": "功能暂未实现"
+    },
+    {
+      "name": "invalid_progress_toast",
+      "value": "不支持进度条模板"
     }
   ]
 }

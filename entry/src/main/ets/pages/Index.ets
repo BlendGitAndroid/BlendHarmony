@@ -101,6 +101,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'thirdParty/pages/MainPage'})
           })
+
+        Text("给应用添加通知消息")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'notificationDownload/pages/MainPage'})
+          })
       }
       .width('100%')
     }

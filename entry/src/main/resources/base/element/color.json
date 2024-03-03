@@ -303,6 +303,18 @@
     {
       "name": "outer_button_bg",
       "value": "#dedbdb"
+    },
+    {
+      "name": "index_background_color",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "button_color",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "cancel_button_color",
+      "value": "#0D000000"
     }
   ]
 }

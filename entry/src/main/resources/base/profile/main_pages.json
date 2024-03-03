@@ -17,6 +17,7 @@
     "httpRequest/pages/Index",
     "dataPreferences/pages/HomePage",
     "dataPreferences/pages/SetFontSizePage",
-    "thirdParty/pages/MainPage"
+    "thirdParty/pages/MainPage",
+    "notificationDownload/pages/MainPage"
   ]
 }
