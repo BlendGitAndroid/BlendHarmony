@@ -109,6 +109,14 @@ struct Index {
           .onClick(() => {
             router.pushUrl({url: 'notificationDownload/pages/MainPage'})
           })
+
+        Text("后台代理提醒")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            router.pushUrl({url: 'reminderClock/pages/MainIndex'})
+          })
       }
       .width('100%')
     }

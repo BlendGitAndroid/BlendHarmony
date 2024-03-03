@@ -18,6 +18,8 @@
     "dataPreferences/pages/HomePage",
     "dataPreferences/pages/SetFontSizePage",
     "thirdParty/pages/MainPage",
-    "notificationDownload/pages/MainPage"
+    "notificationDownload/pages/MainPage",
+    "reminderClock/pages/MainIndex",
+    "reminderClock/pages/DetailIndex"
   ]
 }
