@@ -22,8 +22,7 @@ export default struct CommonDialog {
   private controller?: CustomDialogController;
   private onConfirm: () => void = () => {
   };
-  @BuilderParam closer: () => void = () => {
-  };
+  @BuilderParam closer: () => void;
 
   build() {
     Column() {

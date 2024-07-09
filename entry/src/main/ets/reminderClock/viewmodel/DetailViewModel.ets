@@ -140,7 +140,7 @@ export default class DetailViewModel {
 
   private getAlarmTime(aType: number): number {
     let times:DayDataItem = DetailConstant.DAY_DATA[aType];
-    let selectedIndex = times.delSelect;
+    let selectedIndex: number = times.delSelect;
     let time = Number(times.data[selectedIndex]);
     if (aType === CommonConstants.DEFAULT_SINGLE) {
       time = (time === CommonConstants.DEFAULT_TOTAL_HOUR ? 0 : time)

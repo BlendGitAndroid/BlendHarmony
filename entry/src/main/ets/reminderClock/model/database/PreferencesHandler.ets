@@ -37,9 +37,9 @@ export default class PreferencesHandler {
    */
   public async configure(context: Context) {
     this.preferences = await data_preferences.getPreferences(context, CommonConstants.PREFERENCE_ID);
-    this.preferences.on('change', (data: Record<string, Object>) => {
+    this.preferences.on('change', (data: string) => {
       for (let preferencesListener of this.listeners) {
-        preferencesListener.onDataChanged(data.key as string);
+        preferencesListener.onDataChanged(data);
       }
     });
   }

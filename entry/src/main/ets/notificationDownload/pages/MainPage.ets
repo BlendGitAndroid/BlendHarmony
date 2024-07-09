@@ -211,7 +211,7 @@ struct MainPage {
   }) {
     Button(textResource)
       .backgroundColor($r('app.color.button_color'))
-      .buttonStyle()
+      .buttonStyle(ButtonStyleMode.NORMAL)
       .onClick(() => {
         click();
       })
@@ -220,7 +220,7 @@ struct MainPage {
   @Builder
   cancelButton() {
     Button($r('app.string.button_cancel'))
-      .buttonStyle()
+      .buttonStyle(ButtonStyleMode.NORMAL)
       .backgroundColor($r('app.color.cancel_button_color'))
       .fontColor($r('app.color.button_color'))
       .margin({ right: $r('app.float.button_margin') })

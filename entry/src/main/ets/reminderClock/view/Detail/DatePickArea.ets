@@ -27,8 +27,8 @@ export default struct DatePickArea {
           TextPicker({ range: item.data, selected: item.delSelect })
             .layoutWeight(CommonConstants.DEFAULT_LAYOUT_WEIGHT)
             .backgroundColor($r('app.color.grey_light'))
-            .onChange((value: string, index: number) => {
-              item.delSelect = index;
+            .onChange((value, index) => {
+              item.delSelect = index as number;
             })
         }, (item: DayDataItem) => JSON.stringify(item))
       }

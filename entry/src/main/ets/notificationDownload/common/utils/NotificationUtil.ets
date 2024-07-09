@@ -17,6 +17,7 @@ import wantAgent, { WantAgent } from '@ohos.app.ability.wantAgent';
 import notification from '@ohos.notificationManager';
 import CommonConstants from '../constants/CommonConstants';
 import Logger from '../utils/Logger';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 /**
  * Obtains the WantAgent of an application.
@@ -46,7 +47,7 @@ export function createWantAgent(bundleName: string, abilityName: string): Promis
  * @param wantAgentObj The want of application.
  */
 export function publishNotification(progress: number, title: string, wantAgentObj: WantAgent) {
-  let template:notification.NotificationTemplate = {
+  let template: notification.NotificationTemplate = {
     name: 'downloadTemplate',
     data: {
       progressValue: progress,
@@ -56,11 +57,11 @@ export function publishNotification(progress: number, title: string, wantAgentOb
   };
   let notificationRequest: notification.NotificationRequest = {
     id: CommonConstants.NOTIFICATION_ID,
-    slotType: notification.SlotType.CONTENT_INFORMATION,
+    notificationSlotType: notification.SlotType.CONTENT_INFORMATION,
     // Construct a progress bar template. The name field must be set to downloadTemplate.
     template: template,
     content: {
-      contentType: notification.ContentType.NOTIFICATION_CONTENT_BASIC_TEXT,
+      notificationContentType: notification.ContentType.NOTIFICATION_CONTENT_BASIC_TEXT,
       normal: {
         title: `${title}：${CommonConstants.DOWNLOAD_FILE}`,
         text: '',
@@ -80,7 +81,7 @@ export function publishNotification(progress: number, title: string, wantAgentOb
 export function openNotificationPermission() {
   notification.requestEnableNotification().then(() => {
     Logger.info('Enable notification success');
-  }).catch((err) => {
+  }).catch((err: BusinessError) => {
     Logger.error('Enable notification failed because ' + JSON.stringify(err));
   });
 }

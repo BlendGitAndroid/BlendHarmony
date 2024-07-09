@@ -1,4 +1,4 @@
-import UIAbility from '@ohos.app.ability.UIAbility';
+import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
 import { GlobalContext } from '../dataPreferences/common/utils/GlobalContext';
@@ -11,9 +11,8 @@ import display from '@ohos.display';
 const TAG = '[entryAbility]';
 
 export default class EntryAbility extends UIAbility {
-
   // 应用初始化操作
-  onCreate(want, launchParam) {
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
 
     Logger.info(TAG, 'onCreate');
     GlobalContext.getContext().setObject('abilityWant', want);
@@ -28,7 +27,7 @@ export default class EntryAbility extends UIAbility {
 
   // 应用的UIAbility实例已创建，该UIAbility配置为单实例模式，再次调用startAbility()方法启动该UIAbility实例。由于启动的还是原来的UIAbility实例，
   // 并未重新创建一个新的UIAbility实例，此时只会进入该UIAbility的onNewWant()回调，不会进入其onCreate()和onWindowStageCreate()生命周期回调。
-  onNewWant(want, launchParams) {
+  onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam) {
 
   }
 
