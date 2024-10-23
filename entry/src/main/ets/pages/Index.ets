@@ -1,4 +1,6 @@
 import router from '@ohos.router'
+import '@ohos/base/src/main/ets/Indexs'  // 接受命名路由
+
 @Entry
 @Component
 struct Index {
@@ -7,6 +9,17 @@ struct Index {
   build() {
     Row() {
       Column() {
+        Text("base学习")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .margin(10)
+          .onClick(() => {
+            // 条找路由命名
+            router.pushNamedRoute({
+              name: 'baseIndexPage'
+            })
+          })
+
         Text(this.message)
           .fontSize(20)
           .fontWeight(FontWeight.Bold)

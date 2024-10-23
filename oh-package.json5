@@ -11,6 +11,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@ohos/lottie": "^2.0.9",
-    "@ohos/buttonLibrary": "file:./buttonLibrary"
+    "@ohos/buttonLibrary": "file:./buttonLibrary",
+    "@ohos/base": "file:./base"
   }
 }

@@ -40,6 +40,10 @@
     {
       "name": "buttonLibrary",
       "srcPath": "./buttonLibrary"
+    },
+    {
+      "name": "base",
+      "srcPath": "./base",
     }
   ]
 }
