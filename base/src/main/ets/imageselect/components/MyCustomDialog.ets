@@ -1,4 +1,4 @@
-// 声明一个弹框
+// 声明一个弹框,是一个弹框
 @CustomDialog
 export struct MyCustomDialog {
   @Prop
@@ -7,18 +7,19 @@ export struct MyCustomDialog {
   @State
   activeIndex: number = 0
 
-  // 弹层控制器
+  // 必须得有一个弹层控制器
   controller: CustomDialogController
 
   build() {
     Column() {
+      // 滑块视图容器，提供子组件滑动轮播显示的能力
       Swiper() {
         ForEach(this.selectedList, (item: ResourceStr) => {
           Image(item)
             .width('100%')
         })
       }
-      .index($$this.activeIndex)
+      .index($$this.activeIndex)  // 设置当前在容器中显示的子组件的索引值
 
       Text(`${this.activeIndex + 1}/${this.selectedList.length}`)
         .fontColor('#fff')
@@ -29,6 +30,7 @@ export struct MyCustomDialog {
     .backgroundColor('#d2010203')
     .justifyContent(FlexAlign.Center)
     .onClick(() => {
+      // 使用弹层控制器关闭
       this.controller.close()
     })
   }
