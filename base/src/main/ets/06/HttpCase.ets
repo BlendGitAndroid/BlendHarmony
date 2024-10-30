@@ -3,7 +3,7 @@ import axios, {
   AxiosResponse,
 } from '@ohos/axios'
 
-@Entry
+@Entry({ routeName: 'HttpCase' })
 @Component
 struct HttpCase {
   async sendHttp() {

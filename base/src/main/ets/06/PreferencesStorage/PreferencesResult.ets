@@ -1,7 +1,7 @@
 import { PreferencesUtil } from './PreferencesUtil';
 import { router } from '@kit.ArkUI';
 
-@Entry
+@Entry({ routeName: 'PreferencesResult' })
 @Component
 struct PreferencesResult {
   @State message: string = '已登录！';

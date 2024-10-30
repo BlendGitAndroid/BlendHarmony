@@ -1,10 +1,17 @@
 import { PreferencesUtil } from './PreferencesUtil';
 import { router } from '@kit.ArkUI';
+import '@ohos/base/src/main/ets/06/PreferencesStorage/PreferenceCase'; // 接受命名路由
+import './PreferencesResult';
 
-@Entry({ routeName: 'referenceCase' })
+@Entry({ routeName: 'PreferenceCase' })
 @Component
 export struct PreferenceCase {
-  @State message: string = '暂未登录！';
+  @State
+  message: string = '暂未登录！';
+
+  aboutToAppear(): void {
+    this.message = PreferencesUtil.getToken(getContext()) + ""
+  }
 
   build() {
     Row() {
@@ -18,8 +25,8 @@ export struct PreferenceCase {
             AlertDialog.show({
               message: '登录成功！'
             })
-            router.pushUrl({
-              url: '/06/PreferencesStorage/PreferencesResult'
+            router.pushNamedRoute({
+              name: 'PreferencesResult'
             })
           })
       }

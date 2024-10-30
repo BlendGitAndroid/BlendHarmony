@@ -1,3 +1,6 @@
+import { router } from '@kit.ArkUI';
+import './06/PreferencesStorage/PreferenceCase';
+import './06/HttpCase';
 
 // HAR不支持在配置文件中声明pages页面，但是可以包含pages页面，
 // 并通过命名路由的方式进行跳转。
@@ -8,10 +11,24 @@ export struct Indexs {
 
   build() {
     Row() {
-      Column() {
+      Column({ space: 20 }) {
         Text(this.message)
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
+
+        Button('PreferenceCase')
+          .onClick(() => {
+            router.pushNamedRoute({
+              name: 'PreferenceCase'
+            })
+          })
+
+        Button('HttpCase')
+          .onClick(() => {
+            router.pushNamedRoute({
+              name: 'HttpCase'
+            })
+          })
       }
       .width('100%')
     }
