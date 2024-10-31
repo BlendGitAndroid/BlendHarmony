@@ -1,6 +1,7 @@
 import { router } from '@kit.ArkUI';
 import './06/PreferencesStorage/PreferenceCase';
 import './06/HttpCase';
+import "./meituan/MTIndex";
 
 // HAR不支持在配置文件中声明pages页面，但是可以包含pages页面，
 // 并通过命名路由的方式进行跳转。
@@ -27,6 +28,13 @@ export struct Indexs {
           .onClick(() => {
             router.pushNamedRoute({
               name: 'HttpCase'
+            })
+          })
+
+        Button('美团')
+          .onClick(() => {
+            router.pushNamedRoute({
+              name: 'MTIndex'
             })
           })
       }
