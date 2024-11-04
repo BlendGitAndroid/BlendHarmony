@@ -6,15 +6,15 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "微信"
+      "value": "Wechat"
     },
     {
       "name": "Micphone_Reason",
-      "value": "申请录制语音消息"
+      "value": "give me mic"
     },
     {
       "name": "GPS_Reson",
-      "value": "获取当前地理位置"
+      "value": "location"
     }
   ]
 }

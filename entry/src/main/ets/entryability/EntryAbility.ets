@@ -7,6 +7,7 @@ import CommonConstants from '../dataPreferences/common/constants/CommonConstants
 import PreferencesHandler from '../reminderClock/model/database/PreferencesHandler';
 import display from '@ohos.display';
 import { KeyboardAvoidMode } from '@kit.ArkUI';
+import { WeChat } from '@ohos/wechat';
 
 const TAG = '[entryAbility]';
 
@@ -60,6 +61,10 @@ export default class EntryAbility extends UIAbility {
         return;
       }
     });
+
+
+    // 初始化WeChat
+    WeChat.init(this.context)
   }
 
   onWindowStageDestroy() {

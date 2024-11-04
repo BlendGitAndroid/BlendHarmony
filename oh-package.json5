@@ -13,7 +13,8 @@
     "@ohos/lottie": "^2.0.9",
     "@ohos/buttonLibrary": "file:./buttonLibrary",
     "@ohos/base": "file:./base",
-    "@ohos/axios": "^2.2.4"
+    "@ohos/axios": "^2.2.4",
+    "@ohos/wechat": "file:./wechat"
   },
   "dynamicDependencies": {}
 }
