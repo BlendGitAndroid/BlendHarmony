@@ -29,20 +29,33 @@ limitations under the License.
     </style>
 </head>
 <body>
-    <div class="luckyDraw">
-        <!-- Use an unordered list to implement a lottery tray -->
-        <ul id="prize" class="prizes">
-            <li class="prizes-li active"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" src="#"></li>
-            <li class="prizes-li"><img class="pic" onclick="startDraw()" src="#"></li>
-        </ul>
-    </div>
-    <script src="./js/index.js"></script>
+<div>
+    <h1>我是一个HTML5网页</h1>
+    <button style="width: 200px; height: 100px" onclick="sendMsg()">来个提示！</button>
+</div>
+<div class="luckyDraw">
+    <!-- Use an unordered list to implement a lottery tray -->
+    <ul id="prize" class="prizes">
+        <li class="prizes-li active"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" src="#"></li>
+        <li class="prizes-li"><img class="pic" onclick="startDraw()" src="#"></li>
+    </ul>
+</div>
+<script src="./js/index.js"></script>
+<script>
+    function changeText(){
+        document.querySelector('h1').innerText = '是我让你变的啊！'
+        return Date.now()
+    }
+    function sendMsg(){
+        objName.objKey(2)
+    }
+</script>
 </body>
 </html>
