@@ -14,14 +14,19 @@ import PreviewImage from './PreviewImage'
 struct ChatDetail {
   @State
   talker: UserInfo = {} as UserInfo
+
   @State
   messageList: MessageInfoModel[] = []
+
   @State
   isInputting: boolean = false
+
   // 预览的地址
   previewUrl: string = ''
-  type: 'img' | 'video' = 'img'
-  // 初始化：预览的弹层
+
+  type: 'img' | 'video' = 'img' // type默认是img类型
+
+  // 初始化：图片和视频预览的弹层
   previewController: CustomDialogController = new CustomDialogController({
     builder: PreviewImage({
       url: this.previewUrl,
@@ -31,36 +36,30 @@ struct ChatDetail {
     customStyle: true
   })
 
-  // // 预览图片(打开弹层)
-  // previewImage(){
-  //   this.previewController.open()
-  // }
-
-
   aboutToAppear(): void {
-    this.talker = router.getParams() as UserInfo
+    this.talker = router.getParams() as UserInfo // 界面间传值,获取路由参数,并转换为UserInfo
     this.messageList = StoreClass.getChatMessage(this.talker.user_id)
-    // 消息有了再去创建(更应该在entryAbility创建的时候进行初始化)
+    // 声音播放器初始化
     AudioRender.init()
   }
 
   // 发送文本消息
   async sendTextMsg(message: string) {
-    //   准备消息对象
+    // 准备消息对象
     const newMessage = new MessageInfoModel({
       messageContent: message,
       sendUser: currentUser,
       connectUser: this.talker
     } as MessageInfo)
-    //   加入消息列表中(视图上添加)
+    // 加入消息列表中(视图上添加)
     this.messageList.push(newMessage)
-    //   持久化
+    // 持久化
     await StoreClass.addChatMessage(this.talker.user_id, newMessage)
     // 滚动到底部
     this.scroller.scrollEdge(Edge.Bottom)
-    //  获取消息结果
+    // 获取消息结果
     this.getResponseMessage(message)
-    //   音乐的播放
+    //  发送声音播放
     AVPlayerClass.play('send')
   }
 
@@ -74,20 +73,19 @@ struct ChatDetail {
       sourceFilePath: filePath,
       sourceDuration: duration
     } as MessageInfo)
-    //   加入消息列表中(视图上添加)
+    // 加入消息列表中(视图上添加)
     this.messageList.push(newMessage)
-    //   持久化
+    // 持久化
     await StoreClass.addChatMessage(this.talker.user_id, newMessage)
     // 滚动到底部
     this.scroller.scrollEdge(Edge.Bottom)
   }
 
   // 发送图片消息
-
   sendImageMsg(imgList: MessageInfoModel[]) {
-    // ...可以用，但是只能给数组用
+    // 鸿蒙中...可以用，但是只能给数组用
     this.messageList.push(...imgList)
-    //   持久化
+    // 持久化
     imgList.forEach(async (newMessage) => {
       await StoreClass.addChatMessage(this.talker.user_id, newMessage)
     })
@@ -95,7 +93,7 @@ struct ChatDetail {
     setTimeout(() => {
       this.scroller.scrollEdge(Edge.Bottom)
     }, 30)
-    //   音乐的播放
+    // 发送声音播放
     AVPlayerClass.play('send')
   }
 
@@ -104,7 +102,7 @@ struct ChatDetail {
     this.isInputting = true
     const result = await requestMessage(message)
     // result.data.info.text
-    //   准备消息对象
+    // 准备消息对象
     const newMessage = new MessageInfoModel({
       messageContent: result.data.info.text,
       // 后续数据持久化有关系
@@ -117,12 +115,12 @@ struct ChatDetail {
     this.messageList.push(newMessage)
     //   持久化
     await StoreClass.addChatMessage(this.talker.user_id, newMessage)
-    // 滚动到底部
 
     this.isInputting = false
 
     AVPlayerClass.play('information')
     setTimeout(() => {
+      // 滚动到底部
       this.scroller.scrollEdge(Edge.Bottom)
     }, 30)
   }
@@ -135,23 +133,6 @@ struct ChatDetail {
 
   // 列表滚动控制器
   scroller: Scroller = new Scroller()
-
-  // 全屏模态实现思路：预览图片
-  // @Provide
-  // showImageInfo:boolean = false
-  // @Provide
-  // previewImageUrl:string = ''
-  // @Builder
-  // getImageInfo(){
-  //    Column(){
-  //      Image(this.previewImageUrl)
-  //        .width('100%')
-  //    }.width('100%')
-  //   .height('100%')
-  //   .backgroundColor('#000')
-  //   .justifyContent(FlexAlign.Center)
-  // }
-
 
   build() {
     Column() {
@@ -180,6 +161,7 @@ struct ChatDetail {
       //   聊天内容
       List({ space: 16, scroller: this.scroller }) {
         ForEach(this.messageList, (message: MessageInfoModel) => {
+          // 每条消息的组件
           Message({
             message,
             delMessage: (messageId: string) => {
@@ -202,7 +184,7 @@ struct ChatDetail {
         top: 20
       })
 
-      //   聊天框
+      // 底部聊天框
       BottomInput({
         sendTextMsg: (message) => {
           this.sendTextMsg(message)
@@ -217,10 +199,5 @@ struct ChatDetail {
       })
     }
     .height('100%')
-
-    // 全屏模态实现思路：
-    // .bindContentCover(this.showImageInfo,this.getImageInfo,{
-    //   modalTransition:ModalTransition.NONE
-    // })
   }
 }

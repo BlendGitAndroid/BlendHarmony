@@ -24,7 +24,7 @@ export class FileOperate {
     return filePath
   }
 
-  //  2.删除文件
+  // 2.删除文件
   static delFilePath(filePath: string) {
     if (filePath) {
       // 删除一个文件
@@ -32,7 +32,7 @@ export class FileOperate {
     }
   }
 
-  //  3.删除整个人的聊天文件
+  // 3.删除整个人的聊天文件
   static delUserPath(userId: string) {
     //删除一个目录
     if (userId) {

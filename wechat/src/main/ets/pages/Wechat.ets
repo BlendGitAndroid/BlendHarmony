@@ -107,6 +107,7 @@ struct WeChat {
       }
     }
   ]
+
   @State
   showPopup: boolean = false
 
@@ -132,7 +133,9 @@ struct WeChat {
           right: 12
         })
         .onClick(() => {
+          // 点击对象的itemClick方法
           item.itemClick && item.itemClick()
+          this.showPopup = false
         })
       })
     }
@@ -141,7 +144,7 @@ struct WeChat {
 
   // 扫码的方法
   async scan() {
-    //  1.原生的扫码(API)
+    // 1.原生的扫码(API)
     // 定义扫码配置，打开扫码
     const option: scanBarcode.ScanOptions = {
       scanTypes: [scanCore.ScanType.ALL],
@@ -176,20 +179,22 @@ struct WeChat {
           .height(20)
           .fillColor($r('app.color.text_primary'))
           .position({
+            // 绝对定位，确定子组件相对父组件的位置。
             x: '100%'
           })
           .translate({
-            x: -40,
-            y: -5
+            x: -40, // 向左偏移40
+            y: -5 // 向上偏移5
           })
           .bindPopup($$this.showPopup, {
+            // Popup弹窗
             builder: this.getDropDown(),
             backgroundBlurStyle: BlurStyle.NONE,
             popupColor: $r('app.color.popup_back'),
             onStateChange: (event) => {
               this.showPopup = event.isVisible
             },
-            placement: Placement.Bottom
+            placement: Placement.Bottom // 设置popup组件相对于目标的显示位置，默认值为Placement.Bottom
           })
           .onClick(() => {
             this.showPopup = true

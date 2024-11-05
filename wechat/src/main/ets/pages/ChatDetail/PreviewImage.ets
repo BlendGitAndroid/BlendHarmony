@@ -1,7 +1,11 @@
+// 使用自定义Dialog
 @CustomDialog
 struct PreviewImage {
+  // Dialog控制器
   controller: CustomDialogController
+
   url: string = ''
+
   type: 'img' | 'video' = 'img'
 
   build() {
@@ -21,8 +25,6 @@ struct PreviewImage {
           .width('100%')
           .height('100%')
       }
-
-
     }
     .width('100%')
     .height('100%')

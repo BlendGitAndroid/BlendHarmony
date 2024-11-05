@@ -1,20 +1,20 @@
 import { DefaultUserList, UserInfo } from '../models/user'
 import { router } from '@kit.ArkUI'
 
-// 组件和页面的区别
+// 组件和页面的区别,页面有@Entry,但是组件没有
 @Component
 struct Connect {
   @State
   @Watch('filterName')
-  searchText: string = ''
+  searchText: string = '' // searchText发生变化的时候,执行filterName方法
 
-  // 筛选
-  filterName(){
-    this.filterList = DefaultUserList.filter(user=>user.username.includes(this.searchText))
+  // 筛选,监听searchText,发生变化调用filterName方法,直接使用filter方法
+  filterName() {
+    this.filterList = DefaultUserList.filter(user => user.username.includes(this.searchText))
   }
 
   @State
-  filterList:UserInfo[] = []
+  filterList: UserInfo[] = []
 
   // 初始赋值
   aboutToAppear(): void {
@@ -30,15 +30,13 @@ struct Connect {
           .height(30)
           .backgroundColor($r('app.color.white'))
           .borderRadius(4)
-      }.width('100%')
+      }
+      .width('100%')
       .padding({
         left: 10,
         right: 10,
         top: 10
       })
-      // 验证搜索效果：
-      // TextInput({text:'老'})
-      //   .width('100%')
 
       //  联系人列表
       List() {
@@ -57,16 +55,17 @@ struct Connect {
             .padding(16)
             .backgroundColor($r('app.color.white'))
             .border({
+              // 增加底部横线
               width: {
                 bottom: 1
               },
               color: '#f5f7f8'
             })
           }
-          .onClick(()=>{
+          .onClick(() => {
             router.pushUrl({
-              url:'@bundle:com.blend.harmony/wechat/ets/pages/ChatDetail/ChatDetail',
-              params:user
+              url: '@bundle:com.blend.harmony/wechat/ets/pages/ChatDetail/ChatDetail',
+              params: user
             })
           })
         })

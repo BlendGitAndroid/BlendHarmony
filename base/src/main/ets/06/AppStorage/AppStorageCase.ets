@@ -42,7 +42,7 @@ struct AppStorageCase {
     if (this.username === 'admin' && this.password === '123456') {
       //  向应用状态存贮账号信息
       const userInfo: Record<string, string> = {
-        'nickName': '老潘',
+        'nickName': 'Blend',
         'age': '99'
       }
 

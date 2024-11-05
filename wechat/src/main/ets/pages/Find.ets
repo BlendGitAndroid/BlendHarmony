@@ -1,9 +1,6 @@
-
 @Preview
 @Component
 struct Find {
-
-
   @Builder
   getRenderItem(left: string, rightClick?: () => void) {
     Row() {
@@ -36,6 +33,7 @@ struct Find {
       .justifyContent(FlexAlign.Center)
       .height(40)
       .width('100%')
+
       Scroll() {
         Column() {
           // 顶部

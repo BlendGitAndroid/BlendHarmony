@@ -6,6 +6,7 @@ import { promptAction } from '@kit.ArkUI'
 struct VoiceInput {
   @Consume
   voiceState: VoiceState
+
   @Consume
   v2tResult: string
 
@@ -89,6 +90,7 @@ struct VoiceInput {
   list: number[] = []
 
   aboutToAppear(): void {
+    // 计算音频高度
     emitter.on('calcVoice', (data) => {
       this.calcAudioHeight(data.data!.buffer as ArrayBuffer)
     })

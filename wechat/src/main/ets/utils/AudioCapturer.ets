@@ -41,7 +41,7 @@ export class AudioCapturer {
     }
   }
 
-  //   开启录音
+  //  开启录音
   static async start(filePath: string) {
     if (!AudioCapturer.audioCapturer) {
       console.log('wechat', 'No AudioCapturer audioCapturer')
@@ -56,8 +56,6 @@ export class AudioCapturer {
     // 开启录音
     AudioCapturer.isRecording = true
     await AudioCapturer.audioCapturer.start()
-    // 如果没有等待开启，while没走进去
-    // 录着没？
     while (AudioCapturer.isRecording) {
       // 录着呢，把麦克风缓冲区的内容写入文件中
       // 缓冲区读取的大小
@@ -65,17 +63,16 @@ export class AudioCapturer {
       // 读取缓冲的内容
       let buffer = await AudioCapturer.audioCapturer.read(size, true)
 
-
       // 1.buffer发送给voiceInput
       // 2.将buffer可视化
       if (buffer) {
-
-        //   写入文件
+        // 写入文件
         fileIo.writeSync(fd, buffer, {
           // 已经写入的内容作为偏移量(不能覆盖写入，接着写)
           offset: bufferSize,
           length: buffer.byteLength
         })
+        // 发射音频数据
         emitter.emit('calcVoice', {
           data: {
             buffer
@@ -88,7 +85,7 @@ export class AudioCapturer {
     }
   }
 
-  //   结束录音
+  // 结束录音
   static stop() {
     if (AudioCapturer.audioCapturer) {
       AudioCapturer.audioCapturer.stop()

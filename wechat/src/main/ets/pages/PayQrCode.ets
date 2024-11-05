@@ -1,11 +1,12 @@
 import { router } from '@kit.ArkUI'
-import { generateBarcode, scanBarcode, scanCore } from '@kit.ScanKit'
+import { generateBarcode, scanCore } from '@kit.ScanKit'
 
 @Entry
 @Component
 struct PayQrCode {
   @State
   payParams: number = Date.now()
+
   // 条形码思路
   // 图 pixelMap
   // 条形码生成工具绘制
@@ -24,6 +25,7 @@ struct PayQrCode {
     setInterval(() => {
       this.payParams = Date.now()
     }, 3000)
+    // 创建条形码
     this.createBarImage()
   }
 
@@ -40,6 +42,7 @@ struct PayQrCode {
             })
             .zIndex(2)
 
+          // 这个占满整个
           Text("收付款")
             .width('100%')
             .textAlign(TextAlign.Center)
@@ -60,6 +63,7 @@ struct PayQrCode {
               .width(20)
               .height(20)
               .fillColor($r("app.color.pay_back"))
+
             Text("付款码")
               .fontColor($r("app.color.pay_back"))
           }
@@ -78,10 +82,13 @@ struct PayQrCode {
             Text("优先使用xx银行储蓄卡付款")
               .fontColor($r("app.color.text_second"))
               .fontSize(12)
-            // 二维码组件：
+
+            // 二维码组件QRCode
             QRCode(this.payParams.toString())
               .width(140)
               .aspectRatio(1)
+
+            // 条形码组件
             Image(this.barImage)
               .width(300)
           }

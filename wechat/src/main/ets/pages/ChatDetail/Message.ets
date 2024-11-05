@@ -2,22 +2,26 @@ import { MessageInfo, MessageInfoModel, MessageTypeEnum } from '../../models/mes
 import { PopupItem } from '../../models/popup'
 import { currentUser } from '../../models/user'
 import { StoreClass } from '../../utils/StoreClass'
-import { Button } from '@ohos.multimodalInput.mouseEvent'
-import { promptAction } from '@kit.ArkUI'
 import { AudioRender } from '../../utils/AudioRender'
 import { FileOperate } from '../../utils/FileOperate'
 import { VoiceToText } from '../../utils/VoiceToText'
 import { TextToVoice } from '../../utils/TextToVoice'
+import { promptAction } from '@kit.ArkUI'
 
 @Component
 struct Message {
   @State
   v2tInfo: string = ''
+
   message: MessageInfoModel = new MessageInfoModel({} as MessageInfo)
+
+  // 定义delMessage方法
   delMessage: (messageId: string) => void = () => {
   }
+
   @State
   showPopup: boolean = false
+
   @State
   popupList: PopupItem[] = [
     {
@@ -50,39 +54,49 @@ struct Message {
       title: '删除',
       icon: $r("app.media.ic_public_cancel"),
       itemClick: () => {
-        // promptAction.showDialog({
-        //   title: '警告：',
-        //   message: '确认删除吗？',
-        //   buttons: [
-        //     {
-        //       text: '确定',
-        //       color: '#ff114c14'
-        //     },
-        //     {
-        //       text: '取消',
-        //       color: '#ff1d678d'
-        //     }
-        //   ]
-        // })
-        // 1.删除UI页面
-        this.delMessage(this.message.id)
-        // 2.首选项的删除
-        StoreClass.removeChatMessage(this.message.connectUser.user_id, this.message.id)
-        // 3.有没有消息文件
-        if (this.message.sourceFilePath) {
-          FileOperate.delFilePath(this.message.sourceFilePath)
-        }
+        promptAction.showDialog({
+          title: '警告：',
+          message: '确认删除吗？',
+          buttons: [
+            {
+              text: '确定',
+              color: '#ff114c14'
+            },
+            {
+              text: '取消',
+              color: '#ff1d678d'
+            }
+          ]
+        }).then(data => {
+          if (data.index == 0) {
+            // 1.删除UI页面
+            this.delMessage(this.message.id)
+            // 2.首选项的删除
+            StoreClass.removeChatMessage(this.message.connectUser.user_id, this.message.id)
+            // 3.有没有消息文件
+            if (this.message.sourceFilePath) {
+              FileOperate.delFilePath(this.message.sourceFilePath)
+            }
+          }
+        }).catch((err: Error) => {
+          console.info('showDialog error: ' + err);
+        })
       }
-    }, {
-    title: '多选',
-    icon: $r("app.media.ic_public_multi_select")
-  }, {
-    title: '引用',
-    icon: $r("app.media.ic_public_link")
-  }, {
-    title: '提醒',
-    icon: $r("app.media.ic_public_warin")
-  }]
+    },
+    {
+      title: '多选',
+      icon: $r("app.media.ic_public_multi_select")
+    },
+    {
+      title: '引用',
+      icon: $r("app.media.ic_public_link")
+    },
+    {
+      title: '提醒',
+      icon: $r("app.media.ic_public_warin")
+    }
+  ]
+
   @State
   playState: AnimationStatus = AnimationStatus.Initial
 
@@ -222,8 +236,6 @@ struct Message {
     })
     .onClick(() => {
       // 全屏模态实现思路：
-      // this.previewImageUrl = 'file://' + this.message.sourceFilePath
-      // this.showImageInfo = true
       this.previewImage()
     })
   }
@@ -296,15 +308,15 @@ struct Message {
       }
       .layoutWeight(6)
       .justifyContent(currentUser.user_id === this.message.sendUser.user_id ? FlexAlign.End : FlexAlign.Start)
-      .gesture(LongPressGesture()
+      .gesture(LongPressGesture()// 手势，长按弹出弹层
         .onAction(() => {
-          //   显示弹层
+          // 显示Popup弹层
           this.showPopup = true
         }))
       .bindPopup($$this.showPopup, {
-        builder: this.getContent,
+        builder: this.getContent, // 是一个Builder
         popupColor: $r('app.color.popup_back'),
-        backgroundBlurStyle: BlurStyle.NONE,
+        backgroundBlurStyle: BlurStyle.NONE, // 背景模糊方式，为当前组件提供一种在背景和内容之间的模糊能力
         onStateChange: (event) => {
           this.showPopup = event.isVisible
         }

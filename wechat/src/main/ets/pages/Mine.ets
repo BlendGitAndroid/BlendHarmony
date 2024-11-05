@@ -1,6 +1,8 @@
 @Preview
 @Component
 struct Mine {
+
+  // 这个组件有意思
   @Builder
   getRenderItem(left: string, rightClick?: () => void) {
     Row() {
@@ -30,12 +32,12 @@ struct Mine {
       // 顶部
       Row() {
         Row({ space: 10 }) {
-          Image("https://foruda.gitee.com/avatar/1705232317138324256/1759638_itcast_panpu_1705232317.png")
+          Image("https://gips3.baidu.com/it/u=1039279337,1441343044&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1024_1024")
             .width(60)
             .height(60)
             .borderRadius(6)
           Column({ space: 10 }) {
-            Text("一介码农").fontSize(18).fontColor($r('app.color.text_primary'))
+            Text("Blend").fontSize(18).fontColor($r('app.color.text_primary'))
             Text("微信号：666666").fontColor($r('app.color.text_second')).fontSize(14)
           }.alignItems(HorizontalAlign.Start)
         }

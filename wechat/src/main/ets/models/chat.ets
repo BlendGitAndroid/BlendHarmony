@@ -1,12 +1,17 @@
 export interface ChatInfo {
-  text:string
+  text: string
 }
+
 export interface ChatData {
-  type:string
-  info:ChatInfo
+  type: string
+
+  info: ChatInfo
 }
+
 export interface ChatResult {
-  status:number
-  message:string
-  data:ChatData
+  status: number
+
+  message: string
+
+  data: ChatData
 }

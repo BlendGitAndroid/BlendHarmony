@@ -9,6 +9,6 @@ export async function requestMessage(content: string) {
     const result = JSON.parse(res.result as string) as ChatResult
     return result
   } catch (err) {
-      return Promise.reject(err)
+    return Promise.reject(err)
   }
 }
