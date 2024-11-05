@@ -20,6 +20,7 @@
     "thirdParty/pages/MainPage",
     "notificationDownload/pages/MainPage",
     "reminderClock/pages/MainIndex",
-    "reminderClock/pages/DetailIndex"
+    "reminderClock/pages/DetailIndex",
+    "pages/Official"
   ]
 }
