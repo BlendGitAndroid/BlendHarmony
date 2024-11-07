@@ -49,7 +49,7 @@ function roll() {
 
   // Remove all active class names for each call
   for (let j = 0; j < allPrizesLi.length; j++) {
-    allPrizesLi[j].classList.remove('active');
+    allPrizesLi[j].classList.remove('activeli');
   }
   prizesPosition++;
 
@@ -59,7 +59,7 @@ function roll() {
     count++;
   }
 
-  allPrizesLi[prizesPosition].classList.add('active');
+  allPrizesLi[prizesPosition].classList.add('activeli');
   let initSpeed = 500;
   let timer;
   // Total number of revolutions at least

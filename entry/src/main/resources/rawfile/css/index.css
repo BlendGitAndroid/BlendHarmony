@@ -99,7 +99,7 @@ img {
 }
 
 /* Draw effect */
-.active:after {
+.activeli:after {
     top: 0;
     left: 0;
     width: 100%;
