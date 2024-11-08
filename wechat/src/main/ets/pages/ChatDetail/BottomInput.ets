@@ -11,6 +11,7 @@ import { MessageInfo, MessageInfoModel, MessageTypeEnum } from '../../models/mes
 import { camera, cameraPicker } from '@kit.CameraKit'
 import Location from './Location'
 import { VoiceToText } from '../../utils/VoiceToText'
+import { photoAccessHelper } from '@kit.MediaLibraryKit'
 
 @Preview
 @Component
@@ -251,10 +252,10 @@ struct BottomInput {
   // 发送图片的方法
   async sendPhotos() {
     // 1. 选择图片拿到结果
-    const photo = new picker.PhotoViewPicker()
+    const photo = new photoAccessHelper.PhotoViewPicker()
     const result = await photo.select({
       maxSelectNumber: 9,
-      MIMEType: picker.PhotoViewMIMETypes.IMAGE_TYPE
+      MIMEType: photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE
     })
     if (result.photoUris.length) {
       // 2. 图片的拷贝

@@ -29,7 +29,7 @@ struct Start {
         return
       }
       this.adObj.adTime--
-    }, 1000)
+    }, 100)
   }
 
   // // 4 当界面销毁时, 销毁定时器
@@ -41,18 +41,19 @@ struct Start {
   build() {
     Stack({ alignContent: Alignment.TopEnd }) {
       Image(this.adObj.adImg).objectFit(ImageFit.Cover)
-      Text(`${this.adObj.adTime}秒后跳过`)
-        .padding({ left: 10, right: 10 })
-        .margin({ right: 20, top: 50 })
-        .height(30)
-        .fontSize(14)
-        .borderRadius(15)
-        .backgroundColor($r("app.color.background_page"))
-        .textAlign(TextAlign.Center)
-        .onClick(() => {
-          this.closeWin()
-        })
-
+      if (this.adObj.showTime) {
+        Text(`${this.adObj.adTime}秒后跳过`)
+          .padding({ left: 10, right: 10 })
+          .margin({ right: 20, top: 50 })
+          .height(30)
+          .fontSize(14)
+          .borderRadius(15)
+          .backgroundColor($r("app.color.background_page"))
+          .textAlign(TextAlign.Center)
+          .onClick(() => {
+            this.closeWin()
+          })
+      }
     }.height('100%').width('100%')
   }
 }

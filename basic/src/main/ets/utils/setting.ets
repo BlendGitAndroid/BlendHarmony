@@ -5,7 +5,8 @@ import { AdvertClass } from '../models'
 import { TOKEN_KEY, USER_SETTING, USER_SETTING_AD } from '../constants'
 
 export const defaultAd: AdvertClass = {
-  showAd: false,
+  showAd: true,
+  showTime: false,
   adTime: 5,
   adImg: $r('app.media.start')
 }

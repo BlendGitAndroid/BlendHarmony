@@ -15,8 +15,8 @@ console.log('appId -----> ', appId)
 struct Login {
   @State showLoading: boolean = false
   @State accountForm: LoginFormModel = {
-    account: '',
-    password: '',
+    account: 'blendA',
+    password: '123456',
   }
 
   @Styles
@@ -38,8 +38,8 @@ struct Login {
   async onLogin() {
     //   调用登录的接口
     const token = await loginAPI(this.accountForm)
-    AlertDialog.show({ message: token, alignment: DialogAlignment.Center })
-    //   保存token到APpStorage中 首选项中各一份
+    // AlertDialog.show({ message: token, alignment: DialogAlignment.Center })
+    //   保存token到AppStorage中 首选项中各一份
     const userSetting = new UserSettingClass(getContext())
     userSetting.setToken(token)
     AppStorage.setOrCreate(TOKEN_KEY, token)

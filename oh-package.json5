@@ -13,6 +13,7 @@
     "@ohos/axios": "^2.2.4",
     "@ohos/wechat": "file:./wechat",
     "@blend/xsd": "file:./xsd",
+    "@blend/basic": "file:./basic",
     "dayjs": "^1.11.7"
   },
   "devDependencies": {

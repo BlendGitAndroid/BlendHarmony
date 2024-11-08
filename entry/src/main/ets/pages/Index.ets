@@ -1,3 +1,4 @@
+import { TOKEN_KEY, UserSettingClass } from '@blend/basic';
 import router from '@ohos.router';
 import '@ohos/base/src/main/ets/Indexs'; // 接受命名路由
 
@@ -37,16 +38,22 @@ struct Index {
             })
           })
 
-        Text("快递")
+        Text("express")
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
           .onClick(() => {
-            // 条找路由命名
-            router.pushUrl({
-              // '@bundle:包名（bundleName）/模块名（moduleName）/路径/页面所在的文件名(不加.ets后缀)'
-              // 需要在Deploy Multi Hap下进行配置
-              url: '@bundle:com.blend.harmony/xsd/ets/pages/Login/Login'
-            })
+            const userSetting = new UserSettingClass(getContext())
+            const token = userSetting.getToken()
+            AppStorage.setOrCreate(TOKEN_KEY, token)
+            if (token) {
+              router.pushUrl({
+                url: '@bundle:com.blend.harmony/xsd/ets/pages/Index/Index'
+              })
+            } else {
+              router.pushUrl({
+                url: '@bundle:com.blend.harmony/xsd/ets/pages/Login/Login'
+              })
+            }
           })
       }
       .width('100%')

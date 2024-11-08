@@ -8,6 +8,8 @@ import PreferencesHandler from '../reminderClock/model/database/PreferencesHandl
 import display from '@ohos.display';
 import { KeyboardAvoidMode } from '@kit.ArkUI';
 import { WeChat } from '@ohos/wechat';
+import { AdvertClass } from '@blend/basic/src/main/ets/models';
+import { defaultAd, UserSettingClass } from '@blend/basic';
 
 const TAG = '[entryAbility]';
 
@@ -51,6 +53,24 @@ export default class EntryAbility extends UIAbility {
     //   window.setWindowLayoutFullScreen(true)
     // })
 
+    // 通过模拟请求拿到广告信息
+    const ad = await new Promise<AdvertClass>((resolve) => {
+      setTimeout(() => {
+        resolve(defaultAd)
+      }, 500)
+    })
+
+    // 存到用户的持久化存储中
+    const userSetting = new UserSettingClass(this.context)
+    userSetting.setAdvert(ad)
+
+    // 如果要显示广告-不能直接显示首页
+    if (ad.showAd) {
+      const win = await windowStage.createSubWindow('ad_window')
+      await win.showWindow() // 打开子窗口
+      win.setUIContent('@bundle:com.blend.harmony/xsd/ets/pages/Start/Start') // 显示那个页面的内容做为子窗口的页面
+    }
+
     // 在onWindowStageCreate(windowStage)中通过loadContent接口设置应用要加载的页面
     windowStage.loadContent('pages/Index', (err, data) => {
       // 设置键盘避让
@@ -61,7 +81,6 @@ export default class EntryAbility extends UIAbility {
         return;
       }
     });
-
 
     // 初始化WeChat
     WeChat.init(this.context)
