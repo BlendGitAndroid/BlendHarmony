@@ -1,9 +1,6 @@
 {
   "modelVersion": "5.0.0",
   "license": "",
-  "devDependencies": {
-    "@ohos/hypium": "1.0.6"
-  },
   "author": "",
   "name": "blendharmony",
   "description": "Please describe the basic information.",
@@ -14,7 +11,12 @@
     "@ohos/buttonLibrary": "file:./buttonLibrary",
     "@ohos/base": "file:./base",
     "@ohos/axios": "^2.2.4",
-    "@ohos/wechat": "file:./wechat"
+    "@ohos/wechat": "file:./wechat",
+    "@blend/xsd": "file:./xsd",
+    "dayjs": "^1.11.7"
+  },
+  "devDependencies": {
+    "@ohos/hypium": "1.0.6",
   },
   "dynamicDependencies": {}
 }

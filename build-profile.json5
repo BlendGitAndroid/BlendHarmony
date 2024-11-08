@@ -60,6 +60,18 @@
     {
       "name": "basic",
       "srcPath": "./basic",
+    },
+    {
+      "name": "xsd",
+      "srcPath": "./xsd",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     }
   ]
 }

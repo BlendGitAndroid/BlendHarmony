@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "Location_reason",
+      "value": "申请位置"
+    }
+  ]
+}
