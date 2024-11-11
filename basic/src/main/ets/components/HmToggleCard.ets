@@ -1,12 +1,11 @@
 @Component
 struct HmToggleCard {
-  /** 左侧标题, 需要父组件传入 */
+  // 左侧标题, 需要父组件传入
   title: string = "基本信息"
-  // 控制折叠 或这展开的效果
+  // 控制折叠或展开的效果
   @State
-  toggleCard: boolean = true // 是否展示
-  // 尾随闭包
-  /** 外部传入的内容 */
+  toggleCard: boolean = true
+  // 尾随闭包, 外部传入的内容
   @BuilderParam
   CardContent: () => void
 
@@ -21,10 +20,10 @@ struct HmToggleCard {
           .width(24)
           .aspectRatio(1)
           .onClick(() => {
+            // 动画展示
             animateTo({ duration: 300 }, () => {
               this.toggleCard = !this.toggleCard
             })
-
           })
       }
       .width("100%")
@@ -43,8 +42,11 @@ struct HmToggleCard {
       right: 18,
       bottom: 18
     })
-    .margin({ left: 10, right: 10, top: 10 })
-
+    .margin({
+      left: 10,
+      right: 10,
+      top: 10
+    })
   }
 }
 

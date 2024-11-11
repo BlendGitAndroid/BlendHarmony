@@ -2,6 +2,7 @@
 @Component
 @Preview
 export struct HmLoading {
+  // 全屏加载
   controller: CustomDialogController
   title: string = '数据处理中..'
 

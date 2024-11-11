@@ -13,52 +13,65 @@ console.log('appId -----> ', appId)
 @Entry
 @Component
 struct Login {
-  @State showLoading: boolean = false
-  @State accountForm: LoginFormModel = {
+  @State
+  showLoading: boolean = false
+  @State
+  accountForm: LoginFormModel = {
     account: 'blendA',
     password: '123456',
   }
 
+  // 设置Style
   @Styles
   loginStyle() {
     .backgroundColor('#fff')
-    .border({ color: $r('app.color.background_divider'), width: { bottom: 1 } })
+    .border({ color: $r('app.color.background_divider'), width: { bottom: 1 } }) // 设置下边的边框
     .width('100%')
     .height(58)
-    .borderRadius(0)
+    .borderRadius(0) // 没有边框
   }
 
   getFormValidate() {
-    if (this.accountForm.account && this.accountForm.password) {
-      return true
-    }
-    return false
+    return !!this.accountForm.account && !!this.accountForm.password
   }
 
   async onLogin() {
-    //   调用登录的接口
+    // 调用登录的接口
     const token = await loginAPI(this.accountForm)
-    // AlertDialog.show({ message: token, alignment: DialogAlignment.Center })
-    //   保存token到AppStorage中 首选项中各一份
+    // 保存token到AppStorage中 首选项中各一份
     const userSetting = new UserSettingClass(getContext())
     userSetting.setToken(token)
     AppStorage.setOrCreate(TOKEN_KEY, token)
-    //   提示用户
+    // 提示用户
     promptAction.showToast({ message: '登录成功' })
-    //   跳转到首页上去
+    // 跳转到首页上去
     router.pushUrl({ url: '@bundle:com.blend.harmony/xsd/ets/pages/Index/Index' })
   }
 
   build() {
     Column() {
       // 顶部标题
-      Text("小时达").fontColor($r('app.color.text_primary')).fontSize(18).height(25)
+      Text("小时达")
+        .fontColor($r('app.color.text_primary'))
+        .fontSize(18)
+        .height(25)
+
       // 账号登录
       Row() {
-        Text('账号登录').fontColor($r('app.color.text_primary')).fontSize(24).fontWeight(FontWeight.Bold)
+        Text('账号登录')
+          .fontColor($r('app.color.text_primary'))
+          .fontSize(24)
+          .fontWeight(FontWeight.Bold)
+
         Row() {
-          Text("手机号登录").fontColor($r('app.color.primary')).fontSize(16).fontWeight(FontWeight.Bold)
-          Image($r("app.media.ic_angle")).width(10).height(10).margin({ left: 5 })
+          Text("手机号登录")
+            .fontColor($r('app.color.primary'))
+            .fontSize(16)
+            .fontWeight(FontWeight.Bold)
+          Image($r("app.media.ic_angle"))
+            .width(10)
+            .height(10)
+            .margin({ left: 5 })
         }
       }
       .width('100%')
@@ -85,9 +98,14 @@ struct Login {
       Button({ type: ButtonType.Capsule }) {
         Row() {
           if (this.showLoading) {
-            LoadingProgress().width(20).height(20).margin({ right: 12 }).color($r('app.color.white'))
+            LoadingProgress()
+              .width(20)
+              .height(20)
+              .margin({ right: 12 })
+              .color($r('app.color.white'))
           }
-          Text('登录').fontColor($r('app.color.white'))
+          Text('登录')
+            .fontColor($r('app.color.white'))
         }
       }
       .backgroundColor(this.getFormValidate() ? $r('app.color.primary') : $r('app.color.primary_disabled'))

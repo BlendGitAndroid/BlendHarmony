@@ -1,15 +1,19 @@
 @Preview
 @Component
 export struct HmSkeleton {
+  // 骨架屏
+
   @Prop
   showAvatar: boolean = true
   @Prop
   count: number = 2
   timer: number = -1
+  // 背景颜色
   @State
   currentColor: string = "#f3f4f5"
 
   aboutToAppear(): void {
+    // 每100ms改变一次
     this.timer = setInterval(() => {
       if (this.currentColor === "#f3f4f5") {
         this.currentColor = "#f7f8f9"

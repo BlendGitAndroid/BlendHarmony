@@ -59,7 +59,9 @@ struct TaskItemCard {
           .margin({ left: 11.5 })
           .fontColor($r('app.color.text_secondary'))
           .fontSize(14)
-      }.margin({ top: 21 }).width('100%')
+      }
+      .margin({ top: 21 })
+      .width('100%')
 
       Row() {
         Text("止")
@@ -82,9 +84,13 @@ struct TaskItemCard {
         .color($r('app.color.background_divider'))
         .opacity(0.6)
         .margin({ left: 8, right: 8, top: 21 })
+
       Row() {
         Column() {
-          Text('提货时间').fontSize(14).fontColor($r('app.color.text_secondary'))
+          Text('提货时间')
+            .fontSize(14)
+            .fontColor($r('app.color.text_secondary'))
+
           Text(this.taskItem.planDepartureTime)
             .fontSize(14)
             .fontColor($r('app.color.text_secondary'))

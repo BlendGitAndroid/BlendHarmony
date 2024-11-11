@@ -3,6 +3,8 @@ import router from '@ohos.router';
 @Preview
 @Component
 export struct HmNavBar {
+  // 标题栏组件
+
   title: string = "测试个人中心"
   showBackIcon: boolean = true
 
@@ -10,7 +12,10 @@ export struct HmNavBar {
     Stack({ alignContent: Alignment.TopStart }) {
       Row() {
         if (this.title) {
-          Text(this.title).fontColor($r('app.color.text_primary')).fontSize(18).fontWeight(600)
+          Text(this.title)
+            .fontColor($r('app.color.text_primary'))
+            .fontSize(18)
+            .fontWeight(600)
         }
       }
       .justifyContent(FlexAlign.Center)
@@ -20,15 +25,19 @@ export struct HmNavBar {
 
       if (this.showBackIcon) {
         Row() {
-          Image($r("app.media.ic_btn_nav_back")).width(44).height(44).onClick(() => {
-            router.back() // 回上一页
-          })
-        }.alignItems(VerticalAlign.Center).width(44)
+          Image($r("app.media.ic_btn_nav_back"))
+            .width(44)
+            .height(44)
+            .onClick(() => {
+              router.back() // 回上一页
+            })
+        }.alignItems(VerticalAlign.Center)
+        .width(44)
       }
     }
     .backgroundColor($r('app.color.white'))
-    .height(50)
     .width('100%')
+    .height(50)
     .padding(10)
   }
 }

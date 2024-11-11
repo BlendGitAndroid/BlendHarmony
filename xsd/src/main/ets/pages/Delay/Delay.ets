@@ -8,11 +8,14 @@ import { delayAPI } from '../../api/task';
 @Entry
 @Component
 struct Delay {
-  @State oldTime: string = ''
-  @State delayForm: DelayParamsTypeModel = {
+  @State
+  oldTime: string = ''
+  @State
+  delayForm: DelayParamsTypeModel = {
     delayReason: ''
   } as DelayParamsTypeModel
-  @State maxSizeNumber: number = 50
+  @State
+  maxSizeNumber: number = 50
 
   aboutToAppear(): void {
     const param = router.getParams() as CommonRouterParams

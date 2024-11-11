@@ -4,11 +4,6 @@ import { ExceptionParamsTypeModel } from '../../models'
 import { promptAction, router } from '@kit.ArkUI'
 import { exceptionReportAPI } from '../../api/task'
 
-interface ExceptionItem {
-  name: string
-  index: number
-}
-
 @Entry
 @Component
 struct ExceptionReport {
@@ -16,7 +11,13 @@ struct ExceptionReport {
   exceptionForm: ExceptionParamsTypeModel = {
     exceptionDescribe: ''
   } as ExceptionParamsTypeModel
-  @State maxSizeNumber: number = 50
+  @State
+  maxSizeNumber: number = 50
+  @State
+  exceptErrorList: string[] =
+    ["发动机启动困难", "不着车、漏油", "照明失灵", "有异常响动", "排烟异常、温度异常", "其他问题"]
+  @State
+  selectedIndex: number = -1
 
   onPageShow() {
     const params = router.getParams() as CommonRouterParams
@@ -29,11 +30,6 @@ struct ExceptionReport {
     }
   }
 
-  @State
-  exceptErrorList: string[] =
-    ["发动机启动困难", "不着车、漏油", "照明失灵", "有异常响动", "排烟异常、温度异常", "其他问题"]
-  @State selectedIndex: number = -1
-
   @Builder
   getCardContent() {
     ForEach(this.exceptErrorList, (item: string, index,) => {
@@ -44,7 +40,10 @@ struct ExceptionReport {
   @Builder
   getSingleItem(item: string, index: number, showBorder: boolean) {
     Row() {
-      Text(item).fontSize(14).fontWeight(400).fontColor($r('app.color.text_primary'))
+      Text(item)
+        .fontSize(14)
+        .fontWeight(400)
+        .fontColor($r('app.color.text_primary'))
       Row() {
         Image($r(this.selectedIndex === index ? "app.media.ic_check_true" : "app.media.ic_check_false"))
           .width(32)
@@ -123,7 +122,7 @@ struct ExceptionReport {
                   showTime: true,
                   useMilitaryTime: true,
                   onDateAccept: (value) => {
-                    this.exceptionForm.exceptionTime = dayjs(value).format('YYYY-MM-DD HH:mm')
+                    this.exceptionForm.exceptionTime = dayjs(value).format('YYYY-MM-DD HH:mm') // dayjs时间控件
                   }
                 })
               }
@@ -181,7 +180,8 @@ struct ExceptionReport {
                 this.exceptionForm.exceptionImagesList = list
               }
             })
-            Row().height(20)
+            Row()
+              .height(20)
           }
         }
       }.padding({

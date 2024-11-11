@@ -44,7 +44,7 @@ struct Index {
           .onClick(() => {
             const userSetting = new UserSettingClass(getContext())
             const token = userSetting.getToken()
-            AppStorage.setOrCreate(TOKEN_KEY, token)
+            AppStorage.setOrCreate(TOKEN_KEY, token)  // 放在内存中
             if (token) {
               router.pushUrl({
                 url: '@bundle:com.blend.harmony/xsd/ets/pages/Index/Index'

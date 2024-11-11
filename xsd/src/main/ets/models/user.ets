@@ -6,8 +6,6 @@ export interface LoginFormModel {
 
   /** 密码 */
   password: string;
-
-
 }
 
 

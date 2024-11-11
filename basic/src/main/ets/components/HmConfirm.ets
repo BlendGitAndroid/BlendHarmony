@@ -34,7 +34,7 @@ export struct HmConfirm {
               .border({
                 color: $r('app.color.background_divider'),
                 width: {
-                  right: this.buttonList.length > 1 && index !== this.buttonList.length - 1
+                  right: this.buttonList.length > 1 && index !== this.buttonList.length - 1 // 控制右边的竖线
                     ? 0.5 : 0
                 }
               })
@@ -51,7 +51,7 @@ export struct HmConfirm {
         .width('100%')
       }
     }
-    .width(278)
+    .width(278) // 固定宽度
     .borderRadius(12)
     .backgroundColor($r('app.color.white'))
   }

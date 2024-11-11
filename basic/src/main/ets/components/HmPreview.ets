@@ -1,6 +1,8 @@
 @CustomDialog
 @Component
 export struct HmPreview {
+  // 图片预览
+
   controller: CustomDialogController
   urls: string[] = []
   selectedIndex: number = 0

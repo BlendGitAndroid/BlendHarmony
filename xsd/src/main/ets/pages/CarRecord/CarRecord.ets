@@ -1,14 +1,11 @@
-import { HmNavBar, HmCard, HmCardItem, CommonRouterParams, HmLoading, HmCheckBox } from '@blend/basic'
+import { CommonRouterParams, HmCard, HmCardItem, HmCheckBox, HmLoading, HmNavBar } from '@blend/basic'
 import { carRecordAPI, getTaskDetailAPI } from '../../api/task'
 import { CarRecordTypeModel, TaskDetailInfoModel } from '../../models'
 import { promptAction, router } from '@kit.ArkUI'
 import dayjs from 'dayjs'
 
-// 需求: 实现交车功能
-
+// 实现交车功能
 // 1. 调用接口
-
-
 @Entry
 @Component
 struct CarRecord {

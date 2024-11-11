@@ -14,7 +14,6 @@ export const defaultAd: AdvertClass = {
 // 管理App的一些配置: 广告的配置
 export class UserSettingClass {
   // 获取用户的广告持久化配置仓库
-
   context: Context
 
   constructor(ctx: Context) {
@@ -22,13 +21,12 @@ export class UserSettingClass {
   }
 
   getStore() {
-    // UIAbilityContext  组件的content  getC
     return preferences.getPreferencesSync(this.context, { name: USER_SETTING })
   }
 
   setAdvert(ad: AdvertClass) {
     const store = this.getStore()
-    store.putSync(USER_SETTING_AD, JSON.stringify(ad)) // 内存中
+    store.putSync(USER_SETTING_AD, JSON.stringify(ad))
     store.flush()
   }
 
@@ -39,16 +37,16 @@ export class UserSettingClass {
     return JSON.parse(str)
   }
 
-  // 获取token
-  getToken(): string {
-    const store = this.getStore()
-    return store.getSync(TOKEN_KEY, '') as string
-  }
-
   // 保存token
   async setToken(token: string) {
     const store = this.getStore()
     store.putSync(TOKEN_KEY, token)
     await store.flush()
+  }
+
+  // 获取token
+  getToken(): string {
+    const store = this.getStore()
+    return store.getSync(TOKEN_KEY, '') as string
   }
 }

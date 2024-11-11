@@ -1,7 +1,8 @@
 @Component
 export struct HmCardItem {
   leftText: string = ''
-  @Prop rightText: string = ''
+  @Prop
+  rightText: string = ''
   showRightIcon: boolean = true
   showBottomBorder: boolean = true
   onRightClick: () => void = () => {
@@ -9,20 +10,27 @@ export struct HmCardItem {
 
   build() {
     Row() {
-      Text(this.leftText).fontSize(16).fontWeight(400).fontColor($r('app.color.text_primary'))
+      Text(this.leftText)
+        .fontSize(16)
+        .fontWeight(400)
+        .fontColor($r('app.color.text_primary'))
       Row() {
         if (this.rightText) {
-          Text(this.rightText).fontSize(16).fontWeight(400).fontColor($r('app.color.text_secondary'))
+          Text(this.rightText)
+            .fontSize(16)
+            .fontWeight(400)
+            .fontColor($r('app.color.text_secondary'))
         }
 
         if (this.showRightIcon) {
-          Image($r("app.media.ic_btn_more")).width(24).height(24)
+          Image($r("app.media.ic_btn_more"))
+            .width(24)
+            .height(24)
         }
       }
       .onClick(() => {
         this.onRightClick()
       })
-
     }
     .justifyContent(FlexAlign.SpaceBetween)
     .alignItems(VerticalAlign.Center)

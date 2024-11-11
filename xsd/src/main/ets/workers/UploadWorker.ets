@@ -33,21 +33,20 @@ workerPort.onmessage = async (e: MessageEvents) => {
     // 根据文件的路径, 打开一个文件
     const sourceFile = fileIo.openSync(fileObj?.url, fileIo.OpenMode.READ_ONLY)
 
-    //   创建一个新文件
+    // 创建一个新文件
     const newFileName = data.filePath + '/' + util.generateRandomUUID() + '.jpg'
     const targetFile = fileIo.openSync(newFileName, fileIo.OpenMode.CREATE | fileIo.OpenMode.READ_WRITE)
 
-    //   编码旧图片到新图片文件中
+    // 编码旧图片到新图片文件中
     let packOpts: image.PackingOption = { format: "image/jpeg", quality: 20 };
 
-    await imagePackerApi.packToFile(image.createImageSource(sourceFile.fd), targetFile.fd,
-      packOpts) // 把一个文件 重新编码到另外一个文件中
+    // 把一个文件 重新编码到另外一个文件中
+    await imagePackerApi.packToFile(image.createImageSource(sourceFile.fd), targetFile.fd, packOpts)
 
     arr.push({ url: newFileName })
 
     fileIo.close(sourceFile.fd)
     fileIo.close(targetFile.fd)
-
   }
 
   // 子线程主动告诉主线程消息
@@ -56,8 +55,6 @@ workerPort.onmessage = async (e: MessageEvents) => {
   })
 
   workerPort.close()
-
-
 }
 
 /**

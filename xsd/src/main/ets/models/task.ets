@@ -87,9 +87,9 @@ export interface TaskInfoItemModel {
 }
 
 export enum TaskTypeEnum {
-  Waiting = 1,  // 待提货
+  Waiting = 1, // 待提货
   Line = 2, // 在途
   Delivered = 4, // 已交货待回车登记
-  Finish = 6  // 回车和已完成
+  Finish = 6 // 回车和已完成
 }
 

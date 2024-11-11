@@ -16,7 +16,9 @@ export struct HmSelectCard {
   build() {
     Column() {
       Row() {
-        Text(this.title).fontSize(16).fontColor($r('app.color.text_primary'))
+        Text(this.title)
+          .fontSize(16)
+          .fontColor($r('app.color.text_primary'))
         if (this.showClose) {
           Image($r("app.media.ic_btn_close")).width(13).height(13)
             .onClick(() => {
@@ -47,7 +49,6 @@ export struct HmSelectCard {
               }
             })
         }
-
       }
       .width('100%')
       .justifyContent(FlexAlign.Center)

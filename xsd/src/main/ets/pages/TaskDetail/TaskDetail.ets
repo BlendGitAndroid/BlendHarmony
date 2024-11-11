@@ -1,6 +1,5 @@
 import {
   CommonRouterParams,
-  HmCard,
   HmNavBar,
   HmSkeleton,
   HmToggleCard,
@@ -13,7 +12,6 @@ import { deliverAPI, getTaskDetailAPI, pickUpAPI } from '../../api/task'
 import { ExceptionListModel, TaskDetailInfoModel } from '../../models/task_detail'
 import { HmLoading } from '@blend/basic/src/main/ets/components/HmLoading'
 import { TaskTypeEnum } from '../../models'
-import { uploadImageAPI } from '@blend/basic/src/main/ets/api/upload'
 import common from '@ohos.app.ability.common'
 import call from '@ohos.telephony.call'
 import { worker } from '@kit.ArkTS'
@@ -34,7 +32,9 @@ function baseTextIconStyle() {
 
 @Extend(Text)
 function baseTextStyle() {
-  .margin({ left: 11.5 })
+  .margin({
+    left: 11.5
+  })
   .fontColor($r('app.color.text_secondary'))
   .fontSize(14)
   .lineHeight(20)
@@ -52,10 +52,13 @@ class BaseBuilderClass {
 @Entry
 @Component
 struct TaskDetail {
-  @State taskDetailData: TaskDetailInfoModel = {} as TaskDetailInfoModel
-  @State snapImag: image.PixelMap | null = null
-  /** 是否要打开一个半模态框 */
-  @State snapShow: boolean = false
+  @State
+  taskDetailData: TaskDetailInfoModel = {} as TaskDetailInfoModel
+  @State
+  snapImag: image.PixelMap | null = null
+  // 是否要打开一个半模态框,用于截图
+  @State
+  snapShow: boolean = false
 
   async aboutToAppear() {
     await this.getTaskDetail()
@@ -96,21 +99,31 @@ struct TaskDetail {
     })
   }
 
+  // 定义一个Builder样式
   @Builder
   getBaseContentItem(item: BaseBuilderClass) {
     Row() {
-      Text(item.title).fontSize(14).fontColor($r('app.color.text_secondary'))
+      Text(item.title)
+        .fontSize(14)
+        .fontColor($r('app.color.text_secondary'))
         .lineHeight(20)
       Row() {
-        Text(item.value).fontSize(14).fontColor($r('app.color.text_secondary'))
+        Text(item.value)
+          .fontSize(14)
+          .fontColor($r('app.color.text_secondary'))
         if (item.icon) {
-          Image(item.icon).width(24).height(24)
+          Image(item.icon)
+            .width(24)
+            .height(24)
             .onClick(() => {
               item.iconClick && item.iconClick()
             })
         }
       }
-    }.justifyContent(FlexAlign.SpaceBetween).width('100%').margin({
+    }
+    .justifyContent(FlexAlign.SpaceBetween)
+    .width('100%')
+    .margin({
       top: 14
     })
   }
@@ -131,24 +144,38 @@ struct TaskDetail {
     Row() {
       Column() {
         Row() {
-          Text("起").baseTextIconStyle()
-          Text(this.taskDetailData.startAddress).baseTextStyle()
-        }.margin({ top: 21 })
+          Text("起")
+            .baseTextIconStyle()
+          Text(this.taskDetailData.startAddress)
+            .baseTextStyle()
+        }.margin({
+          top: 21
+        })
 
         Row() {
-          Text("止").baseTextIconStyle().backgroundColor($r('app.color.primary'))
-          Text(this.taskDetailData.endAddress).baseTextStyle()
-        }.margin({ top: 14.5 })
+          Text("止")
+            .baseTextIconStyle()
+            .backgroundColor($r('app.color.primary'))
+          Text(this.taskDetailData.endAddress)
+            .baseTextStyle()
+        }.margin({
+          top: 14.5
+        })
       }
       .alignItems(HorizontalAlign.Start)
       .layoutWeight(1)
-      .margin({ right: 20 })
-
+      .margin({
+        right: 20
+      })
 
       if (this.taskDetailData.status === TaskTypeEnum.Line) {
         Column() {
-          Image($r("app.media.ic_navigation")).width(22).height(22)
-          Text("开始导航").fontSize(14).margin({ top: 10, bottom: 10 })
+          Image($r("app.media.ic_navigation"))
+            .width(22)
+            .height(22)
+          Text("开始导航")
+            .fontSize(14)
+            .margin({ top: 10, bottom: 10 })
         }
         .justifyContent(FlexAlign.SpaceBetween)
         .margin({
@@ -158,11 +185,17 @@ struct TaskDetail {
           this.beginNav()
         })
       }
+    }
+    .justifyContent(FlexAlign.SpaceBetween)
+    .alignItems(VerticalAlign.Center).width('100%')
 
-
-    }.justifyContent(FlexAlign.SpaceBetween).alignItems(VerticalAlign.Center).width('100%')
-
-    Divider().vertical(false).height(2).color($r('app.color.background_divider')).margin({ left: 8, right: 8, top: 21 })
+    Divider()
+      .vertical(false)
+      .height(2)
+      .color($r('app.color.background_divider'))
+      .margin({
+        left: 8, right: 8, top: 21
+      })
 
     this.getBaseContentItem({
       title: '任务编号',
@@ -215,25 +248,35 @@ struct TaskDetail {
           .fontColor($r('app.color.text_primary'))
           .lineHeight(22)
           .fontWeight(600)
-        Text(this.taskDetailData.startCity).fontSize(14).lineHeight(22)
+        Text(this.taskDetailData.startCity)
+          .fontSize(14)
+          .lineHeight(22)
       }.width(50)
 
-      Image($r("app.media.ic_right_arrow")).width(36).height(16)
+      Image($r("app.media.ic_right_arrow"))
+        .width(36)
+        .height(16)
+
       Column() {
         Text(this.taskDetailData.endProvince)
           .fontSize(16)
           .fontColor($r('app.color.text_primary'))
           .lineHeight(22)
           .fontWeight(600)
-        Text(this.taskDetailData.endCity).fontSize(14).lineHeight(22)
+        Text(this.taskDetailData.endCity)
+          .fontSize(14)
+          .lineHeight(22)
       }.width(50)
-    }.justifyContent(FlexAlign.SpaceBetween).alignItems(VerticalAlign.Center).width('100%').padding({
+    }.justifyContent(FlexAlign.SpaceBetween)
+    .alignItems(VerticalAlign.Center)
+    .width('100%')
+    .padding({
       left: 60,
       right: 60
     })
   }
 
-  /** 提货时上传组件 */
+  // 提货时上传组件
   @Builder
   getPickUpInfo() {
     HmUpload({
@@ -244,6 +287,7 @@ struct TaskDetail {
         this.taskDetailData.cargoPickUpPictureList = imageList
       }
     })
+
     HmUpload({
       canUpload: this.taskDetailData.status === TaskTypeEnum.Waiting,
       title: '请拍照上传货物照片凭证',
@@ -251,7 +295,6 @@ struct TaskDetail {
       onImageListChange: (imageList) => {
         this.taskDetailData.cargoPictureList = imageList
       }
-
     })
   }
 
@@ -262,27 +305,34 @@ struct TaskDetail {
   })
 
   async onPickUp() {
-    this.loading.open()
-    /** 上传后的图片地址数组 */
-    const cargoPickUpPictureList = await UploadFile(this.taskDetailData.cargoPickUpPictureList)
-    const cargoPictureList = await UploadFile(this.taskDetailData.cargoPictureList)
-    // 调用提货的接口
-    await pickUpAPI({
-      id: this.taskDetailData.id,
-      cargoPickUpPictureList: cargoPickUpPictureList,
-      cargoPictureList: cargoPictureList
-    })
+    try {
+      this.loading.open()
+      /** 上传后的图片地址数组 */
+      const cargoPickUpPictureList = await UploadFile(this.taskDetailData.cargoPickUpPictureList)
+      const cargoPictureList = await UploadFile(this.taskDetailData.cargoPictureList)
+      // 调用提货的接口
+      await pickUpAPI({
+        id: this.taskDetailData.id,
+        cargoPickUpPictureList: cargoPickUpPictureList,
+        cargoPictureList: cargoPictureList
+      })
 
-    this.loading.close()
+      this.loading.close()
 
-    //  刷新界面
-    this.getTaskDetail()
-    this.scroller.scrollEdge(Edge.Top) // 控制滚动条到顶部
-    promptAction.showToast({ message: '提货成功' })
+      // 刷新界面
+      this.getTaskDetail()
+      this.scroller.scrollEdge(Edge.Top) // 控制滚动条到顶部
+      promptAction.showToast({
+        message: '提货成功'
+      })
+    } catch (e) {
+      console.log(JSON.stringify(e));
+      this.loading.close()
+    }
+
   }
 
   getPickUpEnable() {
-
     const cargoPickUpPictureList = this.taskDetailData.cargoPickUpPictureList || []
     const cargoPictureList = this.taskDetailData.cargoPictureList || []
     if (cargoPickUpPictureList.length > 0 && cargoPictureList.length > 0) {
@@ -297,7 +347,7 @@ struct TaskDetail {
   getBottomBtn() {
     Row() {
       if (this.taskDetailData.status === TaskTypeEnum.Waiting) {
-        Button("延迟收货", { type: ButtonType.Capsule })
+        Button("延迟提货", { type: ButtonType.Capsule })
           .backgroundColor($r('app.color.btn_gray'))
           .fontColor($r('app.color.text_primary'))
           .fontSize(16)
@@ -323,8 +373,7 @@ struct TaskDetail {
           .onClick(() => {
             this.onPickUp()
           })
-
-        //   交货的逻辑
+        // 交货的逻辑
       } else if (this.taskDetailData.status === TaskTypeEnum.Line) {
         Button("上报异常", { type: ButtonType.Capsule })
           .backgroundColor($r('app.color.btn_gray'))
@@ -350,7 +399,6 @@ struct TaskDetail {
           .onClick(() => {
             this.onDeliver() // 调用交货接口
           })
-
       } else if (this.taskDetailData.status === TaskTypeEnum.Delivered) {
         Row() {
           // 已交付显示回车登记
@@ -372,15 +420,14 @@ struct TaskDetail {
       }
     }
     .width('100%')
-    .padding({ left: 15, right: 15 })
     .height(70)
+    .padding({
+      left: 15,
+      right: 15
+    })
     .justifyContent(FlexAlign.SpaceBetween)
     .alignItems(VerticalAlign.Center)
     .backgroundColor($r('app.color.white'))
-
-
-    //已完成不显示任何按钮
-
   }
 
   // 交货的逻辑
@@ -402,13 +449,13 @@ struct TaskDetail {
       onImageListChange: (imageList) => {
         this.taskDetailData.deliverPictureList = imageList
       }
-
     })
   }
 
   // 控制交货按钮是否可以被点击
   getDeliverEnable() {
-    if (this.taskDetailData.deliverPictureList?.length > 0 && this.taskDetailData.certificatePictureList?.length > 0) {
+    if (this.taskDetailData.deliverPictureList?.length > 0
+      && this.taskDetailData.certificatePictureList?.length > 0) {
       return true
     } else {
       return false
@@ -417,7 +464,6 @@ struct TaskDetail {
 
   // 调用接口, 执行交货
   async onDeliver() {
-
 
     this.loading.open()
 
@@ -434,8 +480,6 @@ struct TaskDetail {
         return
       }
 
-
-      //
       const res = await Promise.all([UploadFile(certificatePictureList), UploadFile(deliverPictureList)])
       await deliverAPI({
         certificatePictureList: res[0],
@@ -445,23 +489,22 @@ struct TaskDetail {
       this.loading.close()
       promptAction.showToast({ message: '交货成功' })
       this.getTaskDetail()
-
     }
 
     // 让主线程和子线程发消息
     uploadWorker1.postMessage({
-      // 💥不允许传非可序列化的数据, 带装饰器的数据, 不能传给子线程
+      // 不允许传非可序列化的数据, 带装饰器的数据, 不能传给子线程
       files: [...this.taskDetailData.certificatePictureList],
       filePath: getContext().filesDir
     })
 
     uploadWorker2.postMessage({
-      // 💥不允许传非可序列化的数据, 带装饰器的数据, 不能传给子线程
+      // 不允许传非可序列化的数据, 带装饰器的数据, 不能传给子线程
       files: [...this.taskDetailData.deliverPictureList],
       filePath: getContext().filesDir
     })
 
-    // 线程1完成的压缩结果
+    // 线程1完成的压缩结果,从UploadWorker中获取结果
     uploadWorker1.onmessage = (e) => {
       certificatePictureList = e.data.files
       checkFile()
@@ -472,20 +515,6 @@ struct TaskDetail {
       deliverPictureList = e.data.files
       checkFile()
     }
-
-
-    // // 先把图片上传到在线地址上
-    // const certificatePictureList = await UploadFile(this.taskDetailData.certificatePictureList)
-    // const deliverPictureList = await UploadFile(this.taskDetailData.deliverPictureList)
-    // this.loading.open()
-    // await deliverAPI({
-    //   certificatePictureList: certificatePictureList,
-    //   deliverPictureList: deliverPictureList,
-    //   id: this.taskDetailData.id
-    // })
-    // this.loading.close()
-    // promptAction.showToast({ message: '交货成功' })
-    // this.getTaskDetail()
   }
 
   // 获取异常信息
@@ -530,23 +559,23 @@ struct TaskDetail {
   }
 
   build() {
+    // 如果taskDetailData还没有数据,则显示骨架屏
     if (this.taskDetailData.id) {
       Column() {
         HmNavBar({ title: '任务详情' })
 
         Row() {
+          // 截图
           Image($r('app.media.ic_phone'))
             .width(24)
             .height(24)
             .fillColor($r("app.color.primary"))
             .onClick(async () => {
               // 给某个组件来截图
-              // const componentSnapshot = new ComponentSnapshot()
               const spanImg = await componentSnapshot.get('detail') // detail是给某个组件分配的id, 支持自定义组件
               this.snapImag = spanImg
               this.snapShow = true
             })
-
         }
         .width('100%')
         .justifyContent(FlexAlign.End)
@@ -581,8 +610,7 @@ struct TaskDetail {
               }
             }
 
-
-            //   显示异常信息
+            // 显示异常信息
             if (this.taskDetailData.status === TaskTypeEnum.Line) {
               HmToggleCard({ title: '异常信息' }) {
                 this.getExceptionContent()
@@ -593,16 +621,15 @@ struct TaskDetail {
         }
         .layoutWeight(1)
 
-
         this.getBottomBtn()
-
-
       }
-      .backgroundColor($r('app.color.background_page')).height('100%')
-      .id('detail')
-      .bindContentCover($$this.snapShow, this.getSnapContent(), {
-        modalTransition: ModalTransition.NONE
-      })
+      .backgroundColor($r('app.color.background_page'))
+      .height('100%')
+      .id('detail') // 定义截屏Id
+      .bindContentCover($$this.snapShow,
+        this.getSnapContent(), {
+          modalTransition: ModalTransition.NONE
+        })
     } else {
       HmSkeleton({ showAvatar: false, count: 4 })
     }

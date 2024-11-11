@@ -6,15 +6,25 @@ import { promptAction, router } from '@kit.ArkUI'
 struct Setting {
   controller = new CustomDialogController({
     builder: HmConfirm({
-      message: '确定退出吗？', buttonList: [
-        { text: '取消', fontColor: $r('app.color.text_secondary') },
+      message: '确定退出吗？',
+      buttonList: [
         {
-          text: '确定', fontColor: $r('app.color.text_primary'), action: () => {
-          this.logout()
-        }
+          text: '取消',
+          fontColor: $r('app.color.text_secondary')
+        },
+        {
+          text: '再想想',
+          fontColor: $r('app.color.text_secondary')
+        },
+        {
+          text: '确定',
+          fontColor: $r('app.color.text_primary'),
+          action: () => {
+            this.logout()
+          }
         }
       ]
-    },),
+    }),
     customStyle: true,
     alignment: DialogAlignment.Center
   })
@@ -22,7 +32,7 @@ struct Setting {
   async logout() {
     AppStorage.set(TOKEN_KEY, '')
     await new UserSettingClass(getContext()).setToken('')
-    router.replaceUrl({ url: '@bundle:com.blend.harmony/xsd/ets/pages/Login/Login'})
+    router.replaceUrl({ url: '@bundle:com.blend.harmony/xsd/ets/pages/Login/Login' })
     promptAction.showToast({ message: '退出成功' })
   }
 

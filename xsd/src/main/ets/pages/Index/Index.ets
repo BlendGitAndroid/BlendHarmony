@@ -7,7 +7,7 @@ import { TaskTabs } from './Task/TaskTabs'
 struct Index {
   @State
   @Watch('updateName')
-  currentIndex: number = 0 // 当前激活项
+  currentIndex: number = 0 // 当前激活项,通过Watch调用updateName函数
   @State tabsData: TabClass[] = [
     { title: '任务', name: 'task', icon: $r("app.media.ic_tab_btn_task") },
     { title: '消息', name: 'message', icon: $r("app.media.ic_tab_btn_mess_nor") },
@@ -16,6 +16,7 @@ struct Index {
   @Provide
   currentName: string = 'task'
 
+  // updateName函数更新currentName
   updateName() {
     this.currentName = this.tabsData[this.currentIndex].name
   }
@@ -24,7 +25,7 @@ struct Index {
   getTabBar(item: TabClass) {
     Column() {
       Image(item.icon).width(22).height(22)
-        .fillColor(item.name === this.tabsData[this.currentIndex].name ?
+        .fillColor(item.name === this.tabsData[this.currentIndex].name ? // 填充颜色
         $r('app.color.primary') : $r('app.color.text_secondary'))
       Text(item.title)
         .fontSize(12)
@@ -32,19 +33,20 @@ struct Index {
         .margin({ top: 5 })
         .fontColor(item.name === this.tabsData[this.currentIndex].name ?
         $r('app.color.primary') : $r('app.color.text_secondary'))
-    }.alignItems(HorizontalAlign.Center)
+    }
+    .alignItems(HorizontalAlign.Center)
   }
 
   build() {
     Tabs({ barPosition: BarPosition.End, index: $$this.currentIndex }) {
       ForEach(this.tabsData, (item: TabClass) => {
         TabContent() {
-          if (item.name === 'task') {
+          if (item.name === 'task') { // 任务组件
             TaskTabs()
           } else if (item.name === 'message') {
             Text("消息组件")
           } else {
-            My()
+            My() // 我的组件
           }
         }.tabBar(this.getTabBar(item))
       })

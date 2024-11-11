@@ -66,7 +66,7 @@ export default class EntryAbility extends UIAbility {
 
     // 如果要显示广告-不能直接显示首页
     if (ad.showAd) {
-      const win = await windowStage.createSubWindow('ad_window')
+      const win = await windowStage.createSubWindow('ad_window')  // 创建该WindowStage实例下的子窗口，使用Promise异步回调
       await win.showWindow() // 打开子窗口
       win.setUIContent('@bundle:com.blend.harmony/xsd/ets/pages/Start/Start') // 显示那个页面的内容做为子窗口的页面
     }
