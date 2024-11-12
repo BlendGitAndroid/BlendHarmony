@@ -82,7 +82,11 @@ export const requestClockIn = async () => {
 export const calcPercent = (done: number, total: number) => {
   return Math.round((done / total * 100)) + '%'
 }
+
 // 从rawFile目录的json文件中读取字符串内容
-export const getStrFromJson = (path: string) => {
-  return new util.TextDecoder().decodeWithStream(getContext().resourceManager.getRawFileContentSync(path))
+export const getStrFromJson = (context: Context, path: string) => {
+  // 跨HSP包访问resource资源，需要指定HSP module，可以通过resourceManager进行访问操作
+  return new util.TextDecoder().decodeToString(context.createModuleContext('interview')
+    .resourceManager
+    .getRawFileContentSync(path))
 }

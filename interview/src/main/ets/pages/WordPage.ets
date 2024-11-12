@@ -1,11 +1,8 @@
 import { HmNavBar } from '../common/components'
 import { WordItem, Words } from '../model'
-import { util } from '@kit.ArkTS'
-import { logger } from '../common/utils/Logger'
 import { getStrFromJson } from '../common/utils'
 import { webview } from '@kit.ArkWeb'
 import { WordDialog } from '../views/Word/WordDialog'
-import { media } from '@kit.MediaKit'
 
 @Entry
 @Component
@@ -42,7 +39,7 @@ struct WordPage {
     //     1.读取json文件 -> 二进制流
     // const stream = getContext().resourceManager.getRawFileContentSync('word.json')
     //     2.流转成JSON格式数据  ->  JSON字符串
-    const str = getStrFromJson('word.json')
+    const str = getStrFromJson(getContext(), 'word.json')
     this.words = JSON.parse(str) as Words
     this.wordKey = Object.keys(this.words)[0]
   }

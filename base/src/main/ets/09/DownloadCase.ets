@@ -10,7 +10,7 @@ struct DownloadCase {
   // getContext().tempDir
 
   @State
-  downloadUrl: string = 'https://foruda.gitee.com/avatar/1705232317138324256/1759638_itcast_panpu_1705232317.png';
+  downloadUrl: string = 'https://gips3.baidu.com/it/u=1039279337,1441343044&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1024_1024';
 
   @State
   filePath: string = ''

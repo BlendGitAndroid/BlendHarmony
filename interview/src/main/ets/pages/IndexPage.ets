@@ -1,4 +1,4 @@
-import { auth } from '../common/utils'
+import { auth, fullScreen } from '../common/utils'
 import { theme } from '../common/utils/Theme'
 // 数据结构定义
 import { HomePage } from './HomePage'
@@ -51,6 +51,14 @@ struct IndexPage {
   ]
   @State
   activeIndex: number = 0
+
+  aboutToAppear(): void {
+    fullScreen.enable()
+  }
+
+  aboutToDisappear(): void {
+    fullScreen.disable()
+  }
 
   // tabbarBuilder
   @Builder

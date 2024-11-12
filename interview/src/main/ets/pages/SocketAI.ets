@@ -282,8 +282,8 @@ export class MessageItem {
   constructor(content: string, self: boolean = true) {
     this.content = content
     this.self = self
-    this.avatar = self ? 'https://foruda.gitee.com/avatar/1705232317138324256/1759638_itcast_panpu_1705232317.png' :
-      'http://toutiao.itheima.net/images/user_head.jpg'
+    this.avatar = self ? 'https://gips3.baidu.com/it/u=1039279337,1441343044&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1024_1024' :
+      'http://gips2.baidu.com/it/u=109337419,2018114866&fm=3042&app=3042&f=JPEG&wm=1,huayi,0,0,13,9&wmo=0,0&w=1024&h=1024'
   }
 }
 

@@ -14,7 +14,7 @@ export struct ImageCase {
           .fillColor(Color.Red)
 
         //   2.使用在线图片
-        Image('https://foruda.gitee.com/avatar/1705232317138324256/1759638_itcast_panpu_1705232317.png')
+        Image('https://gips3.baidu.com/it/u=1039279337,1441343044&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1024_1024')
           .width(100)
           .height(100)
 

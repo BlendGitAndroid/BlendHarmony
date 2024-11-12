@@ -168,7 +168,7 @@ struct AudioPage {
   // insertDB() {
   //   this.store?.insert(this.tableName, {
   //     // 主键可以省略不屑
-  //     name: '老潘',
+  //     name: 'BlendAndroid',
   //     age: Math.floor(Math.random()*100)
   //   })
   // }

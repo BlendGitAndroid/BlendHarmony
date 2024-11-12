@@ -118,7 +118,7 @@ export struct MinePage {
             }
             .onClick(()=>{
               auth.checkAuth({
-                url:'pages/SettingPage'
+                url:'@bundle:com.blend.harmony/interview/ets/pages/SettingPage'
               })
             })
           }
@@ -148,17 +148,17 @@ export struct MinePage {
       GridRow({ columns: 4 }) {
         this.navBuilder({
           icon: $r('app.media.ic_mine_history'), name: '历史记录', onClick: () => {
-            // TODO
+
           }
         })
         this.navBuilder({
           icon: $r('app.media.ic_mine_collect'), name: '我的收藏', onClick: () => {
-            // TODO
+
           }
         })
         this.navBuilder({
           icon: $r('app.media.ic_mine_like'), name: '我的点赞', onClick: () => {
-            // TODO
+
           }
         })
         this.navBuilder({
@@ -199,7 +199,7 @@ export struct MinePage {
         this.toolsBuilder({
           icon: $r('app.media.ic_mine_invite'), name: '面试录音', onClick: () => {
             auth.checkAuth({
-              url: 'pages/AudioPage'
+              url: '@bundle:com.blend.harmony/interview/ets/pages/AudioPage'
             })
           }
         })
