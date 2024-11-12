@@ -44,8 +44,9 @@ struct Login {
     AppStorage.setOrCreate(TOKEN_KEY, token)
     // 提示用户
     promptAction.showToast({ message: '登录成功' })
+    router.clear()
     // 跳转到首页上去
-    router.pushUrl({ url: '@bundle:com.blend.harmony1/xsd/ets/pages/Index/Index' })
+    router.replaceUrl({ url: '@bundle:com.blend.harmony1/xsd/ets/pages/Index/Index' })
   }
 
   build() {

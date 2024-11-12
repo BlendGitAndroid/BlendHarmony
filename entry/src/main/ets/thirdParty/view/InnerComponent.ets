@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { Buttons } from '@ohos/buttonLibrary';
+import { Buttons } from '@blend/buttonLibrary';
 import InnerViewModel from '../viewmodel/InnerViewModel'
 import { ButtonList } from '../viewmodel/ButtonList';
 import { CommonConstants } from '../common/constants/CommonConst';

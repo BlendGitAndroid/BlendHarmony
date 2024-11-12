@@ -1,6 +1,6 @@
 import { PreferencesUtil } from './PreferencesUtil';
 import { router } from '@kit.ArkUI';
-import '@ohos/base/src/main/ets/06/PreferencesStorage/PreferenceCase'; // 接受命名路由
+import '@blend/base/src/main/ets/06/PreferencesStorage/PreferenceCase'; // 接受命名路由
 import './PreferencesResult';
 
 @Entry({ routeName: 'PreferenceCase' })

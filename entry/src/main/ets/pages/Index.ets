@@ -1,6 +1,6 @@
 import { TOKEN_KEY, UserSettingClass } from '@blend/basic';
 import router from '@ohos.router';
-import '@ohos/base/src/main/ets/Indexs'; // 接受命名路由
+import '@blend/base/src/main/ets/Indexs'; // 接受命名路由
 
 @Entry
 @Component

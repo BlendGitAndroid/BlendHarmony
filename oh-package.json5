@@ -8,10 +8,10 @@
   "version": "1.0.0",
   "dependencies": {
     "@ohos/lottie": "^2.0.9",
-    "@ohos/buttonLibrary": "file:./buttonLibrary",
-    "@ohos/base": "file:./base",
     "@ohos/axios": "^2.2.4",
-    "@ohos/wechat": "file:./wechat",
+    "@blend/buttonLibrary": "file:./buttonLibrary",
+    "@blend/base": "file:./base",
+    "@blend/wechat": "file:./wechat",
     "@blend/xsd": "file:./xsd",
     "@blend/interview": "file:./interview",
     "@blend/basic": "file:./basic",

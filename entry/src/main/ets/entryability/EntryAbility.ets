@@ -7,7 +7,7 @@ import CommonConstants from '../dataPreferences/common/constants/CommonConstants
 import PreferencesHandler from '../reminderClock/model/database/PreferencesHandler';
 import display from '@ohos.display';
 import { KeyboardAvoidMode } from '@kit.ArkUI';
-import { WeChat } from '@ohos/wechat';
+import { WeChat } from '@blend/wechat';
 import { AdvertClass } from '@blend/basic/src/main/ets/models';
 import { defaultAd, UserSettingClass } from '@blend/basic';
 
