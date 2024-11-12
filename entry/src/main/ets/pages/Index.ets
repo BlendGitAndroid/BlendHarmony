@@ -55,6 +55,15 @@ struct Index {
               })
             }
           })
+
+        Text("interview")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .onClick(() => {
+            router.pushUrl({
+              url: '@bundle:com.blend.harmony/interview/ets/pages/IndexPage'
+            })
+          })
       }
       .width('100%')
     }

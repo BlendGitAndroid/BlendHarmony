@@ -72,6 +72,18 @@
           ]
         }
       ]
+    },
+    {
+      "name": "interview",
+      "srcPath": "./interview",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     }
   ]
 }

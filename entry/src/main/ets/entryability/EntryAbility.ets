@@ -25,6 +25,11 @@ export default class EntryAbility extends UIAbility {
 
     // 后台代理提醒
     GlobalContext.getContext().setObject('preference', PreferencesHandler.instance);
+
+    //----------------------------------------------------------------------------
+
+    // interview设置
+    AppStorage.setOrCreate('context', this.context)
   }
 
   // 应用的UIAbility实例已创建，该UIAbility配置为单实例模式，再次调用startAbility()方法启动该UIAbility实例。由于启动的还是原来的UIAbility实例，
@@ -48,6 +53,8 @@ export default class EntryAbility extends UIAbility {
     let preference = GlobalContext.getContext().getObject('preference') as PreferencesHandler;
     await preference.configure(this.context.getApplicationContext());
 
+    //----------------------------------------------------------------------------
+
     // 沉浸式: 给所有的页面都设置了沉浸式
     // windowStage.getMainWindow().then(window => {
     //   window.setWindowLayoutFullScreen(true)
@@ -66,7 +73,7 @@ export default class EntryAbility extends UIAbility {
 
     // 如果要显示广告-不能直接显示首页
     if (ad.showAd) {
-      const win = await windowStage.createSubWindow('ad_window')  // 创建该WindowStage实例下的子窗口，使用Promise异步回调
+      const win = await windowStage.createSubWindow('ad_window') // 创建该WindowStage实例下的子窗口，使用Promise异步回调
       await win.showWindow() // 打开子窗口
       win.setUIContent('@bundle:com.blend.harmony/xsd/ets/pages/Start/Start') // 显示那个页面的内容做为子窗口的页面
     }
