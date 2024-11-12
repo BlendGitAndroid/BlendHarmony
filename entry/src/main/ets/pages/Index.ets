@@ -34,7 +34,7 @@ struct Index {
             router.pushUrl({
               // '@bundle:包名（bundleName）/模块名（moduleName）/路径/页面所在的文件名(不加.ets后缀)'
               // 需要在Deploy Multi Hap下进行配置
-              url: '@bundle:com.blend.harmony/wechat/ets/pages/Index'
+              url: '@bundle:com.blend.harmony1/wechat/ets/pages/Index'
             })
           })
 
@@ -47,11 +47,11 @@ struct Index {
             AppStorage.setOrCreate(TOKEN_KEY, token)  // 放在内存中
             if (token) {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/xsd/ets/pages/Index/Index'
+                url: '@bundle:com.blend.harmony1/xsd/ets/pages/Index/Index'
               })
             } else {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/xsd/ets/pages/Login/Login'
+                url: '@bundle:com.blend.harmony1/xsd/ets/pages/Login/Login'
               })
             }
           })
@@ -61,7 +61,7 @@ struct Index {
           .fontWeight(FontWeight.Bold)
           .onClick(() => {
             router.pushUrl({
-              url: '@bundle:com.blend.harmony/interview/ets/pages/IndexPage'
+              url: '@bundle:com.blend.harmony1/interview/ets/pages/IndexPage'
             })
           })
       }

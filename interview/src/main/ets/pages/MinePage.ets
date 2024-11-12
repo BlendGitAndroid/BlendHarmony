@@ -118,7 +118,7 @@ export struct MinePage {
             }
             .onClick(()=>{
               auth.checkAuth({
-                url:'@bundle:com.blend.harmony/interview/ets/pages/SettingPage'
+                url:'@bundle:com.blend.harmony1/interview/ets/pages/SettingPage'
               })
             })
           }
@@ -132,7 +132,7 @@ export struct MinePage {
             .textOverflow({ overflow: TextOverflow.Ellipsis })
             .layoutWeight(1)
             .onClick(() => {
-              router.pushUrl({ url: '@bundle:com.blend.harmony/interview/ets/pages/LoginPage' })
+              router.pushUrl({ url: '@bundle:com.blend.harmony1/interview/ets/pages/LoginPage' })
             })
         }
 
@@ -169,7 +169,7 @@ export struct MinePage {
             // TODO
             auth.checkAuth(() => {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/interview/ets/pages/StudyTimePage'
+                url: '@bundle:com.blend.harmony1/interview/ets/pages/StudyTimePage'
               })
             })
           }
@@ -184,14 +184,14 @@ export struct MinePage {
           icon: $r('app.media.ic_mine_notes'), name: '开发常用词', onClick: () => {
             // TODO
             router.pushUrl({
-              url: '@bundle:com.blend.harmony/interview/ets/pages/WordPage'
+              url: '@bundle:com.blend.harmony1/interview/ets/pages/WordPage'
             })
           }
         })
         this.toolsBuilder({
           icon: $r('app.media.ic_mine_ai'), name: '面通AI', onClick: () => {
             router.pushUrl({
-              url: '@bundle:com.blend.harmony/interview/ets/pages/SocketAI'
+              url: '@bundle:com.blend.harmony1/interview/ets/pages/SocketAI'
             })
           }
         })
@@ -199,7 +199,7 @@ export struct MinePage {
         this.toolsBuilder({
           icon: $r('app.media.ic_mine_invite'), name: '面试录音', onClick: () => {
             auth.checkAuth({
-              url: '@bundle:com.blend.harmony/interview/ets/pages/AudioPage'
+              url: '@bundle:com.blend.harmony1/interview/ets/pages/AudioPage'
             })
           }
         })

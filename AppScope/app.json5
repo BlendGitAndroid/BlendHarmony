@@ -1,7 +1,7 @@
 {
   "app": {
-    "bundleName": "com.blend.harmony",
-    "vendor": "example",
+    "bundleName": "com.blend.harmony1",
+    "vendor": "blend",
     "versionCode": 1000000,
     "versionName": "1.0.0",
     "icon": "$media:app_icon",

@@ -41,7 +41,7 @@ class Auth {
       if (typeof opt === 'function') {
         //   4.没登录 - 执行方法
         router.pushUrl({
-          url: '@bundle:com.blend.harmony/interview/ets/pages/LoginPage'
+          url: '@bundle:com.blend.harmony1/interview/ets/pages/LoginPage'
         })
       } else {
         //   3.没登录 - 跳转
@@ -53,7 +53,7 @@ class Auth {
         // return_url自定义的
         params.return_url = opt.url
         router.pushUrl({
-          url: '@bundle:com.blend.harmony/interview/ets/pages/LoginPage',
+          url: '@bundle:com.blend.harmony1/interview/ets/pages/LoginPage',
           params
         })
       }

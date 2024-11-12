@@ -32,7 +32,7 @@ struct Setting {
   async logout() {
     AppStorage.set(TOKEN_KEY, '')
     await new UserSettingClass(getContext()).setToken('')
-    router.replaceUrl({ url: '@bundle:com.blend.harmony/xsd/ets/pages/Login/Login' })
+    router.replaceUrl({ url: '@bundle:com.blend.harmony1/xsd/ets/pages/Login/Login' })
     promptAction.showToast({ message: '退出成功' })
   }
 

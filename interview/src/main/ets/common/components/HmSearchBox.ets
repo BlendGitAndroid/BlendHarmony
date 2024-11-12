@@ -36,7 +36,7 @@ export struct HmSearchBox {
     .backgroundColor(this.searchBgColor)
     .onClick(()=>{
       router.pushUrl({
-        url:'@bundle:com.blend.harmony/interview/ets/pages/SearchPage'
+        url:'@bundle:com.blend.harmony1/interview/ets/pages/SearchPage'
       })
     })
   }

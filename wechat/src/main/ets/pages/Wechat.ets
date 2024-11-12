@@ -102,7 +102,7 @@ struct WeChat {
       icon: $r('app.media.ic_public_receive'),
       itemClick: () => {
         router.pushUrl({
-          url: '@bundle:com.blend.harmony/wechat/ets/pages/PayQrCode'
+          url: '@bundle:com.blend.harmony1/wechat/ets/pages/PayQrCode'
         })
       }
     }
@@ -261,7 +261,7 @@ struct WeChat {
             // 因为有个删除的Builder
             .onClick(() => {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/wechat/ets/pages/ChatDetail/ChatDetail',
+                url: '@bundle:com.blend.harmony1/wechat/ets/pages/ChatDetail/ChatDetail',
                 params: message.connectUser
               })
             })

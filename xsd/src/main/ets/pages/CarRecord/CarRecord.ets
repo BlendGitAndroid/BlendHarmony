@@ -38,7 +38,7 @@ struct CarRecord {
     await carRecordAPI(this.carRecord)
     promptAction.showToast({ message: '交车成功' })
     router.clear() // 清空路由跳转的历史记录
-    router.replaceUrl({ url: '@bundle:com.blend.harmony/xsd/ets/pages/Index/Index' })
+    router.replaceUrl({ url: '@bundle:com.blend.harmony1/xsd/ets/pages/Index/Index' })
   }
 
   build() {

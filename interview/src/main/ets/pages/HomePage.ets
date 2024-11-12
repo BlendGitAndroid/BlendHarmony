@@ -76,7 +76,7 @@ export struct HomePage {
         })
       }
       router.pushUrl({
-        url: '@bundle:com.blend.harmony/interview/ets/pages/QuestionPage',
+        url: '@bundle:com.blend.harmony1/interview/ets/pages/QuestionPage',
         params: {
           item,
           list: [item]

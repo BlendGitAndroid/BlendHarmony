@@ -355,7 +355,7 @@ struct TaskDetail {
           .width(125)
           .onClick(() => {
             router.pushUrl({
-              url: '@bundle:com.blend.harmony/xsd/ets/pages/Delay/Delay',
+              url: '@bundle:com.blend.harmony1/xsd/ets/pages/Delay/Delay',
               params: {
                 id: this.taskDetailData.id,
                 oldTime: this.taskDetailData.planDepartureTime
@@ -383,7 +383,7 @@ struct TaskDetail {
           .width(125)
           .onClick(() => {
             router.pushUrl({
-              url: '@bundle:com.blend.harmony/xsd/ets/pages/Exception/ExceptionReport',
+              url: '@bundle:com.blend.harmony1/xsd/ets/pages/Exception/ExceptionReport',
               params: {
                 id: this.taskDetailData.transportTaskId
               }
@@ -409,7 +409,7 @@ struct TaskDetail {
             .width('80%')
             .onClick(() => {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/xsd/ets/pages/CarRecord/CarRecord',
+                url: '@bundle:com.blend.harmony1/xsd/ets/pages/CarRecord/CarRecord',
                 params: {
                   id: this.taskDetailData.id
                 }
@@ -543,7 +543,7 @@ struct TaskDetail {
         Image($r("app.media.ic_btn_more")).width(24).height(24)
           .onClick(() => {
             router.pushUrl({
-              url: '@bundle:com.blend.harmony/xsd/ets/pages/Exception/ExceptionDetail',
+              url: '@bundle:com.blend.harmony1/xsd/ets/pages/Exception/ExceptionDetail',
               params: {
                 formData: item
               }

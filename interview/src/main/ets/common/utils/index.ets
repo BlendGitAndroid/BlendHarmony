@@ -69,12 +69,12 @@ export const requestClockIn = async () => {
     }
     //   跳转
     router.pushUrl({
-      url: '@bundle:com.blend.harmony/interview/ets/pages/ClockInPage'
+      url: '@bundle:com.blend.harmony1/interview/ets/pages/ClockInPage'
     })
   } else {
     // 不能用鉴权：可能会存在登录了，但是没打卡（放行跳转，会漏打卡）
     router.pushUrl({
-      url: '@bundle:com.blend.harmony/interview/ets/pages/LoginPage'
+      url: '@bundle:com.blend.harmony1/interview/ets/pages/LoginPage'
     })
   }
 }

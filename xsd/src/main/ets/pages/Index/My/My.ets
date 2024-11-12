@@ -123,7 +123,7 @@ struct My {
           })
           HmCardItem({
             leftText: '系统设置', showBottomBorder: false, onRightClick: () => {
-              router.pushUrl({ url: '@bundle:com.blend.harmony/xsd/ets/pages/Setting/Setting' })
+              router.pushUrl({ url: '@bundle:com.blend.harmony1/xsd/ets/pages/Setting/Setting' })
             }
           })
 

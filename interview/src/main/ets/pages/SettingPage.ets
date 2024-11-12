@@ -113,7 +113,7 @@ struct SettingsPage {
         this.toolsBuilder({
           name: '编辑资料', radius: 1, onClick: () => {
             auth.checkAuth({
-              url: '@bundle:com.blend.harmony/interview/ets/pages/ProfilePage'
+              url: '@bundle:com.blend.harmony1/interview/ets/pages/ProfilePage'
             })
           }
         })

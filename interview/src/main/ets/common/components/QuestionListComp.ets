@@ -144,7 +144,7 @@ export struct QuestionListComp {
               // })
               // 鉴权 - 跳转页面
               auth.checkAuth({
-                url: '@bundle:com.blend.harmony/interview/ets/pages/QuestionPage',
+                url: '@bundle:com.blend.harmony1/interview/ets/pages/QuestionPage',
                 params: {
                   item,
                   list: this.list

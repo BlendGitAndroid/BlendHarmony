@@ -6,9 +6,9 @@
         "type": "HarmonyOS",
         "material": {
           "certpath": "C:\\Users\\xuhai\\.ohos\\config\\default_BlendHarmony_Rm6UQpXasFaJ5LqHtGKDxTY6DrMxpG-4TtFnQivdSSY=.cer",
-          "storePassword": "0000001B29816CF735D288C8EF9E9DF1F2446ADBD9FC43487919300EC38B4E6A5C0EAD28E6AC07FC44F222",
+          "storePassword": "0000001BA64489813211E6B838410E136C46C75D433C943DA1E33FF74926A7024A5DA81D947024F69C3E4B",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B8F9CF1C4EE9D37C209A27E3FFC271C82E221F6484E4578F564B46EDFE1AE5C5199731DD2013EB1",
+          "keyPassword": "0000001B26A456AC83DECB7F1A04D5E0C8C1796030C7A8FDE2644BFCECE084C6F4EF529CBCE2BDB92A193B",
           "profile": "C:\\Users\\xuhai\\.ohos\\config\\default_BlendHarmony_Rm6UQpXasFaJ5LqHtGKDxTY6DrMxpG-4TtFnQivdSSY=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "C:\\Users\\xuhai\\.ohos\\config\\default_BlendHarmony_Rm6UQpXasFaJ5LqHtGKDxTY6DrMxpG-4TtFnQivdSSY=.p12"

@@ -106,7 +106,7 @@ struct TaskItemCard {
             .enabled(this.getBtnEnable())// 可提货
             .onClick(() => {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/xsd/ets/pages/TaskDetail/TaskDetail', params: {
+                url: '@bundle:com.blend.harmony1/xsd/ets/pages/TaskDetail/TaskDetail', params: {
                   id: this.taskItem.id
                 }
               })
@@ -126,7 +126,7 @@ struct TaskItemCard {
     .backgroundColor($r('app.color.white'))
     .onClick(() => {
       router.pushUrl({
-        url: '@bundle:com.blend.harmony/xsd/ets/pages/TaskDetail/TaskDetail', params: {
+        url: '@bundle:com.blend.harmony1/xsd/ets/pages/TaskDetail/TaskDetail', params: {
           id: this.taskItem.id
         }
       })

@@ -73,7 +73,7 @@ struct LoginPage {
     const params = router.getParams() as Record<string, string>
     if (params) {
       router.replaceUrl({
-        url: "@bundle:com.blend.harmony/interview/ets/" + params.return_url,
+        url: "@bundle:com.blend.harmony1/interview/ets/" + params.return_url,
         params
       })
     } else {
@@ -122,7 +122,7 @@ struct LoginPage {
             .padding({ right: 4 })
             .onClick(() => {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/interview/ets/pages/WebPage',
+                url: '@bundle:com.blend.harmony1/interview/ets/pages/WebPage',
                 params: {
                   title: '用户协议',
                   src: 'http://110.41.143.89/user'
@@ -137,7 +137,7 @@ struct LoginPage {
             .fontSize(14)
             .onClick(() => {
               router.pushUrl({
-                url: '@bundle:com.blend.harmony/interview/ets/pages/WebPage',
+                url: '@bundle:com.blend.harmony1/interview/ets/pages/WebPage',
                 params: {
                   title: '隐私政策',
                   src: 'http://110.41.143.89/privacy'

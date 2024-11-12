@@ -79,7 +79,7 @@ instance.interceptors.response.use((res: AxiosResponse) => {
     // 2.无感刷新 - refreshToken获取新的token写入，重发请求err.config
     // 跳转登录页面(历史记录只有一个登录页面)
     router.pushUrl({
-      url: '@bundle:com.blend.harmony/interview/ets/pages/LoginPage'
+      url: '@bundle:com.blend.harmony1/interview/ets/pages/LoginPage'
     }, router.RouterMode.Single)
     return
   }

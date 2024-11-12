@@ -67,7 +67,7 @@ export async function requestHttp<T>(url: string, method: http.RequestMethod = h
       promptAction.showToast({ message: '登录超时, 请重新登录' })
       router.clear() // 清空路由,跳转到登陆界面
       // 跳转到登录页面上去
-      router.replaceUrl({ url: '@bundle:com.blend.harmony/xsd/ets/pages/Login/Login' })
+      router.replaceUrl({ url: '@bundle:com.blend.harmony1/xsd/ets/pages/Login/Login' })
       return Promise.reject(new Error('登录超时, 请重新登录'))
     }
 

@@ -24,7 +24,7 @@ struct DownloadCase {
         Button('下载')
           .onClick(async () => {
             // 起一个名字
-            // /data/app/el2/100/base/com.blend.harmony/haps/entry/cache/test.jpg
+            // /data/app/el2/100/base/com.blend.harmony1/haps/entry/cache/test.jpg
             let filePath: string = getContext().cacheDir + '/test.jpg'
             //  下载
             const task = await request.downloadFile(getContext(), {
