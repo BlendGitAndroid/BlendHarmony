@@ -54,13 +54,6 @@
           "when": "always"
         }
       }
-    ],
-    "metadata": [
-      {
-        "name": "client_id",
-        "value": "111366463"
-        // 配置为获取的Client ID
-      }
     ]
   }
 }

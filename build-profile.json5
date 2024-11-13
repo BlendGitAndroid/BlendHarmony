@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\xuhai\\.ohos\\config\\default_BlendHarmony_Rm6UQpXasFaJ5LqHtGKDxTY6DrMxpG-4TtFnQivdSSY=.cer",
-          "storePassword": "0000001BA64489813211E6B838410E136C46C75D433C943DA1E33FF74926A7024A5DA81D947024F69C3E4B",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001B26A456AC83DECB7F1A04D5E0C8C1796030C7A8FDE2644BFCECE084C6F4EF529CBCE2BDB92A193B",
-          "profile": "C:\\Users\\xuhai\\.ohos\\config\\default_BlendHarmony_Rm6UQpXasFaJ5LqHtGKDxTY6DrMxpG-4TtFnQivdSSY=.p7b",
+          "storePassword": "0000001BECAC8065CBC44E558943F2E3E6AE3907237B6A8C97C64D3318A5ACA88E9FB2AB44B1A1374F8703",
+          "certpath": "C:/ProjectHuawei/BlendHarmony/signcert/blend.cer",
+          "keyAlias": "blend",
+          "keyPassword": "0000001B7610F5FA32D6F9EBEBB95CFF944A653FD636B9BC3CA2CEE24AC0C50397134CDFC68F114A388C95",
+          "profile": "C:/ProjectHuawei/BlendHarmony/signcert/blend.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\xuhai\\.ohos\\config\\default_BlendHarmony_Rm6UQpXasFaJ5LqHtGKDxTY6DrMxpG-4TtFnQivdSSY=.p12"
+          "storeFile": "C:/ProjectHuawei/BlendHarmony/signcert/blend.p12"
         }
       }
     ],

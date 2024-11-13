@@ -45,6 +45,12 @@
           "when": "inuse"
         }
       }
+    ],
+    "metadata": [
+      {
+        "name": "client_id",
+        "value": "112528297"
+      }
     ]
   }
 }
