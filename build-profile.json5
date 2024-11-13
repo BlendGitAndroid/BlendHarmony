@@ -6,12 +6,12 @@
         "type": "HarmonyOS",
         "material": {
           "storePassword": "0000001BECAC8065CBC44E558943F2E3E6AE3907237B6A8C97C64D3318A5ACA88E9FB2AB44B1A1374F8703",
-          "certpath": "C:/ProjectHuawei/BlendHarmony/signcert/blend.cer",
+          "certpath": "./signcert/blend.cer",
           "keyAlias": "blend",
           "keyPassword": "0000001B7610F5FA32D6F9EBEBB95CFF944A653FD636B9BC3CA2CEE24AC0C50397134CDFC68F114A388C95",
-          "profile": "C:/ProjectHuawei/BlendHarmony/signcert/blend.p7b",
+          "profile": "./signcert/blend.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:/ProjectHuawei/BlendHarmony/signcert/blend.p12"
+          "storeFile": "./signcert/blend.p12"
         }
       }
     ],
