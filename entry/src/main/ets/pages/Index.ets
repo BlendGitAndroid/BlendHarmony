@@ -1,6 +1,7 @@
 import { TOKEN_KEY, UserSettingClass } from '@blend/basic';
 import router from '@ohos.router';
 import '@blend/base/src/main/ets/Indexs'; // 接受命名路由
+import { RouterConfig, TokenManager } from '@care/basic';
 
 @Entry
 @Component
@@ -44,7 +45,7 @@ struct Index {
           .onClick(() => {
             const userSetting = new UserSettingClass(getContext())
             const token = userSetting.getToken()
-            AppStorage.setOrCreate(TOKEN_KEY, token)  // 放在内存中
+            AppStorage.setOrCreate(TOKEN_KEY, token) // 放在内存中
             if (token) {
               router.pushUrl({
                 url: '@bundle:com.blend.harmony1/xsd/ets/pages/Index/Index'
@@ -63,6 +64,21 @@ struct Index {
             router.pushUrl({
               url: '@bundle:com.blend.harmony1/interview/ets/pages/IndexPage'
             })
+          })
+
+        Text("care")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .onClick(async () => {
+            if ((await TokenManager.getUser()).token) {
+              router.pushUrl({
+                url: RouterConfig.INDEX_URL
+              })
+            } else {
+              router.pushUrl({
+                url: RouterConfig.LOGIN_URL
+              })
+            }
           })
       }
       .width('100%')

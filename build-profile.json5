@@ -84,6 +84,102 @@
           ]
         }
       ]
+    },
+    {
+      "name": "care_basic",
+      "srcPath": "./care/common/care_basic",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "care_device",
+      "srcPath": "./care/features/care_device",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "care_duty",
+      "srcPath": "./care/features/care_duty",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "care_home",
+      "srcPath": "./care/features/care_home",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "care_message",
+      "srcPath": "./care/features/care_message",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "care_mine",
+      "srcPath": "./care/features/care_mine",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "care_stage",
+      "srcPath": "./care/features/care_stage",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "care_index",
+      "srcPath": "./care/features/care_index",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     }
   ]
 }

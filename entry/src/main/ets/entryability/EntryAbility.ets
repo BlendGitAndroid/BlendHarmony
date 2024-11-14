@@ -10,6 +10,7 @@ import { KeyboardAvoidMode } from '@kit.ArkUI';
 import { WeChat } from '@blend/wechat';
 import { AdvertClass } from '@blend/basic/src/main/ets/models';
 import { defaultAd, UserSettingClass } from '@blend/basic';
+import { TokenManager } from '@care/basic';
 
 const TAG = '[entryAbility]';
 
@@ -91,6 +92,9 @@ export default class EntryAbility extends UIAbility {
 
     // 初始化WeChat
     WeChat.init(this.context)
+
+    // 初始化care
+    TokenManager.context = this.context // 上下文
   }
 
   onWindowStageDestroy() {

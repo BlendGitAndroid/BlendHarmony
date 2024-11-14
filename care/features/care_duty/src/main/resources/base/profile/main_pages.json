@@ -1,0 +1,8 @@
+{
+  "src": [
+    "pages/Care/CareTask",
+    "pages/Health/HealthList",
+    "pages/Health/HealthDetail",
+    "pages/Health/HealthRecord"
+  ]
+}

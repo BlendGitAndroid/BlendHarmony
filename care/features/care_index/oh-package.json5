@@ -1,0 +1,16 @@
+{
+  "name": "care_index",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "@care/basic": "file:../../common/care_basic",
+    "@care/home": "file:../care_home",
+    "@care/duty": "file:../care_duty",
+    "@care/stage": "file:../care_stage",
+    "@care/mine": "file:../care_mine",
+  }
+}

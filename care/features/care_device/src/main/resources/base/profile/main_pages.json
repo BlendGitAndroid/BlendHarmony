@@ -1,0 +1,29 @@
+{
+  "src": [
+    "pages/Access/BluetoothOpen",
+    "pages/Access/DoorControl",
+    "pages/Access/OpenRecord",
+    "pages/Access/RemoteOpen",
+    "pages/Access/TempPassword",
+    "pages/Alarm/AlarmDevice",
+    "pages/Alarm/AlarmHandle",
+    "pages/BloodManage/BindBlood",
+    "pages/BloodManage/TestPrepare",
+    "pages/BloodManage/TestResult",
+    "pages/BloodManage/TestStart",
+    "pages/WIfi/ScanWifi",
+    "pages/WIfi/NetDoor",
+    "pages/WIfi/ConnectTip",
+    "pages/WIfi/ConnectNet",
+    "pages/Device/SetupDevice",
+    "pages/Device/BindDevice",
+    "pages/Device/BindDeviceTip",
+    "pages/Device/ManageDevice",
+    "pages/Device/MyDevice",
+    "pages/Device/NearDevice",
+    "pages/Device/ProductDevice",
+    "pages/Device/SelectDevice",
+    "pages/Device/SelectElder",
+    "pages/Device/SetupDeviceTip"
+  ]
+}
