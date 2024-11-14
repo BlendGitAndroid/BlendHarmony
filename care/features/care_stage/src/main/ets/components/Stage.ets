@@ -1,5 +1,4 @@
 import { StateList } from './StateList'
-import router from '@ohos.router'
 import { ResManager } from '@care/basic/Index'
 
 @Component
@@ -34,9 +33,7 @@ export struct Stage {
           .fontColor(ResManager.EC_MID_19)
           .fontSize(ResManager.EC_NORMAL_FS)
           .onClick(() => {
-            router.pushUrl({
-              url: 'pages/stage/NurseRecordsPage'
-            })
+
           })
       }
       .width('100%')
@@ -45,19 +42,21 @@ export struct Stage {
       .padding({ left: 24, right: 15 })
       .justifyContent(FlexAlign.SpaceBetween)
 
-
       //  2. tabs
       Tabs({ index: this.activeIndex }) {
         ForEach(this.tabs, (item: string, i: number) => {
           TabContent() {
             // 护理任务列表
             StateList()
-          }
-          .tabBar(this.cateBuilder(item, i))
+          }.tabBar(this.cateBuilder(item, i)) // 设置每一个Tab的样式
         })
       }
       .width('100%')
       .barMode(BarMode.Scrollable)
+      .padding({
+        left: 16,
+        right: 16
+      })
       .onChange((i: number) => {
         this.activeIndex = i
       })

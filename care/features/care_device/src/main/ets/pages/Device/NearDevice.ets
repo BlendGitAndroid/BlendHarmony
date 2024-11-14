@@ -1,4 +1,4 @@
-import { EcDialogTips } from '@itheima/wing-care'
+import { EcDialogTips, EcLoading } from '@itheima/wing-care'
 import router from '@ohos.router'
 import { ResManager, RouterConfig } from '@care/basic/Index'
 import { blueManager } from '../../utils'
@@ -41,12 +41,13 @@ struct NearDevice {
   search() {
     this.run() // 开始动画
     blueManager.scanDevice((list) => {
-      this.list = list.filter(item => item.deviceName.startsWith("JL-ITHEIMA"))
+      this.list = list.filter(item => item.deviceName !== "") // 使用filter进行过滤
     })
     setTimeout(() => {
       if (this.list.length) {
         this.hasDevice = true
       }
+      this.isSearch = false
       clearInterval(this.timer) // 停止动画
     }, 8000)
   }
@@ -60,7 +61,6 @@ struct NearDevice {
     this.isSearch = true
     this.hasDevice = false
     this.search()
-
   }
 
   // 4. 未找到说明
@@ -103,12 +103,20 @@ struct NearDevice {
       cancelButton: {
         text: '我知道了',
         color: ResManager.EC_MAIN_COLOR,
-        // cb:()=>{
-        //
-        // }
+        cb: () => {
+          this.notFoundDialog.close()
+        }
       }
     }),
     alignment: DialogAlignment.Bottom
+  })
+  // 自定义Dialog
+  loading: CustomDialogController = new CustomDialogController({
+    builder: EcLoading({
+      tip: "绑定设备中..."
+    }),
+    customStyle: true,
+    alignment: DialogAlignment.Center
   })
 
   build() {
@@ -124,6 +132,7 @@ struct NearDevice {
                 angle: this.angle
               })
               .animation({
+                // 设置动画
                 duration: 100
               })
 
@@ -149,14 +158,11 @@ struct NearDevice {
                 .margin({ top: 50 })
                 .width(230)
                 .onClick(() => this.reset())
-
             }
-
           }
           .padding({ top: 80 })
           .width('100%')
           .height('100%')
-
 
           Text('未找到设备')
             .fontColor(ResManager.EC_MAIN_COLOR)
@@ -164,7 +170,6 @@ struct NearDevice {
             .fontWeight(500)
             .margin({ bottom: 72 })
             .onClick(() => this.notFoundDialog.open())
-
         }
         .width('100%')
         .height('100%')
@@ -209,6 +214,8 @@ struct NearDevice {
                       .aspectRatio(1)
                       .onClick(() => {
                         try {
+                          this.loading.open()
+                          // 连接蓝牙
                           blueManager.connectBlue(item.deviceId, async () => {
                             this.isConnect = true // 连接成功
                             // 因为蓝牙连接成功了 所以可以绑定了
@@ -220,7 +227,7 @@ struct NearDevice {
                                 tips: 1 // 成功的提示
                               }
                             })
-                          }) // 连接蓝牙
+                          })
                         } catch (error) {
                           router.pushUrl({
                             url: RouterConfig.DEVICE_BIND_TIP_URL, // 进行配置网络页面
@@ -228,8 +235,9 @@ struct NearDevice {
                               tips: 2 // 失败的提示
                             }
                           })
+                        } finally {
+                          this.loading.close()
                         }
-
                       })
                   }
                   .width('100%')

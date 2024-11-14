@@ -2,6 +2,7 @@ import { ResManager } from '../utils'
 import { router } from '@kit.ArkUI'
 import { RouterConfig } from '../constants'
 
+// interface不能有默认值
 class CareBuilderParams {
   title: string = ""
   icon: ResourceStr = ""
@@ -9,15 +10,8 @@ class CareBuilderParams {
   pageUrl: string = "" // 跳转地址
 }
 
-// 模块item
+// 复用模块item
 @Builder
-/**
- *
- * @param title
- * @param icon
- * @param pos
- * @param url
- */
 function careItem(item: CareBuilderParams) {
   if (item.direction === "horizontal") {
     // 护理工作台
@@ -35,9 +29,6 @@ function careItem(item: CareBuilderParams) {
       left: 13,
       right: 13
     })
-    // .borderRadius(8)
-    // .layoutWeight(1)
-    // .backgroundColor(ResManager.EC_MID_WHITE)
     .modStyle()
     .onClick(() => {
       item.pageUrl && router.pushUrl({
@@ -55,9 +46,6 @@ function careItem(item: CareBuilderParams) {
         .fontSize(ResManager.EC_SMALL_FS)
     }
     .padding({ top: 23, bottom: 23 })
-    // .borderRadius(8)
-    // .layoutWeight(1)
-    // .backgroundColor(ResManager.EC_MID_WHITE)
     .modStyle()
     .onClick(() => {
       item.pageUrl && router.pushUrl({

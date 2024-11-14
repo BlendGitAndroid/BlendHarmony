@@ -1,10 +1,8 @@
-import pickerPhoto from '@ohos.file.picker'
-import cameraPicker from '@ohos.multimedia.cameraPicker';
 import camera from '@ohos.multimedia.camera';
-import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import { ResManager } from '../utils/ResManager';
 import picker from '@ohos.multimedia.cameraPicker';
+import { photoAccessHelper } from '@kit.MediaLibraryKit';
 
 @CustomDialog
 export struct EcDialogUpload {
@@ -20,7 +18,7 @@ export struct EcDialogUpload {
       };
       let pickerResult: picker.PickerResult = await picker.pick(getContext(),
         [picker.PickerMediaType.PHOTO], pickerProfile);
-      if (pickerResult.resultUri) {
+      if (pickerResult.resultUri) { // 这里是直接一个uri
         this.callback(pickerResult.resultUri)
       }
     } catch (error) {
@@ -31,12 +29,12 @@ export struct EcDialogUpload {
 
   // 选择相册
   async selectPhoto() {
-    const photo = new pickerPhoto.PhotoViewPicker()
+    const photo = new photoAccessHelper.PhotoViewPicker()
     const result = await photo.select({
-      MIMEType: pickerPhoto.PhotoViewMIMETypes.IMAGE_TYPE,
+      MIMEType: photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE,
       maxSelectNumber: 1
     })
-    if (result.photoUris.length) {
+    if (result.photoUris.length) { // 这里是一个数组
       // 找到图片了
       this.callback(result.photoUris[0])
     }
@@ -80,18 +78,16 @@ export struct EcDialogUpload {
             .width('100%')
             .textAlign(TextAlign.Center)
             .padding(15)
-        }
-        .onClick(() => {
+        }.onClick(() => {
           this.controller.close()
         })
       }
       .width('100%')
       .height('auto')
-      .divider({ strokeWidth: 0.5, color: ResManager.EC_MID_LINE })
+      .divider({ strokeWidth: 0.5, color: ResManager.EC_MID_LINE }) // 设置List的分割线
       .padding(ResManager.EC_CONTENT_SPACE)
       .backgroundColor('#fff')
       .borderRadius(ResManager.EC_NORMAL_RD)
-
     }
   }
 }

@@ -1,4 +1,4 @@
-import { EcDialogTips, EcList } from '@itheima/wing-care'
+import { EcList } from '@itheima/wing-care'
 import promptAction from '@ohos.promptAction'
 import { ResManager } from '@care/basic/Index'
 import { MsgItemComp } from './MsgItemComp'
@@ -29,7 +29,9 @@ export struct MsgListComp {
   isRefreshing: boolean = false
   // 触底加载数据
   load = () => {
-    if (this.loading || this.finished) return
+    if (this.loading || this.finished) {
+      return
+    }
     this.loading = true
     // 请求数据
     setTimeout(() => {
@@ -119,6 +121,7 @@ export struct MsgListComp {
           MsgItemComp({ type: this.type, item: item })
         }
         .swipeAction({
+          // 滑动删除
           end: () => {
             this.itemEnd(item)
           }

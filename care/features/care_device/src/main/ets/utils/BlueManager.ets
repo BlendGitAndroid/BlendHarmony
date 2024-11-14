@@ -8,8 +8,18 @@ import { BlueData } from '../viewmodel'
 import { util } from '@kit.ArkTS'
 
 class BlueManager {
+  // 在 TypeScript 中，async 函数总是返回一个 Promise。即使你在 async 函数中直接返回一个值，这个值也会被自动包装成一个 Promise。
+  // 因此，在你的 checkBlue 函数中，返回 true 实际上是返回一个 Promise，其解析值为 true。
+  // 当你在 async 函数中返回一个值时，TypeScript 会自动将这个值包装在一个 Promise 中。例如：
+  // async function example(): Promise<boolean> {
+  //   return true;
+  // }
+  // 上面的代码等同于：
+  // function example(): Promise<boolean> {
+  //   return Promise.resolve(true);
+  // }
   // 检查蓝牙权限-应用有没有蓝牙权限
-  async checkBlue() {
+  async checkBlue(): Promise<boolean> {
     try {
       // 权限的检查
       const bundleInfo =
@@ -20,16 +30,14 @@ class BlueManager {
       if (status === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
         // 要去申请蓝牙权限
         const result = await atManager.requestPermissionsFromUser(getContext(), ["ohos.permission.ACCESS_BLUETOOTH"])
-        // 能否确定授权吗？？？？
-        // AlertDialog.show({ message: result.authResults[0] + "" })
+        // 检查是否授权,如果已经授权
         if (result.authResults[0] === 0) {
-          // 通过了
+          // 应该打开蓝牙开关 检测开关是关着的
           if (!this.checkBlueOpen()) {
-            // 应该打开蓝牙开关 检测开关是关着的
             return Promise.reject(new Error("请首先打开蓝牙开关"))
           }
-          return true // 表示检查权限成功
-
+          // return true // 表示检查权限成功
+          return Promise.resolve(true) // 等同于返回true
         } else {
           // 如果不等于0 那就是点击了禁止
           // 拉起应用系统设置页面
@@ -39,12 +47,11 @@ class BlueManager {
             abilityName: 'com.huawei.hmos.settings.MainAbility',
             uri: 'application_info_entry',
             parameters: {
-              pushParams: 'com.hm.yk.yl' // 应用包名
+              pushParams: 'com.blend.harmony1' // 应用包名
             }
           });
           return false // 表示授权失败 跳到了设置页面
-        } // 0 就是通过 -1 是不通过
-
+        }
       }
       // 已经有蓝牙权限
       if (!this.checkBlueOpen()) {
@@ -72,7 +79,6 @@ class BlueManager {
       const resList: ble.ScanResult[] = [] // 汇总所有的发现蓝牙
       ble.on("BLEDeviceFind", (list: ble.ScanResult[]) => {
         Log.info("扫描到的蓝牙列表：" + JSON.stringify(list))
-        // [1,2,3] [2]
         resList.push(...list.filter(dv =>!resList.some(item => item.deviceId === dv.deviceId)))
         // 告诉页面
         callback(resList) // 回传汇总的数据

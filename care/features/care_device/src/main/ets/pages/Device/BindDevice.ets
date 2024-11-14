@@ -22,7 +22,11 @@ struct BindDevice {
   refreshNum: number = 0
   // 加载数据
   load = async () => {
-    this.list = await getUnBindDeviceListApi()
+    const origin = await getUnBindDeviceListApi()
+    origin.forEach((item: UnBindProductItemModel) => {
+      item.deviceList.push(...item.deviceList)
+    })
+    this.list = origin
   }
 
   // 2. 产品选择和折叠
@@ -34,11 +38,6 @@ struct BindDevice {
   }
 
   // 选择某个产品下设备
-  /**
-   *
-   * @param item 当前选择产品
-   * @param device 当前点击产品下的某个设备
-   */
   selectDevice(item: UnBindProductItemModel, device: DeviceItemModel) {
     this.list.forEach(prod => {
       prod.deviceList.forEach(dev => {
@@ -138,8 +137,7 @@ struct BindDevice {
                 })
               }
             }
-          }
-          )
+          })
         } else {
           ForEach(item.deviceList, (device: DeviceItemModel) => {
             GridCol() {
@@ -161,8 +159,7 @@ struct BindDevice {
                 this.selectDevice(item, device)
               })
             }
-          }
-          )
+          })
         }
 
       }
@@ -178,7 +175,7 @@ struct BindDevice {
 
   async bindDevice() {
     try {
-      // 这里面检查蓝牙
+      // 这里检查蓝牙
       const isOK = await blueManager.checkBlue() // 检查蓝牙是否授权
       promptAction.showToast({ message: isOK ? '授权成功' : "授权失败" })
       if (isOK) {
@@ -199,9 +196,7 @@ struct BindDevice {
       Stack({ alignContent: Alignment.Bottom }) {
         // 产品列表
         Column() {
-          List({
-            space: 10
-          }) {
+          List({ space: 10 }) {
             ForEach(this.list, (item: UnBindProductItemModel) => {
               ListItem() {
                 this.productItem(item)

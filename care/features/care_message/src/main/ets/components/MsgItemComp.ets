@@ -111,9 +111,9 @@ export struct MsgItemComp {
       cancelButton: {
         text: '我知道了',
         color: ResManager.EC_MAIN_COLOR,
-        // cb:()=>{
-        //
-        // }
+        cb: () => {
+          this.lookDialog.close()
+        }
       }
     }),
     alignment: DialogAlignment.Center
@@ -151,11 +151,15 @@ export struct MsgItemComp {
       .justifyContent(FlexAlign.SpaceBetween)
       .alignItems(VerticalAlign.Center)
     }
-    // .width('100%')
     .margin({ left: 15, right: 15 })
     .borderRadius(12)
     .backgroundColor(ResManager.EC_MID_WHITE)
-    .padding({ left: 14, right: 14, top: 10, bottom: 10 })
+    .padding({
+      left: 14,
+      right: 14,
+      top: 10,
+      bottom: 10
+    })
     .onClick(() => {
       this.detail = this.item
       this.lookDialog.open()

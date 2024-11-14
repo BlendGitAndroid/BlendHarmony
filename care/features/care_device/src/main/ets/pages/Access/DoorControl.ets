@@ -128,8 +128,6 @@ struct DoorControl {
       .width('100%')
       .height('30%')
 
-      // .height(232)
-
       // 2. 设备控制：快捷导航
       Column() {
         List() {

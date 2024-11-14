@@ -1,4 +1,4 @@
-import { CareBuilder, DeviceBuilder, ResManager } from '@care/basic/Index'
+import { CareBuilder, DeviceBuilder, ResManager, RouterConfig } from '@care/basic/Index'
 import router from '@ohos.router'
 
 
@@ -6,16 +6,13 @@ import router from '@ohos.router'
 export struct Home {
   // 消息
   @Builder
-  /**
-   *
-   * @param title
-   * @param icon
-   * @param url
-   */
   msgItem(title: string, icon: Resource | string, count: number, i: number) {
     Column() {
+      // 脚标组件, 可以附加在单个组件上用于信息标记的容器组件
       Badge({
-        count, position: BadgePosition.RightTop, style: {
+        count,
+        position: BadgePosition.RightTop,
+        style: {
           badgeColor: '#FF6363',
           borderColor: '#fff',
           borderWidth: 2,
@@ -38,14 +35,14 @@ export struct Home {
     .backgroundColor(ResManager.EC_MID_WHITE)
     .onClick(() => {
       router.pushUrl({
-        url: '@bundle:com.heima.elderly.pro/message/ets/pages/MsgPage',
+        url: RouterConfig.USER_MSG_URL,
         params: {
           type: i
         }
       })
     })
   }
-  
+
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       Column({ space: 25 }) {
@@ -58,8 +55,8 @@ export struct Home {
           //  1.2 消息提醒
           Column() {
             Row({ space: 10 }) {
-              this.msgItem('老人报警消息', $r("app.media.ic_home_jkbj"), 6, 1)
-              this.msgItem('任务提醒消息', $r("app.media.ic_home_rwtx"), 2, 0)
+              this.msgItem('老人报警消息', $r("app.media.ic_home_jkbj"), 6, 0)
+              this.msgItem('任务提醒消息', $r("app.media.ic_home_rwtx"), 2, 1)
             }
           }
           .margin({
@@ -80,7 +77,7 @@ export struct Home {
               .fontWeight(500)
               .margin({ bottom: 13 })
             // 内容
-            CareBuilder()
+            CareBuilder() // 在basic的提取的Builder
           }
           .width('100%')
           .alignItems(HorizontalAlign.Start)
@@ -94,16 +91,13 @@ export struct Home {
               .fontWeight(500)
               .margin({ bottom: 13 })
             // 内容
-            DeviceBuilder()
-
+            DeviceBuilder() // 在basic的提取的Builder
           }
           .width('100%')
           .alignItems(HorizontalAlign.Start)
-
         }
         .width('100%')
         .padding({ left: 15, right: 15 })
-
       }
       .width('100%')
       .height('100%')
@@ -115,7 +109,6 @@ export struct Home {
           .height(15)
       }
       .margin({ bottom: 28 })
-      .onClick(() => router.pushUrl({ url: 'pages/test/TestPage' }))
     }
     .width('100%')
     .height('100%')

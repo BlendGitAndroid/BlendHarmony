@@ -9,12 +9,19 @@ struct NickName {
   topHeight: number = 0
   @State
   nickName: string = ""
+  @State
+  name: string = (router.getParams() as Record<string, Object>).name as string; // 还能将其转换为Record模式
 
   aboutToAppear(): void {
+    promptAction.showDialog({
+      message: JSON.stringify(router.getParams())   // {"name","value"}
+    })
     const params = router.getParams() as object
-    if (params && params["name"]) {
+    if (params && params["name"]) { // 通过这种方式获取对象的值
       this.nickName = params["name"]
     }
+    // 执行下面的代码
+    this.name
   }
 
   // 提交
@@ -26,15 +33,16 @@ struct NickName {
   }
 
   build() {
+    // 自带导航头
     Navigation() {
       Column() {
-        // Text(this.nickname)
+        Text(this.name)
         TextInput({ text: $$this.nickName, placeholder: '请输入2-5个字符的昵称' })
           .height(50)
           .borderRadius(ResManager.EC_NORMAL_RD)
           .backgroundColor('#fff')
           .placeholderColor(ResManager.EC_MID_99)
-        //   提交
+        // 提交
         Button('保存', { type: ButtonType.Capsule })
           .margin({ top: 50 })
           .width(230)
@@ -44,7 +52,6 @@ struct NickName {
           })
       }
       .margin({ left: 15, right: 15 })
-
     }
     .title('昵称')
     .padding({ top: this.topHeight })

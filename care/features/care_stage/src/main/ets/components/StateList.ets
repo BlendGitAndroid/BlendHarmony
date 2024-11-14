@@ -1,4 +1,4 @@
-import { EcList, EcDialogTips } from '@itheima/wing-care'
+import { EcDialogTips, EcList } from '@itheima/wing-care'
 import dayjs from 'dayjs'
 import promptAction from '@ohos.promptAction'
 import router from '@ohos.router'
@@ -27,7 +27,9 @@ export struct StateList {
   isRefreshing: boolean = false
   // 触底加载数据
   load = () => {
-    if (this.loading || this.finished) return
+    if (this.loading || this.finished) {
+      return
+    }
     this.loading = true
     // 请求数据
     setTimeout(() => {
@@ -90,17 +92,17 @@ export struct StateList {
       },
       confirmButton: {
         text: '确定',
-        // color:ResManager.EC_MAIN_COLOR,
+        color: ResManager.EC_MAIN_COLOR,
         cb: () => {
 
         }
       },
       cancelButton: {
         text: '取消',
-        // color:'red',
-        // cb:()=>{
-        //
-        // }
+        color: 'red',
+        cb: () => {
+          this.reasonDialog.close()
+        }
       }
     }),
     alignment: DialogAlignment.Center
@@ -118,8 +120,6 @@ export struct StateList {
       selected: this.selectedDate,
       showTime: true,
       useMilitaryTime: true,
-      // disappearTextStyle: { color: Color.Pink, font: { size: '22fp', weight: FontWeight.Bold } },
-      // textStyle: { color: '#ff00ff00', font: { size: '18fp', weight: FontWeight.Normal } },
       selectedTextStyle: {
         color: ResManager.EC_MAIN_COLOR,
         font: { size: ResManager.EC_MODULE_TITLE_FS, weight: FontWeight.Regular }
@@ -137,27 +137,7 @@ export struct StateList {
         }
         this.selectedDate = value
       },
-      // onCancel: () => {
-      //   console.info("DatePickerDialog:onCancel()")
-      // },
-      // onDateChange: (value: Date) => {
-      //   // console.info("DatePickerDialog:onDateChange()" + value.toString())
-      //   // const now:Date = new Date()
-      //   // if(value.getTime() < now.getTime()) {
-      //   //   promptAction.showToast({
-      //   //     message:value.getTime()+''
-      //   //   })
-      //   //   this.selectedDate = now
-      //   // }
-      //   // promptAction.showToast({
-      //   //   message:value.getTime()+''
-      //   // })
-      // }
     })
-  }
-
-  aboutToAppear() {
-    // this.reasonDialog.open()
   }
 
   build() {
@@ -208,7 +188,12 @@ export struct StateList {
               .width('100%')
               .backgroundColor('#E9F6FF')
               .borderRadius(5)
-              .padding({ left: 10, right: 10, top: 5, bottom: 8 })
+              .padding({
+                left: 10,
+                right: 10,
+                top: 5,
+                bottom: 8
+              })
 
 
               Row() {
@@ -243,7 +228,12 @@ export struct StateList {
             .width('100%')
             .borderRadius(ResManager.EC_NORMAL_RD)
             .backgroundColor(ResManager.EC_MID_WHITE)
-            .padding({ left: 14, right: 14, top: 10, bottom: 10 })
+            .padding({
+              left: 14,
+              right: 14,
+              top: 10,
+              bottom: 10
+            })
           }
         })
       }

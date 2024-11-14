@@ -28,9 +28,6 @@ export default class EntryAbility extends UIAbility {
     GlobalContext.getContext().setObject('preference', PreferencesHandler.instance);
 
     //----------------------------------------------------------------------------
-
-    // interview设置
-    AppStorage.setOrCreate('context', this.context)
   }
 
   // 应用的UIAbility实例已创建，该UIAbility配置为单实例模式，再次调用startAbility()方法启动该UIAbility实例。由于启动的还是原来的UIAbility实例，
@@ -92,6 +89,9 @@ export default class EntryAbility extends UIAbility {
 
     // 初始化WeChat
     WeChat.init(this.context)
+
+    // interview设置
+    AppStorage.setOrCreate('context', this.context)
 
     // 初始化care
     TokenManager.context = this.context // 上下文

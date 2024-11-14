@@ -9,7 +9,6 @@ import {
   UserData,
   UserDataModel
 } from '@care/basic/Index'
-import fileIO from '@ohos.fileio'
 import { fileIo } from '@kit.CoreFileKit'
 import { FormData } from '@ohos/axios'
 import { promptAction } from '@kit.ArkUI'
@@ -29,8 +28,8 @@ struct Setting {
     // 使用自定义弹层组件
     builder: EcDialogUpload({
       callback: (url) => {
-        this.user.avatar = url // 重新赋值了当前头像
-        this.upload(url) // 传递给方法
+        this.user.avatar = url // 重新赋值了当前头像,直接展示
+        this.upload(url) // 上传url
       }
     }),
     alignment: DialogAlignment.Bottom
@@ -53,17 +52,17 @@ struct Setting {
       const file = fileIo.openSync(url, fileIo.OpenMode.READ_ONLY)
       // 生成一个目标文件的路径
       const destPath = getContext().cacheDir + "/" + file.name
-      // interal://cache:
+      // 需要的目录是: internal://cache:
       fileIo.copyFileSync(file.fd, destPath) // 拷贝到沙箱
       const data = new FormData()
       // 加上file的参数
       data.append("file", `internal://cache/${file.name}`)
-      const res = await uploadApi(data) // 只是传到服务器了 但是并没有更改头像
+      const res = await uploadApi(data) // 只是传到服务器了,获取oss的地址
       // 修改头像地址
-      await updateUserAvatar(res) // 修改用户头像
+      await updateUserAvatar(res) // 上传oss地址,修改用户头像
       promptAction.showToast({ message: '修改用户头像成功' })
       this.uploadDialog.close() // 关闭弹层
-      getContext().eventHub.emit("updateUser")
+      getContext().eventHub.emit("updateUser")  // 发送emit
     }
   }
 
@@ -75,8 +74,7 @@ struct Setting {
         .fontSize(ResManager.EC_MODULE_TITLE_FS)
         .fontWeight(500)
       Row({ space: 10 }) {
-        if (type === ShowType.NICKNAME) {
-          // 昵称修改
+        if (type === ShowType.NICKNAME) { // 昵称
           Text(this.user.nickName || "未命名")
             .fontColor(ResManager.EC_MID_59)
             .fontSize(ResManager.EC_NORMAL_FS)
@@ -88,8 +86,7 @@ struct Setting {
                 }
               })
             })
-        } else {
-          // 上传
+        } else { // 头像
           Image(this.user.avatar ||
             'https://img2.baidu.com/it/u=130573784,2479509663&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=534')
             .width(34)
@@ -110,6 +107,7 @@ struct Setting {
   }
 
   build() {
+    // 导航路由
     Navigation() {
       Column() {
         Column() {
@@ -132,7 +130,6 @@ struct Setting {
           left: ResManager.EC_CONTENT_SPACE,
           right: ResManager.EC_CONTENT_SPACE
         })
-        // .width('100%')
         .backgroundColor('#fff')
         .borderRadius(ResManager.EC_NORMAL_RD)
       }

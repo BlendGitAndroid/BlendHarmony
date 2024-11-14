@@ -8,7 +8,6 @@ import {
   UserData,
   UserDataModel
 } from '@care/basic/Index'
-import { promptAction } from '@kit.ArkUI'
 
 @Component
 export struct Mine {
@@ -19,8 +18,8 @@ export struct Mine {
 
   aboutToAppear(): void {
     this.getUser()
-    getContext()
-      .eventHub.on("updateUser", () => {
+    // eventHub是在同一个线程中发送消息
+    getContext().eventHub.on("updateUser", () => {
       this.getUser()
     })
   }
@@ -137,9 +136,6 @@ export struct Mine {
             .fontColor(ResManager.EC_MID_19)
             .fontSize(ResManager.EC_MODULE_TITLE_FS)
             .fontWeight(500)
-          // Image($r('app.media.ic_arrow_black'))
-          //   .width(7)
-          //   .height(16)
         }
         .width('100%')
         .margin({
@@ -148,7 +144,6 @@ export struct Mine {
 
         // 导航：设备管理
         DeviceBuilder()
-
       }
       .margin({ top: -80, left: ResManager.EC_CONTENT_SPACE, right: ResManager.EC_CONTENT_SPACE })
       // .width('100%')
@@ -164,7 +159,7 @@ export struct Mine {
       Column() {
         List() {
           ListItem() {
-            this.cellItem('我的消息', 'pages/message/MsgPage')
+            this.cellItem('我的消息', RouterConfig.USER_MSG_URL)
           }
         }
         .width('100%')
@@ -177,13 +172,10 @@ export struct Mine {
         left: ResManager.EC_CONTENT_SPACE,
         right: ResManager.EC_CONTENT_SPACE
       })
-      // .width('100%')
       .backgroundColor('#fff')
       .borderRadius(ResManager.EC_NORMAL_RD)
 
-      Button(
-        '退出'
-      )
+      Button('退出')
         .fontColor(ResManager.EC_MID_19)
         .width(230)
         .height(40)
@@ -193,12 +185,9 @@ export struct Mine {
         .onClick(() => {
           this.logout()
         })
-
-
     }
     .width('100%')
     .height('100%')
     .backgroundColor(ResManager.EC_MID_BG)
-
   }
 }

@@ -4,7 +4,6 @@ import { Stage } from '@care/stage'
 import { Mine } from '@care/mine'
 import { TabBarItem } from '../viewmodel'
 
-// 首页
 @Entry
 @Component
 struct Index {
@@ -52,18 +51,20 @@ struct Index {
   }
 
   build() {
-    Tabs({
-      index: $$this.activeIndex
-    }) {
+    Tabs({ index: $$this.activeIndex }) {
       ForEach(this.tabBars, (item: TabBarItem, index: number) => {
+        // Tabs 下有TabContent
         TabContent() {
-          // tab 内容=》切换子组件
-          if (index === 0) Home()
-          else if (index === 1) Duty()
-          else if (index === 2) Stage()
-          else Mine()
-        }
-        .tabBar(this.TabBarBuilder(item, index))
+          if (index === 0) {
+            Home()
+          } else if (index === 1) {
+            Duty()
+          } else if (index === 2) {
+            Stage()
+          } else {
+            Mine()
+          }
+        }.tabBar(this.TabBarBuilder(item, index))
       })
     }
     .barPosition(BarPosition.End)

@@ -1,7 +1,7 @@
 // 消息类型
 import { MsgStatusComp } from '../components/MsgStatusComp'
-import router from '@ohos.router'
 import { ResManager } from '@care/basic/Index'
+import { router } from '@kit.ArkUI'
 
 class MsgItem {
   type: string = ''
@@ -18,6 +18,13 @@ struct MsgPage {
   @State
   activeType: number = 0
   private controller: TabsController = new TabsController()
+
+  aboutToAppear(): void {
+    if (router.getParams()) {
+      this.activeType = (router.getParams() as Record<string, Object>).type as number
+    }
+  }
+
   // 消息类型
   msgTypes: MsgItem[] = [
     {
@@ -48,6 +55,7 @@ struct MsgPage {
   }
 
   build() {
+    // 自带的Navigation
     Navigation() {
       Stack({ alignContent: Alignment.Top }) {
         // tab 分类
@@ -65,7 +73,7 @@ struct MsgPage {
           this.activeType = index
         })
 
-        //  消息分类bar title自定义
+        // 自定义消息分类bar title,不使用原来的bar title
         Row({ space: 5 }) {
           ForEach(this.msgTypes, (item: MsgItem, i: number) => {
             Badge({
@@ -82,28 +90,35 @@ struct MsgPage {
                     .fontSize(ResManager.EC_NORMAL_FS)
                     .fontColor(this.activeType === i ? '#fff' : ResManager.EC_MID_19)
                 }
-                .padding({ left: 15, right: 15, top: 8, bottom: 8 })
+                .padding({
+                  left: 15,
+                  right: 15,
+                  top: 8,
+                  bottom: 8
+                })
 
-                // .alignItems(VerticalAlign.Bottom)
               }
               .backgroundColor(this.activeType === i ? ResManager.EC_MAIN_COLOR : '#fff')
               .animation({ duration: 200 })
               .onClick(() => {
-                this.controller.changeIndex(i)
+                this.controller.changeIndex(i) // 使用controller来控制tab的转换
               })
             }
           })
         }
         .width('100%')
-        .padding({ left: 15, right: 15, top: 10, bottom: 10 })
-        // .height(48)
+        .padding({
+          left: 15,
+          right: 15,
+          top: 10,
+          bottom: 10
+        })
         .alignItems(VerticalAlign.Center)
         .backgroundColor('#fff')
       }
       .width('100%')
       .height('100%')
       .backgroundColor(ResManager.EC_MID_BG)
-
     }
     .title('我的消息')
     .titleMode(NavigationTitleMode.Mini)

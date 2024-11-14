@@ -38,7 +38,6 @@ export struct MsgStatusComp {
         })
       }
       .barPosition(BarPosition.Start)
-      // .barBackgroundColor(ResManager.EC_MID_WHITE)
       .onChange((index: number) => {
         this.activeIndex = index
       })

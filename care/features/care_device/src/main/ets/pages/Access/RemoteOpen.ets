@@ -1,5 +1,4 @@
 import { promptAction } from '@kit.ArkUI';
-import { AVPlayerClass } from '@itheima/wing-care';
 import { ResManager } from '@care/basic/Index';
 
 @Entry
@@ -69,9 +68,6 @@ struct RemoteOpen {
               .opacity(this.pressCount > 0 ? 1 : 0)// 重置回退效果处理
               .animation({ duration: 100 })
             Column() {
-              // Image($r('app.media.ic_kaimen'))
-              //   .width(50)
-              //   .aspectRatio(1)
               Column()
                 .width(50)
                 .aspectRatio(1)

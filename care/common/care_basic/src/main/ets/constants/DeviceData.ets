@@ -9,6 +9,7 @@ export interface DeviceFunctionItem {
   icon: ResourceStr
 }
 
+// 定义一个枚举
 export enum ProductNameMap {
   watch = 'watch',
   Access_control = 'Access_control',

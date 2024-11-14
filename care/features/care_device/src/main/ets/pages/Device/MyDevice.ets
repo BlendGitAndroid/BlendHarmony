@@ -51,7 +51,7 @@ struct MyDevice {
   }
 
   build() {
-    // 导航栏
+    // 导航栏,就是沉浸式的
     Navigation() {
       Column() {
         // 设备列表

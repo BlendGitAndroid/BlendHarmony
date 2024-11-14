@@ -1,4 +1,4 @@
-import { ResManager } from "@care/basic/Index"
+import { ResManager } from '@care/basic/Index'
 import { AVPlayerClass } from '@itheima/wing-care'
 import { sensor } from '@kit.SensorServiceKit'
 import { blueManager } from '../../utils'
