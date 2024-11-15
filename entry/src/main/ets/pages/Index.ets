@@ -81,12 +81,12 @@ struct Index {
             }
           })
 
-        Text("Test")
+        Text("base学习2")
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
           .onClick(() => {
             router.pushUrl({
-              url: '@bundle:com.blend.harmony1/test/ets/pages/TestIndexPage'
+              url: '@bundle:com.blend.harmony1/test/ets/pages/IndexPage'
             })
           })
       }

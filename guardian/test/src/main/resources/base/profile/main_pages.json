@@ -1,6 +1,6 @@
 {
   "src": [
-    "pages/TestIndexPage",
+    "pages/IndexPage",
     "pages/PermissionsTestPage",
     "pages/MediaLibraryKitTestPage",
     "pages/PatternTestPage",

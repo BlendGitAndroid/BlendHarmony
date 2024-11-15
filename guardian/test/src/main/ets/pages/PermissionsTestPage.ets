@@ -48,6 +48,10 @@ struct PermissionsTestPage {
     themeManager.enableFullScreen()
   }
 
+  aboutToDisappear(): void {
+    themeManager.disableFullScreen()
+  }
+
   build() {
     Navigation() {
       Scroll() {

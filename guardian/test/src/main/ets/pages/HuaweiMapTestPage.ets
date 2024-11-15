@@ -68,6 +68,8 @@ struct HuaweiMapDemo {
           this.mapController?.animateCamera(cameraUpdate);
 
         });
+      } else {
+        AlertDialog.show({message: JSON.stringify(err, null, 2)})
       }
     };
   }

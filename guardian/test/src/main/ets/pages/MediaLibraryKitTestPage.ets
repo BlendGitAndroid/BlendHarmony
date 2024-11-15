@@ -1,9 +1,9 @@
 import { permissionManager } from '../manager'
 import { photoAccessHelper } from '@kit.MediaLibraryKit'
 import { dataSharePredicates } from '@kit.ArkData'
-import { formatByteLength } from '../utils'
-import dayjs from 'dayjs'
 import { promptAction } from '@kit.ArkUI'
+import { PhotoSource, RecentPhotoComponent, RecentPhotoOptions } from '@ohos.file.RecentPhotoComponent'
+import { BaseItemInfo } from '@ohos.file.PhotoPickerComponent'
 
 @Entry
 @Component
@@ -26,6 +26,8 @@ struct MediaLibraryKitTestPage {
   @State albumName: string = ''
   // 相册数量
   @State albumCount: string = ''
+  // 最近图片组件初始化
+  recentPhotoOptions: RecentPhotoOptions = new RecentPhotoOptions();
 
   aboutToAppear() {
     // 申请权限
@@ -39,6 +41,24 @@ struct MediaLibraryKitTestPage {
       'ohos.permission.READ_IMAGEVIDEO', // 读图库(获取)
       'ohos.permission.WRITE_IMAGEVIDEO',// 写图库(新增、删除、修改)
     ])
+  }
+
+  // 返回值为true时，才能获取uri的权限
+  private onRecentPhotoClick(recentPhotoInfo: BaseItemInfo): boolean {
+    if (!recentPhotoInfo) {
+      return false;
+    }
+    this.photoAssetDisplayName = recentPhotoInfo.uri as string
+    this.photoAssetUri = recentPhotoInfo.uri as string
+    this.photoAssetSize = recentPhotoInfo.size?.toString() as string
+    return true;
+  }
+
+  private onReceiveCheckResult(recentPhotoExists: boolean): void {
+    if (!recentPhotoExists) {
+      console.info('not exist recent photo');
+    }
+    // 存在最近图片的话，可以实现业务需求， 如去控制RecentPhotoComponent是否显示
   }
 
   build() {
@@ -60,52 +80,39 @@ struct MediaLibraryKitTestPage {
                 })
             })
 
-          Button('获取图库资源')
+          Button('获取最近一张图片')
             .onClick(async () => {
-              // 1. 获取图库管理器
-              const phAccessHelper = photoAccessHelper.getPhotoAccessHelper(getContext())
-              // 2. 准备谓词（查找条件） predicates 是一个类，需要 new 创建类实例
-              const predicates = new dataSharePredicates.DataSharePredicates()
-              // predicates.orderByAsc()   // 正序：按字段从小到大
-              predicates.orderByDesc(photoAccessHelper.PhotoKeys.DATE_ADDED) // 倒序：按字段从大到小
-              // 3. 获取图库资源核心 API： getAssets
-              // 注意： 调用 getAssets 前，需提前申请 IMAGEVIDEO 的权限，否者调用失败
-              const fetchResult = await phAccessHelper.getAssets({
-                fetchColumns: [photoAccessHelper.PhotoKeys.SIZE, photoAccessHelper.PhotoKeys.DATE_ADDED], // 必传参数：查询列
-                predicates: predicates  // 必传参数：谓词（查找条件）
-              })
-              // ---------------- 获取到图片资源后续操作 ----------------
-              // 获取图片数量
-              this.photoCount = fetchResult.getCount()
-              // 获取第一张图片资源对象（默认按图片创建时间排序）
-              const photoAsset = await fetchResult.getFirstObject()
-              // 提取图片属性
-              this.photoAssetUri = photoAsset.uri // 图片 uri (路径)
-              this.photoAssetDisplayName = photoAsset.displayName // 图片名称
+              // 设置数据类型， IMAGE_VIDEO_TYPE：图片和视频（默认值）  IMAGE_TYPE：图片   VIDEO_TYPE：视频  MOVING_PHOTO_IMAGE_TYPE 动态图片
+              this.recentPhotoOptions.MIMEType = photoAccessHelper.PhotoViewMIMETypes.IMAGE_VIDEO_TYPE;
 
-              // 注意事项：若忘记在 fetchColumns 添加查询字段，get 获取时会报错，比较容易踩坑
-              // 获取图片文件大小
-              //  1. 在 fetchColumns 添加 SIZE 字段
-              //  2. 通过 get 获取文件大小
-              const size = photoAsset.get(photoAccessHelper.PhotoKeys.SIZE) as number
-              // 格式化后展示图片文件大小
-              this.photoAssetSize = formatByteLength(size)
+              // 设置最近图片的时间范围，单位（秒）， 0表示所有时间。
+              this.recentPhotoOptions.period = 0;
 
-              // 获取图片添加日期
-              //  1. 在 fetchColumns 添加 DATE_ADDED 字段
-              //  2. 通过 get 获取图片添加日期（添加文件时间距1970年1月1日的秒数值）
-              const dateAdded = photoAsset.get(photoAccessHelper.PhotoKeys.DATE_ADDED) as number
-
-              // 注意事项：ArkTS 中时间戳时毫秒值，图片添加时间为秒数值，单位存在差异，需要秒数值乘 1000 后，再 dayjs 格式化
-              this.photoAssetDateAdded = dayjs(dateAdded * 1000)
-                .format('YYYY-MM-DD HH:mm:ss')
+              // 设置资源的来源 ALL：所有 CAMERA：相机  SCREENSHOT：截图
+              this.recentPhotoOptions.photoSource = PhotoSource.ALL;
             })
+
           Text('总图片数量：' + this.photoCount)
           Text('第一张图片名称：' + this.photoAssetDisplayName)
           Text('第一张图片文件大小：' + this.photoAssetSize)
           Text('第一张图片添加时间：' + this.photoAssetDateAdded)
           Image(this.photoAssetUri)
             .height(100)
+
+          RecentPhotoComponent({
+            // 设置最近图片组件选择选项实例
+            recentPhotoOptions: this.recentPhotoOptions,
+
+            /**
+             * 最近图片点击事件
+             * BaseItemInfo（uri, mimeType, width, height, size, duration）
+             * return 返回值为true时才会给url授权，才可以显示
+             */
+            onRecentPhotoClick: (recentPhotoInfo: BaseItemInfo): boolean => this.onRecentPhotoClick(recentPhotoInfo),
+
+            // 检查是否存在最近的资源
+            onRecentPhotoCheckResult: (recentPhotoExists: boolean) => this.onReceiveCheckResult(recentPhotoExists),
+          })
 
           Button('删除第一张图片')
             .onClick(async () => {

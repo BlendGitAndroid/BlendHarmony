@@ -29,13 +29,16 @@ struct WebSocketTestPage {
               ws.connect('wss://guardian-api.itheima.net/verifyCode')
               // 3. 当连接成功后，客户端会收到 .on('open') 事件的回调
               ws.on('open', (err, data) => {
-                if (err) { return }
+                if (err) {
+                  return
+                }
                 promptAction.showToast({ message: '连接成功' })
               })
               // 4. 当服务器发信息给客户端时，客户端会收到 .on('message') 事件的回调。
               ws.on('message', (err, data) => {
-                if (err) { return } // 如果有错误直接退出
-                // promptAction.showToast({ message: '收到服务器推送的消息：' + JSON.stringify(data, null, 2) })
+                if (err) {
+                  return
+                } // 如果有错误直接退出
                 this.list.push(JSON.stringify(data, null, 2))
               })
               // 保存成全局 ws
@@ -54,7 +57,7 @@ struct WebSocketTestPage {
       .width('100%')
       .height('100%')
     }
-    .title('')
+    .title('WebSocket')
     .titleMode(NavigationTitleMode.Mini)
   }
 }

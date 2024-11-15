@@ -122,8 +122,11 @@ struct TestIndexPage {
             })
         }
       }
+      .width('100%')
+      .height('100%')
+      .scrollBar(BarState.Off)
     }
-    .title('测试页入口')
+    .title('base学习2')
     .titleMode(NavigationTitleMode.Mini)
     .mode(NavigationMode.Stack)
   }
