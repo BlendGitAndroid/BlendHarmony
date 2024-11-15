@@ -1,4 +1,4 @@
-import { HmSearchBox, HmCalendar, HmClockIn } from '../common/components'
+import { HmCalendar, HmClockIn, HmSearchBox } from '../common/components'
 import { auth, http, requestClockIn, tracking, UserStoreKey } from '../common/utils'
 import { QuestionDetail, User } from '../model'
 import { HomeCategory } from '../views/Home/HomeCategory'
@@ -28,45 +28,10 @@ export struct HomePage {
 
   // 扫码
   async scanCode() {
-    // 拓展：
-    // 一多:一次开发，多端部署
-    // 界面（界面级一多）
-    // 能力（功能级一多）耳机  手机
-    // if (canIUse('SystemCapability.Multimedia.Scan.ScanBarcode')) {
-    //   //   唤起扫码界面
-    //   const res = await scanBarcode.startScanForResult(getContext())
-    //   // promptAction.showToast({
-    //   //   message: JSON.stringify(res)
-    //   // })
-    //   const item = await http.request<QuestionDetail>({
-    //     url: 'hm/question/' + res.originalValue
-    //   })
-    //   if (!item) {
-    //     return promptAction.showToast({
-    //       message: '请你扫我分享的码~'
-    //     })
-    //   }
-    //   router.pushUrl({
-    //     url: 'pages/QuestionPage',
-    //     params: {
-    //       item,
-    //       list: [item]
-    //     }
-    //   })
-    // }else{
-    //     promptAction.showToast({
-    //       message: '当前设备不支持扫码'
-    //     })
-    // }
-    // 工程（工程级一多）
     // 1.唤起扫码界面
     try {
-      //     正常唤起扫码
-      //   唤起扫码界面
+      //  唤起扫码界面
       const res = await scanBarcode.startScanForResult(getContext())
-      // promptAction.showToast({
-      //   message: JSON.stringify(res)
-      // })
       const item = await http.request<QuestionDetail>({
         url: 'hm/question/' + res.originalValue
       })
@@ -87,7 +52,6 @@ export struct HomePage {
         message: '当前设备不支持扫码'
       })
     }
-    //   2.根据结果(id)，跳转的题目页面
   }
 
   aboutToAppear(): void {
@@ -103,32 +67,22 @@ export struct HomePage {
           .width(24)
           .aspectRatio(1)
           .onClick(() => {
-            // 登录后才能执行
-            // if(this.user.token){
-            //
-            // }else{
-            //   router.pushurl(xxx)
-            // }
             // 先检测有没有权限
-            // 有，执行
-            // 没有，去登录 - 登录完重新点
             auth.checkAuth(() => {
               this.scanCode()
             })
           })
-        //   搜索框-封装组件
+        // 搜索框-封装组件
         HmSearchBox({
           layoutValue: 1,
           placeHolderText: '搜索关键字',
-
         })
-        //   打卡
+        // 打卡
         HmClockIn({
           clockCount: this.user.clockinNumbers
+        }).onClick(() => {
+          requestClockIn()
         })
-          .onClick(()=>{
-            requestClockIn()
-          })
       }
       .width('100%')
       .padding({
@@ -138,7 +92,7 @@ export struct HomePage {
 
       //轮播图
       Swiper() {
-        //   抽离组件
+        // 抽离组件
         ForEach([
           $r('app.media.banner_pj'),
           $r('app.media.banner_ai'),

@@ -180,6 +180,18 @@
           ]
         }
       ]
+    },
+    {
+      "name": "test",
+      "srcPath": "./guardian/test",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "src": [
+    "pages/TestIndexPage",
+    "pages/PermissionsTestPage",
+    "pages/MediaLibraryKitTestPage",
+    "pages/PatternTestPage",
+    "pages/UserAuthTestPage",
+    "pages/DatabaseTestPage",
+    "pages/AudioCapturerTestPage",
+    "pages/CameraPickerTestPage",
+    "pages/FaultLoggerTestPage",
+    "pages/ContactsTestPage",
+    "pages/PasteboardTestPage",
+    "pages/SensorTestPage",
+    "pages/TorchTestPage",
+    "pages/AVPlayerTestPage",
+    "pages/LocationKitTestPage",
+    "pages/HuaweiMapTestPage",
+    "pages/WebSocketTestPage"
+  ]
+}

@@ -11,7 +11,6 @@ class Theme {
     // 应用状态初始化
     const theme = AppStorage.get<ConfigurationConstant.ColorMode>(this.themeKey)
     // 缓存的主题（系统）设置给应用
-    // TODO:设置主题(theme)
     this.setTheme(theme!)
   }
 
@@ -23,12 +22,9 @@ class Theme {
     getContext().getApplicationContext().setColorMode(theme)
     // 获取当前主题
     const ctx = AppStorage.get<Context>('context');
-    logger.info('颜色模式：'+(ctx as common.UIAbilityContext).config.colorMode)
+    logger.info('颜色模式：' + (ctx as common.UIAbilityContext).config.colorMode)
     const isDark = (ctx as common.UIAbilityContext).config.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK
     AppStorage.setOrCreate('isDark', isDark)
-    //遗留问题：
-    //系统切换的时候我是检测不到的，公共事件订阅（等待华为退出kit）
-
   }
 
   //3.跟随系统(不跟随)
@@ -39,7 +35,6 @@ class Theme {
   //4.设置深色
   setDark() {
     this.setTheme(ConfigurationConstant.ColorMode.COLOR_MODE_DARK)
-
   }
 
   //5.设置浅色

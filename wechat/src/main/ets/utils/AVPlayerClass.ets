@@ -49,7 +49,7 @@ export class AVPlayerClass {
     // 将之前没有播完的取消，先重置
     await AVPlayerClass.player.reset()
     // 重新播放新的
-    const fileDescriptor = AVPlayerClass.context.resourceManager.getRawFdSync(src + '.wav')
+    const fileDescriptor = AVPlayerClass.context.createModuleContext('wechat').resourceManager.getRawFdSync(src + '.wav')
     AVPlayerClass.player.fdSrc = fileDescriptor
   }
 }

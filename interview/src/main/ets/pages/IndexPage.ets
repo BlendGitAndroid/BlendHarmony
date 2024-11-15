@@ -1,18 +1,13 @@
 import { auth, fullScreen } from '../common/utils'
 import { theme } from '../common/utils/Theme'
-// 数据结构定义
 import { HomePage } from './HomePage'
 import { InterviewPage } from './InterviewPage'
 import { MinePage } from './MinePage'
 import { ProjectPage } from './ProjectPage'
 
-// 满足persistentStorage的限制条件：UI结构已经有了//
 // 加载页面前就会执行的
 auth.initUser()
 theme.initTheme()
-//ArkTs代码可以执行的地方（只是不能写arkUI
-// const a:string = '123456'
-
 
 interface TabItem {
   icon: Resource
@@ -60,7 +55,6 @@ struct IndexPage {
     fullScreen.disable()
   }
 
-  // tabbarBuilder
   @Builder
   TabBarBuilder(item: TabItem, index: number) {
     // index是自己的索引
@@ -79,7 +73,7 @@ struct IndexPage {
       Tabs() {
         ForEach(this.tabList, (item: TabItem, index: number) => {
           TabContent() {
-            //   每一页的内容
+            // 每一页的内容
             if (index === 0) {
               HomePage()
             } else if (index === 1) {

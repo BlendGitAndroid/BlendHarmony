@@ -18,7 +18,8 @@
     "dayjs": "^1.11.7",
     "@itheima/wing-care": "^1.0.2",
     "@care/basic": "file:./care/common/care_basic",
-    "@abner/log": "^1.0.3"
+    "@abner/log": "^1.0.3",
+    "@guardian/test": "file:./guardian/test"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.6",

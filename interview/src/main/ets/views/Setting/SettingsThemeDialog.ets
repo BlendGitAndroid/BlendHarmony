@@ -24,10 +24,8 @@ export struct SettingsThemeDialog {
         })
           .onChange((val) => {
             if (val) {
-              // TODO 跟随系统
               theme.notSetTheme()
             } else {
-              // TODO 默认亮色
               theme.setLight()
             }
           })
