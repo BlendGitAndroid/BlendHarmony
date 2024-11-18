@@ -346,7 +346,7 @@ struct GuardNightPage {
               }
 
               GridCol() {
-                HelpButton({ icon: $r('app.media.ic_guard_help_fjpcs'), text: '查看附件派出所' })
+                HelpButton({ icon: $r('app.media.ic_guard_help_fjpcs'), text: '查看附近派出所' })
                   .onClick(() => {
                     router.pushUrl({
                       url: '@bundle:com.blend.harmony1/guardian/ets/pages/Guard/Outdoor/GuardPolicePage'

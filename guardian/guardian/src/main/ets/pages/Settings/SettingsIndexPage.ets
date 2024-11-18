@@ -46,14 +46,6 @@ struct SettingsIndexPage {
               // TODO: 退出登录
               this.userLogout()
             })
-          Button('测试页面入口')
-            .type(ButtonType.Normal)
-            .backgroundColor($r('app.color.brand'))
-            .borderRadius(10)
-            .width('100%')
-            .onClick(() => {
-
-            })
         }
         .padding({ left: 20, right: 20, bottom: 30 })
       }

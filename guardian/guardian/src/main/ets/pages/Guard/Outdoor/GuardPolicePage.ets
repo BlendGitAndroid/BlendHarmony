@@ -1,5 +1,6 @@
 import { router } from '@kit.ArkUI';
-import { AsyncCallback } from '@kit.BasicServicesKit';
+import { AsyncCallback, BusinessError } from '@kit.BasicServicesKit';
+import { geoLocationManager } from '@kit.LocationKit';
 import { map, mapCommon, MapComponent, site } from '@kit.MapKit';
 import { call } from '@kit.TelephonyKit';
 import { themeManager } from '../../../manager';
@@ -24,6 +25,102 @@ struct GuardPolicePage {
   onPageHide() {
     // 关闭沉浸式
     themeManager.disableFullScreen()
+  }
+
+  aboutToAppear(): void {
+    this.initMap()
+  }
+
+  initMap() {
+    this.showMap = true
+    this.mapOption = {
+      position: {
+        target: {
+          latitude: 39.9,
+          longitude: 116.4
+        },
+        zoom: 10
+      },
+    };
+    this.callback = async (err, mapController) => {
+      if (!err) {
+        this.mapController = mapController;
+        this.mapController.on('mapLoad', () => {
+          this.mapController?.setMyLocationEnabled(true);
+          this.mapController?.setMyLocationControlsEnabled(false);
+          try {
+            // 模拟器不支持精确定位
+            geoLocationManager.getCurrentLocation()
+              .then(result => {
+                this.setCurrLocation(result)
+                // 获取当前地址
+                this.getAddress(result)
+              })
+          } catch (e) {
+            console.error('MAP_LOGGER MAPLOAD', JSON.stringify(e))
+          }
+        })
+        this.mapController.on('myLocationButtonClick', () => {
+          geoLocationManager.getCurrentLocation()
+            .then(result => {
+              this.setCurrLocation(result)
+            })
+        })
+      }
+    };
+  }
+
+  async setCurrLocation(result: geoLocationManager.Location) {
+    // 设置当前位置，即圆点位置
+    let position: geoLocationManager.Location = {
+      latitude: result.latitude,
+      longitude: result.longitude,
+      altitude: 0,
+      accuracy: 0,
+      speed: 0,
+      timeStamp: Date.now(),
+      direction: 0,
+      timeSinceBoot: Date.now()
+    };
+    this.mapController?.setMyLocation(position);
+    // 获取的是 WGS84 坐标，移动相机需要转成 GCJ02 坐标
+    map.convertCoordinate(mapCommon.CoordinateType.WGS84, mapCommon.CoordinateType.GCJ02, result)
+      .then(res => {
+        const updateCameraPotions: mapCommon.CameraPosition = {
+          target: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          zoom: 12,
+        }
+        const updateCamera = map.newCameraPosition(updateCameraPotions)
+        this.mapController?.animateCamera(updateCamera)
+      })
+  }
+
+  getAddress(result: geoLocationManager.Location) {
+    console.log('MAP_LOGGER', 'getAddress')
+    site.searchByText({
+      query: '派出所',
+      location: result,
+      pageSize: 10
+    })
+      .then(res => {
+        console.log('MAP_LOGGER', res.totalCount)
+        if (res.sites) {
+          this.addressList = res.sites
+          console.log('MAP_LOGGER', JSON.stringify(res.sites))
+          this.addressList.forEach(item => {
+            this.mapController?.addMarker({
+              position: item.location,
+              alpha: 0.5
+            })
+          })
+        }
+      })
+      .catch((err: BusinessError) => {
+        console.log('MAP_LOGGER', JSON.stringify(err))
+      })
   }
 
   build() {

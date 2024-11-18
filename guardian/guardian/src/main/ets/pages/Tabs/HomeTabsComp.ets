@@ -297,8 +297,12 @@ struct HomeTool {
       icon: $r("app.media.ic_tools_zpql"),
       url: '@bundle:com.blend.harmony1/guardian/ets/pages/Cleaner/CleanerSelectPage'
     },
-    { title: '视频压缩', icon: $r("app.media.ic_tools_spys"), url: '/' },
-    { title: '流量监控', icon: $r("app.media.ic_tools_lljk"), url: '/' },
+    {
+      title: '录音',
+      icon: $r("app.media.ic_tools_spys"),
+      url: '@bundle:com.blend.harmony1/guardian/ets/pages/Privacy/Recorder/RecorderIndexPage'
+    },
+    { title: '笔记', icon: $r("app.media.ic_tools_lljk"), url: '@bundle:com.blend.harmony1/guardian/ets/pages/Privacy/Note/NoteIndexPage' },
     { title: '网络测速', icon: $r("app.media.ic_tools_wlcs"), url: '/' },
   ]
 

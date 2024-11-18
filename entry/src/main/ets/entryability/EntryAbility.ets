@@ -16,6 +16,7 @@ import axios from '@ohos/axios';
 
 const TAG = '[entryAbility]';
 
+// 故障上报,应用运行出现报错后，自动上传错误日志到服务器。
 // 错误管理器的 id 标识
 let observerId = -1
 

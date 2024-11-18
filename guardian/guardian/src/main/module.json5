@@ -9,6 +9,107 @@
       "2in1"
     ],
     "deliveryWithInstall": true,
-    "pages": "$profile:main_pages"
+    "pages": "$profile:main_pages",
+    "requestPermissions": [
+      // 权限等级: normal        对所有应用开放
+      // 授权方式: system_grant  系统静默授权，无弹窗
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING"
+      },
+      // 马达振动
+      {
+        "name": "ohos.permission.VIBRATE"
+      },
+      // 加速度传感器
+      {
+        "name": "ohos.permission.ACCELEROMETER"
+      },
+      // 网络请求
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      // 生物识别和密码(用户认证服务)
+      {
+        "name": "ohos.permission.ACCESS_BIOMETRIC"
+      },
+      // 获取网络信息
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO"
+      },
+      // -------------------- user_grant --------------------
+      // 日历权限（权限组-读写）
+      // 权限等级: normal        对所有应用开放
+      // 授权方式: user_grant    需弹窗
+      {
+        // 读日历（权限组）
+        "name": "ohos.permission.READ_CALENDAR",
+        // 申请权限的原因说明(API 11 为必填属性)
+        "reason": "$string:permission_reason_calendar",
+        // 应用场景(API 11 为必填属性)
+        "usedScene": {}
+      },
+      {
+        // 写日历（权限组）
+        "name": "ohos.permission.WRITE_CALENDAR",
+        // 申请权限的原因说明(API 11 为必填属性)
+        "reason": "$string:permission_reason_calendar",
+        // 应用场景(API 11 为必填属性)
+        "usedScene": {}
+      },
+      // 相机
+      {
+        "name": "ohos.permission.CAMERA",
+        "reason": '$string:permission_reason_camera',
+        "usedScene": {}
+      },
+      // 麦克风
+      {
+        "name": "ohos.permission.MICROPHONE",
+        "reason": '$string:permission_reason_microphone',
+        "usedScene": {}
+      },
+      // 位置信息
+      {
+        // 模糊定位
+        "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": '$string:permission_reason_location',
+        "usedScene": {}
+      },
+      {
+        // 精准定位
+        "name": "ohos.permission.LOCATION",
+        "reason": '$string:permission_reason_location',
+        "usedScene": {}
+      },
+      // -------------------- user_grant --------------------
+      // -------------------- system_basic + user_grant --------------------
+      // system_basic 为受限开放权限，需要签名证书
+      // 如何生成签名证书？
+      //   1. 开发阶段，可通过 DevEco Studio 快速生成签名证书
+      //   2. 项目上线，需要到应用市场（AGC）生成证书
+      // 通讯录(权限组-读写)
+      //      {
+      //        "name": "ohos.permission.READ_CONTACTS",
+      //        "reason": '$string:permission_reason_contact',
+      //        "usedScene": {}
+      //      },
+      //      {
+      //        "name": "ohos.permission.WRITE_CONTACTS",
+      //        "reason": '$string:permission_reason_contact',
+      //        "usedScene": {}
+      //      },
+      //      // 照片(权限组-读写)
+      //      {
+      //        "name": "ohos.permission.READ_IMAGEVIDEO",
+      //        "reason": "$string:permission_reason_imageVideo",
+      //        "usedScene": {}
+      //      },
+      //      {
+      //        "name": "ohos.permission.WRITE_IMAGEVIDEO",
+      //        "reason": "$string:permission_reason_imageVideo",
+      //        "usedScene": {}
+      //      },
+      // -------------------- system_basic + user_grant --------------------
+    ]
   }
 }

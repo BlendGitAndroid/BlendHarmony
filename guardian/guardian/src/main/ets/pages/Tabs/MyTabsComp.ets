@@ -85,6 +85,8 @@ export struct MyTabsComp {
         .fontSize(18)
         .fontWeight(500)
         .fontColor($r('app.color.font'))
+
+      // 路由容器组件，提供路由跳转能力
       Navigator({ target: target }) {
         Row({ space: 2 }) {
           Text('查看')
@@ -133,6 +135,7 @@ export struct MyTabsComp {
   build() {
     Scroll() {
       Column() {
+        // 设置右上角对齐
         Stack({ alignContent: Alignment.TopEnd }) {
           // 设置按钮
           Image($r('app.media.ic_my_settings'))
@@ -242,7 +245,7 @@ export struct MyTabsComp {
             .width('100%')
             .justifyContent(FlexAlign.SpaceBetween)
 
-            // 环形图表
+            // 环形图表,通过设置渐变来改变
             Gauge({ value: this.batteryState, min: 0, max: 100 }) {
               Column() {
                 Text(this.batteryState + '%')
@@ -280,7 +283,7 @@ export struct MyTabsComp {
       .constraintSize({ minHeight: '100%' })
     }
     .backgroundImage($r("app.media.MyPage_bg"))
-    .backgroundImageSize({ width: '100%' })
+    .backgroundImageSize({ width: '100%' }) // 设置背景图片大小
     .height('100%')
   }
 }

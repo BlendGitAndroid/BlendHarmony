@@ -1,4 +1,3 @@
-import { showDevelopingTips } from '../../../common/dev'
 import { avPlayerManager } from '../../../manager'
 
 interface Item {
@@ -84,6 +83,7 @@ struct FakeVoiceIndexPage {
                   Stack() {
                     Row({ space: 5 }) {
                       if (this.activeSrc === item.src) {
+                        // ImageAnimator实现播放
                         ImageAnimator()
                           .images([
                             { src: $r('app.media.ic_public_voice1') },

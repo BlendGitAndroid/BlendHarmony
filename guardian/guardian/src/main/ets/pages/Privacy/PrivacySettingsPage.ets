@@ -52,9 +52,6 @@ struct PrivacySettingsPage {
               Text(item.name)
                 .fontSize(14)
                 .fontColor($r('app.color.font'))
-              Text(item.count.toString())
-                .fontSize(14)
-                .fontColor($r('app.color.font_sub'))
             }
             .onClick(() => {
               if (item.url === '/') {
@@ -80,7 +77,9 @@ struct PrivacySettingsPage {
             rightTextColor: $r('app.color.font_sub'),
           })
             .onClick(() => {
-              router.pushUrl({ url: '@bundle:com.blend.harmony1/guardian/ets/pages/Privacy/Auth/AuthPatternLockSettingsPage' })
+              router.pushUrl({
+                url: '@bundle:com.blend.harmony1/guardian/ets/pages/Privacy/Auth/AuthPatternLockSettingsPage'
+              })
             })
           CellRowArrowComp({ title: '密码保护问题' })
             .onClick(() => {

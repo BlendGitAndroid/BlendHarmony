@@ -177,11 +177,11 @@ struct HardwareIndexPage {
     const netCapabilities = connection.getNetCapabilitiesSync(netHandle)
     // 3. 判断网络类型（按优先级展示: 以太网网络 > Wi-Fi网络 > 窝网络）
     if (netCapabilities.bearerTypes.includes(connection.NetBearType.BEARER_ETHERNET)) {
-      this.netBearType = '以太网网络' // 网线
+      this.netBearType = '以太网网络' // 有线网线
     } else if (netCapabilities.bearerTypes.includes(connection.NetBearType.BEARER_WIFI)) {
-      this.netBearType = 'Wi-Fi网络'
+      this.netBearType = 'Wi-Fi网络' // 无线网络
     } else if (netCapabilities.bearerTypes.includes(connection.NetBearType.BEARER_CELLULAR)) {
-      this.netBearType = '蜂窝网络'
+      this.netBearType = '蜂窝网络' // GPRS
     } else {
       this.netBearType = '有网络'
     }
@@ -224,7 +224,8 @@ struct HardwareIndexPage {
     const list = await sensor.getSensorList()
     // AlertDialog.show({ message: JSON.stringify(list, null, 2) })
     // 提取传感器的 id，用于查询是否支持某个传感器（模拟器也支持部分虚拟传感器，如：加速度传感器）
-    this.supportSensorIds = list.map(item => item.sensorId)
+    // 这里返回传感器的id组成的数组
+    this.supportSensorIds = list.map(item => item.sensorId) // 一个用于处理数组的方法，它可以对数组中的每个元素执行一个提供的函数，并返回一个新的数组
     // AlertDialog.show({ message: JSON.stringify(ids, null, 2) })
   }
 
@@ -276,6 +277,7 @@ struct HardwareIndexPage {
       // 其他内容
       Column() {
         List() {
+          // 用来展示列表item分组，宽度默认充满List组件，必须配合List组件来使用
           ListItemGroup({ header: this.ListTitle('基本信息') }) {
             ListRow({ title: '上次启动', value: this.formatToDateTime(this.uptime) })
             ListRow({ title: '运行时间', value: this.formatToDate(this.uptime) })
@@ -316,9 +318,10 @@ struct HardwareIndexPage {
     }
     .title(NavigationTitleBuilder('硬件信息'))
     .titleMode(NavigationTitleMode.Mini)
-    .mode(NavigationMode.Stack)
+    .mode(NavigationMode.Stack) // 导航栏与内容区独立显示，相当于两个页面
     .hideBackButton(true)
     .linearGradient({
+      // 设置从上到下的渐变
       angle: 180,
       colors: [[$r('app.color.brand'), 0], [$r('app.color.brand_light'), 0.4], [$r('app.color.white'), 0.4]]
     })

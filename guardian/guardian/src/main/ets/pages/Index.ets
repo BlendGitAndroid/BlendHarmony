@@ -6,7 +6,6 @@ import { MyTabsComp } from './Tabs/MyTabsComp';
 
 
 // 持久化 PersistentStorage 整个项目一个字段只需初始化一次
-// 温馨提示：PersistentStorage 持久化在 DevEco Studio 5.0.3.400 前有问题，旧版本需写到 pages/Index 页面组件中
 PersistentStorage.persistProp('isHidePrivacy', false)
 // 隐私空间持久化UI状态
 PersistentStorage.persistProp<PrivacySettings>(PRIVACY_SETTINGS, {})

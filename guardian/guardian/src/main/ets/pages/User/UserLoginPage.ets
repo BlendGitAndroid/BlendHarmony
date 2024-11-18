@@ -131,6 +131,7 @@ struct UserLoginPage {
             .height(42)
             .objectFit(ImageFit.Contain)
             .onClick(() => {
+              // 下面这个有意思
               // 更新图片路径中的 State，让 Image 组件刷新，Image 组件刷新时就会自动往服务器发送新的图片请求，从而实现刷新图形验证码
               this.timestamp = Date.now()
             })
