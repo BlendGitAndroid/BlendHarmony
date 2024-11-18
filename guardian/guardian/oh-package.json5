@@ -1,0 +1,17 @@
+{
+  "name": "guardian",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    // 加密库(鸿蒙和web端都能用)
+    "@ohos/crypto-js": "2.0.4-rc.1",
+    "@wolfx/lodash": "^4.17.21-rc.2",
+  },
+  "devDependencies": {
+    "@ohos/hamock": "1.0.0"
+  }
+}

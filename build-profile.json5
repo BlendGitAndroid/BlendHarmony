@@ -192,6 +192,18 @@
           ]
         }
       ]
+    },
+    {
+      "name": "guardian",
+      "srcPath": "./guardian/guardian",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     }
   ]
 }

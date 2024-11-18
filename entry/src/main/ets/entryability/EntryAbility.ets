@@ -1,4 +1,4 @@
-import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { AbilityConstant, errorManager, UIAbility, Want } from '@kit.AbilityKit';
 import window from '@ohos.window';
 import { GlobalContext } from '../dataPreferences/common/utils/GlobalContext';
 import PreferencesUtil from '../dataPreferences/common/database/Preferencesutil';
@@ -6,13 +6,18 @@ import Logger from '../dataPreferences/common/utils/Logger';
 import CommonConstants from '../dataPreferences/common/constants/CommonConstants';
 import PreferencesHandler from '../reminderClock/model/database/PreferencesHandler';
 import display from '@ohos.display';
-import { KeyboardAvoidMode } from '@kit.ArkUI';
+import { KeyboardAvoidMode, promptAction, router } from '@kit.ArkUI';
 import { WeChat } from '@blend/wechat';
 import { AdvertClass } from '@blend/basic/src/main/ets/models';
 import { defaultAd, UserSettingClass } from '@blend/basic';
 import { TokenManager } from '@care/basic';
+import { FaultLogger } from '@kit.PerformanceAnalysisKit';
+import axios from '@ohos/axios';
 
 const TAG = '[entryAbility]';
+
+// 错误管理器的 id 标识
+let observerId = -1
 
 export default class EntryAbility extends UIAbility {
   // 应用初始化操作
@@ -28,6 +33,23 @@ export default class EntryAbility extends UIAbility {
     GlobalContext.getContext().setObject('preference', PreferencesHandler.instance);
 
     //----------------------------------------------------------------------------
+    // 注册错误管理器，返回 id 标识
+    observerId = errorManager.on('error', {
+      // 应用注册后，当应用产生未捕获 catch 的异常时的回调，做统一的错误管理
+      async onUnhandledException() {
+        // 获取所有故障日志，FaultLogger 的故障日志会更加全面
+        const logs = await FaultLogger.query(FaultLogger.FaultType.JS_CRASH)
+        // 提取当前的错误日志详情
+        const currentFaultLog = logs[0]
+        console.log('errorManager', JSON.stringify(currentFaultLog))
+        // 上报到服务器
+        await axios.post('https://guardian-api.itheima.net/log/fault/report/single', currentFaultLog)
+        // 轻提示
+        promptAction.showToast({
+          message: '出现未知错误，已自动上报'
+        })
+      },
+    })
   }
 
   // 应用的UIAbility实例已创建，该UIAbility配置为单实例模式，再次调用startAbility()方法启动该UIAbility实例。由于启动的还是原来的UIAbility实例，
@@ -36,8 +58,10 @@ export default class EntryAbility extends UIAbility {
 
   }
 
+  // Ability 销毁时
   onDestroy() {
-
+    // 根据 id 标识，解除错误管理器注册
+    errorManager.off('error', observerId)
   }
 
   // UIAbility实例创建完成之后，在进入Foreground之前，系统会创建一个WindowStage。每一个UIAbility实例都对应持有一个WindowStage实例。
@@ -101,11 +125,20 @@ export default class EntryAbility extends UIAbility {
 
   }
 
+  // 切前台
   onForeground() {
 
   }
 
+  // 切后台(回主页/最小化)
   onBackground() {
-
+    const routerState = router.getState()
+    // 判断 path 路径中是否为 隐私空间 的路径
+    if (routerState.path.includes('guardian/ets/pages/Index')) {
+      // 返回主页，自动销毁中间的页面
+      router.back({
+        url: '@bundle:com.blend.harmony1/guardian/ets/pages/Index'
+      })
+    }
   }
 }

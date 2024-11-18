@@ -19,7 +19,8 @@
     "@itheima/wing-care": "^1.0.2",
     "@care/basic": "file:./care/common/care_basic",
     "@abner/log": "^1.0.3",
-    "@guardian/test": "file:./guardian/test"
+    "@guardian/test": "file:./guardian/test",
+    "@guardian/guardian": "file:./guardian/guardian",
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.6",
