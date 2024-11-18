@@ -237,7 +237,8 @@ struct GuardNightPage {
               .fontColor('#AEAEE6')
               .layoutWeight(1)
               .margin({ top: 25 })
-            Image('/common/images/GuardIndoorPage_bozai.png')
+
+            Image($r("app.media.GuardIndoorPage_bozai"))
               .height(120)
               .width(103)
               .margin({ right: 30 })
@@ -306,7 +307,7 @@ struct GuardNightPage {
             Row() {
               ToolButton({ icon: $r('app.media.ic_guard_tool_sdt'), text: '手电筒' })
                 .onClick(() => {
-                  // TODO：切换手电筒
+
                 })
               ToolButton({ icon: $r('app.media.ic_guard_tool_dyljb'), text: '大音量警报' })
                 .onClick(() => {
@@ -347,7 +348,9 @@ struct GuardNightPage {
               GridCol() {
                 HelpButton({ icon: $r('app.media.ic_guard_help_fjpcs'), text: '查看附件派出所' })
                   .onClick(() => {
-                    router.pushUrl({ url: '@bundle:com.blend.harmony1/guardian/ets/pages/Guard/Outdoor/GuardPolicePage' })
+                    router.pushUrl({
+                      url: '@bundle:com.blend.harmony1/guardian/ets/pages/Guard/Outdoor/GuardPolicePage'
+                    })
                   })
               }
 

@@ -279,7 +279,7 @@ export struct MyTabsComp {
       }
       .constraintSize({ minHeight: '100%' })
     }
-    .backgroundImage('/common/images/MyPage_bg.png')
+    .backgroundImage($r("app.media.MyPage_bg"))
     .backgroundImageSize({ width: '100%' })
     .height('100%')
   }

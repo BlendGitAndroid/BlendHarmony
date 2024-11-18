@@ -375,7 +375,7 @@ struct RecorderIndexPage {
         }
         .width('101%')
         .height(222)
-        .backgroundImage('/common/images/RecorderAddPage_bg_bottom.png')
+        .backgroundImage($r("app.media.RecorderAddPage_bg_bottom"))
         .backgroundImageSize(ImageSize.Cover)
         .visibility(this.isRecording ? Visibility.Visible : Visibility.None)
       }

@@ -31,7 +31,7 @@ struct GuardIndoorIndexPage {
           .position({ x: 0, y: 50 })
           .zIndex(1)
 
-          Image('/common/images/GuardIndoorPage_bozai.png')
+          Image($r("app.media.GuardIndoorPage_bozai"))
             .width(122)
         }
         .width('100%')
@@ -45,7 +45,7 @@ struct GuardIndoorIndexPage {
               .fontWeight(500)
               .fontColor($r('app.color.font'))
             Column() {
-              Image('/common/images/GuardIndoorPage_ic01.png')
+              Image($r("app.media.GuardIndoorPage_ic01"))
                 .width(62)
             }
             .height('100%')
@@ -67,7 +67,7 @@ struct GuardIndoorIndexPage {
               .fontWeight(500)
               .fontColor($r('app.color.font'))
             Column() {
-              Image('/common/images/GuardIndoorPage_ic02.png')
+              Image($r("app.media.GuardIndoorPage_ic02"))
                 .width(62)
             }
             .height('100%')
@@ -89,7 +89,7 @@ struct GuardIndoorIndexPage {
               .fontWeight(500)
               .fontColor($r('app.color.font'))
             Column() {
-              Image('/common/images/GuardIndoorPage_ic03.png')
+              Image($r("app.media.GuardIndoorPage_ic03"))
                 .width(62)
             }
             .height('100%')
@@ -110,7 +110,7 @@ struct GuardIndoorIndexPage {
       .justifyContent(FlexAlign.End)
       .padding({ left: 20, right: 20, bottom: 100 })
     }
-    .backgroundImage('/common/images/GuardIndoorPage_bg.png')
+    .backgroundImage($r("app.media.GuardIndoorPage_bg"))
     .backgroundImageSize(ImageSize.Cover)
   }
 }

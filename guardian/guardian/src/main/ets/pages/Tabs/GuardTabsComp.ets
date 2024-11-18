@@ -30,7 +30,7 @@ export struct GuardTabsComp {
               // 夜路守护 + 室内守护
               Row({ space: 10 }) {
                 Stack({ alignContent: Alignment.TopStart }) {
-                  Image('/common/images/GuardPage_bg_ylsh.png')
+                  Image($r("app.media.GuardPage_bg_ylsh"))
                     .layoutWeight(1)
                   Column() {
                     Text('夜路守护')
@@ -52,7 +52,7 @@ export struct GuardTabsComp {
                 })
 
                 Stack({ alignContent: Alignment.TopStart }) {
-                  Image('/common/images/GuardPage_bg_snsh.png')
+                  Image($r("app.media.GuardPage_bg_snsh"))
                     .layoutWeight(1)
                   Column() {
                     Text('室内守护')
@@ -92,7 +92,7 @@ export struct GuardTabsComp {
                   .layoutWeight(1)
                 Row() {
                   Row({ space: 20 }) {
-                    Image('/common/images/GuardPage_ic_wzfx.svg')
+                    Image($r("app.media.GuardPage_ic_wzfx"))
                       .width(20)
                       .aspectRatio(1)
                     Text('位置分享')
@@ -103,7 +103,7 @@ export struct GuardTabsComp {
                   .justifyContent(FlexAlign.Center)
 
                   Row({ space: 20 }) {
-                    Image('/common/images/GuardPage_ic_xcfx.svg')
+                    Image($r("app.media.GuardPage_ic_xcfx"))
                       .width(20)
                       .aspectRatio(1)
                     Text('行程分享')
@@ -129,7 +129,7 @@ export struct GuardTabsComp {
               })
               .alignItems(HorizontalAlign.Start)
               .borderRadius(10)
-              .backgroundImage('/common/images/GuardPage_bg_map.png')
+              .backgroundImage($r("app.media.GuardPage_bg_map"))
               .backgroundImageSize(ImageSize.Cover)
 
               // 伪装来电
@@ -160,7 +160,7 @@ export struct GuardTabsComp {
                   router.pushUrl({ url: '@bundle:com.blend.harmony1/guardian/ets/pages/Guard/Fake/FakeTelPage' })
                 })
 
-                Image('/common/images/GuardPage_tool_wzld.png')
+                Image($r("app.media.GuardPage_tool_wzld"))
                   .width(102)
                   .margin({ right: 10 })
               }
@@ -194,7 +194,7 @@ export struct GuardTabsComp {
                     .padding({ top: 15, left: 15 })
                     .alignItems(HorizontalAlign.Start)
 
-                    Image('/common/images/GuardPage_tool_wzsy.png')
+                    Image($r("app.media.GuardPage_tool_wzsy"))
                       .height(120)
                       .margin({ right: 20 })
                   }
@@ -233,7 +233,7 @@ export struct GuardTabsComp {
                     .padding({ top: 15, left: 15 })
                     .alignItems(HorizontalAlign.Start)
 
-                    Image('/common/images/GuardPage_tool_xnjbq.png')
+                    Image($r("app.media.GuardPage_tool_xnjbq"))
                       .height(75)
                       .margin({ right: 20 })
                   }
@@ -274,7 +274,7 @@ export struct GuardTabsComp {
                     .padding({ top: 15, left: 15 })
                     .alignItems(HorizontalAlign.Start)
 
-                    Image('/common/images/GuardPage_tool_sjfyd.png')
+                    Image($r("app.media.GuardPage_tool_sjfyd"))
                       .height(110)
                       .margin({ right: 20 })
                   }
@@ -315,7 +315,7 @@ export struct GuardTabsComp {
                     .padding({ top: 15, left: 15 })
                     .alignItems(HorizontalAlign.Start)
 
-                    Image('/common/images/GuardPage_tool_sxtjc.png')
+                    Image($r("app.media.GuardPage_tool_sxtjc"))
                       .height(76)
                       .margin({ right: 20 })
                   }
@@ -348,7 +348,7 @@ export struct GuardTabsComp {
           .justifyContent(FlexAlign.Start)
           .width('100%')
           .padding({ top: 200, bottom: 20 })
-          .backgroundImage('/common/images/GuardPage_bg_banner.png')
+          .backgroundImage($r("app.media.GuardPage_bg_banner"))
           .backgroundImageSize({ width: '100%' })
 
         }
