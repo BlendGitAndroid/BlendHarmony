@@ -177,7 +177,8 @@ export struct HomeView {
   @Builder
   getRefreshBuilder() {
     Row() {
-      HDMProgressLoading({ loadingWidth: 30 })
+      // HDMProgressLoading({ loadingWidth: 30 })
+      HDMLoading()
     }
     .justifyContent(FlexAlign.Center)
     .width("100%")
