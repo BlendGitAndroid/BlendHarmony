@@ -204,6 +204,78 @@
           ]
         }
       ]
+    },
+    {
+      "name": "shop_basic",
+      "srcPath": "./shop/common/shop_basic",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shop_cart",
+      "srcPath": "./shop/features/shop_cart",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shop_category",
+      "srcPath": "./shop/features/shop_category",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shop_home",
+      "srcPath": "./shop/features/shop_home",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shop_mine",
+      "srcPath": "./shop/features/shop_mine",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "shop_index",
+      "srcPath": "./shop/index/shop_index",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     }
   ]
 }

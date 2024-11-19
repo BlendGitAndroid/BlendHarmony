@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "CartView",
+      "buildFunction": "CartViewBuilder",
+      "pageSourceFile": "src/main/ets/views/CartView.ets"
+    },
+    {
+      "name": "CheckView",
+      "buildFunction": "CheckViewBuilder",
+      "pageSourceFile": "src/main/ets/views/CheckView.ets"
+    },
+    {
+      "name": "PayView",
+      "buildFunction": "PayViewBuilder",
+      "pageSourceFile": "src/main/ets/views/PayView.ets"
+    },
+    {
+      "name": "PayResultView",
+      "buildFunction": "PayResultViewBuilder",
+      "pageSourceFile": "src/main/ets/views/PayResultView.ets"
+    }
+  ]
+}

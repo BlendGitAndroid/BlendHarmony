@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "SearchView",
+      "buildFunction": "SearchViewBuilder",
+      "pageSourceFile": "src/main/ets/views/SearchView.ets"
+    },
+    {
+      "name": "SearchResultView",
+      "buildFunction": "SearchResultViewBuilder",
+      "pageSourceFile": "src/main/ets/views/SearchResultView.ets"
+    },
+    {
+      "name": "GoodsView",
+      "buildFunction": "GoodsViewBuilder",
+      "pageSourceFile": "src/main/ets/views/GoodsView.ets"
+    }
+  ]
+}

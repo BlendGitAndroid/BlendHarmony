@@ -1,0 +1,15 @@
+{
+  "name": "shop_basic",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "@abner/log": "^1.0.3", // 日志库
+    "@ohos/axios": "^2.2.4",
+    "@ohmos/sku": "^1.0.1",
+//    "@cashier_alipay/cashiersdk": "^15.8.27"  // 支付宝SDK
+  }
+}

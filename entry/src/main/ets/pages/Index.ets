@@ -98,6 +98,15 @@ struct Index {
               url: '@bundle:com.blend.harmony1/guardian/ets/pages/Index'
             })
           })
+
+        Text("shop")
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
+          .onClick(() => {
+            router.pushUrl({
+              url: '@bundle:com.blend.harmony1/shop_index/ets/pages/Index'
+            })
+          })
       }
       .width('100%')
     }

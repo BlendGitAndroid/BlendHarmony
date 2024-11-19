@@ -24,6 +24,8 @@ export default class EntryAbility extends UIAbility {
   // 应用初始化操作
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
 
+    //-----------------------------以下是官网代码-----------------------------------------------
+
     GlobalContext.getContext().setObject('abilityWant', want);
 
     PreferencesUtil.createFontPreferences(this.context);
@@ -33,7 +35,7 @@ export default class EntryAbility extends UIAbility {
     // 后台代理提醒
     GlobalContext.getContext().setObject('preference', PreferencesHandler.instance);
 
-    //----------------------------------------------------------------------------
+    //-----------------------------以下是项目-----------------------------------------------
     // 注册错误管理器，返回 id 标识
     observerId = errorManager.on('error', {
       // 应用注册后，当应用产生未捕获 catch 的异常时的回调，做统一的错误管理
@@ -69,14 +71,14 @@ export default class EntryAbility extends UIAbility {
   // WindowStage为本地窗口管理器，用于管理窗口相关的内容，例如与界面相关的获焦/失焦、可见/不可见。
   // 可以在onWindowStageCreate回调中，设置UI页面加载、设置WindowStage的事件订阅。
   async onWindowStageCreate(windowStage: window.WindowStage) {
-
+    //-----------------------------以下是官网代码-----------------------------------------------
     // 添加全局信息
     let globalDisplay: display.Display = display.getDefaultDisplaySync();
     GlobalContext.getContext().setObject('globalDisplay', globalDisplay);
     let preference = GlobalContext.getContext().getObject('preference') as PreferencesHandler;
     await preference.configure(this.context.getApplicationContext());
 
-    //----------------------------------------------------------------------------
+    //-----------------------------以下是项目-----------------------------------------------
 
     // 沉浸式: 给所有的页面都设置了沉浸式
     // windowStage.getMainWindow().then(window => {

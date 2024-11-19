@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "LoginView",
+      "buildFunction": "LoginViewBuilder",
+      "pageSourceFile": "src/main/ets/views/LoginView.ets"
+    },
+    {
+      "name": "SettingsView",
+      "buildFunction": "SettingsViewBuilder",
+      "pageSourceFile": "src/main/ets/views/SettingView.ets"
+    }
+  ]
+}

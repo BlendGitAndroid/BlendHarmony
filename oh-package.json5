@@ -21,6 +21,7 @@
     "@abner/log": "^1.0.3",
     "@guardian/test": "file:./guardian/test",
     "@guardian/guardian": "file:./guardian/guardian",
+    "@shop/index": "file:./shop/index/shop_index"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.6",
