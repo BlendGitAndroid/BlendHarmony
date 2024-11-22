@@ -14,8 +14,7 @@ class AudioDB {
   tableName: string = 'interview_audio'
   store?: relationalStore.RdbStore
 
-  //建表
-  // 初始化数据库
+  // 建表，初始化数据库
   async initStore() {
     const ctx = AppStorage.get<Context>('context')
     if (ctx) {
@@ -39,8 +38,7 @@ class AudioDB {
     }
   }
 
-  //   增
-  // 添加
+  // 增
   async insert(item: InterviewAudioItem) {
     const rowId = await this.store?.insert(this.tableName, item)
     if (rowId === undefined || rowId === -1) {
@@ -50,8 +48,7 @@ class AudioDB {
     }
   }
 
-  //   删
-  // 删除
+  // 删
   async delete(id: number) {
     const predicates = new relationalStore.RdbPredicates(this.tableName)
     predicates.equalTo('id', id)
@@ -62,18 +59,19 @@ class AudioDB {
       return Promise.resolve()
     }
   }
-  //   改
+
+  // 改
   async update(item: InterviewAudioItem) {
     const predicates = new relationalStore.RdbPredicates(this.tableName)
     predicates.equalTo('id', item.id)
-    const rowCount = await this.store?.update(item,predicates)
+    const rowCount = await this.store?.update(item, predicates)
     if (rowCount === undefined || rowCount <= 0) {
       return Promise.reject('update fail')
     } else {
       return Promise.resolve()
     }
   }
-  //   查
+
   // 查询用户
   async query(userId: string) {
     const predicates = new relationalStore.RdbPredicates(this.tableName)

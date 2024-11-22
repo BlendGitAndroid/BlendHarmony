@@ -1,9 +1,9 @@
 import { http } from '.'
 import { TimeItem } from '../../model'
-import { logger } from './Logger'
 import { preferences } from '@kit.ArkData'
 import { JSON } from '@kit.ArkTS'
 
+// 埋点类
 class Tracking {
   // 缓存列表：缓存记录的点
   // list: TimeItem[] = []
@@ -16,7 +16,7 @@ class Tracking {
   // 仓库的创建
   getStore() {
     if (!this.store) {
-      //   创建仓库
+      // 创建仓库
       const ctx = AppStorage.get<Context>('context')
       this.store = preferences.getPreferencesSync(ctx, {
         name: 'tracking-store'
@@ -37,18 +37,11 @@ class Tracking {
       startTime,
       endTime
     })
-    // =
-    // 完整  的数组  list
+
+    // 完整数组list
     this.getStore().putSync(this.trackKey, JSON.stringify(list))
     // 持久化一定记得写入磁盘
     await this.getStore().flush()
-
-    // this.list.push({
-    //   questionId,
-    //   startTime,
-    //   endTime
-    // })
-    // logger.info(JSON.stringify(this.list))
   }
 
   //上送：不是每个点都发送，恰当的时机上送，减少服务器压力

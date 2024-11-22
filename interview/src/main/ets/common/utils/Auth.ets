@@ -21,6 +21,7 @@ class Auth {
   }
 
   // 鉴权:1.页面跳转 2.功能操作
+  // 参数是路由参数或者方法
   checkAuth(opt: router.RouterOptions | Function) {
     //  判断有无权限
     const user = auth.getUser()
@@ -41,7 +42,7 @@ class Auth {
         })
       } else {
         // 没登录
-        // opt才是用户要去的页面，你给他跳了login
+        // opt才是用户要去的页面，你给它跳了login
         // 跳login是为了鉴权，登录之后应该继续返回opt
         // 1.登录完了要去opt的url
         // 2.还得携带去opt参数

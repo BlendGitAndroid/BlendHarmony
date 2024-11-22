@@ -1,8 +1,8 @@
-import { auth, http, logger, UserStoreKey } from '../common/utils'
+import { auth, http, UserStoreKey } from '../common/utils'
 import { User } from '../model'
 import { HmLoadingDialog, HmNavBar } from '../common/components'
 import { promptAction } from '@kit.ArkUI'
-import { fileIo, picker } from '@kit.CoreFileKit'
+import { fileIo } from '@kit.CoreFileKit'
 import { photoAccessHelper } from '@kit.MediaLibraryKit'
 import { FormData } from '@ohos/axios'
 
@@ -10,6 +10,7 @@ import { FormData } from '@ohos/axios'
 @Component
 struct ProfilePage {
   @StorageProp(UserStoreKey) user: User = {} as User
+
   dialog: CustomDialogController = new CustomDialogController({
     builder: HmLoadingDialog({ message: '更新中...' }),
     customStyle: true,
@@ -33,15 +34,11 @@ struct ProfilePage {
 
   async updateAvatar() {
     // 1.唤起相册选择 - 选一张图
-    // picker.PhotoViewPicker已经淘汰，认识就行
     const option = new photoAccessHelper.PhotoSelectOptions()
     option.MIMEType = photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE
     option.maxSelectNumber = 1
     const picker = new photoAccessHelper.PhotoViewPicker()
     const result = await picker.select(option)
-    // promptAction.showDialog({
-    //   message: JSON.stringify(result)
-    // })
     const uri = result.photoUris[0]
     this.dialog.open()
     // 2.存放到沙箱 - cache - internal
@@ -50,8 +47,6 @@ struct ProfilePage {
     fileIo.closeSync(file.fd)
     // 3.压缩图片(可选)
     // 参考保存二维码
-    // 思考：压缩如何限制大小
-    // fileIo.statSync(file).size
     // 4.发图给后台 - 更新数据
     const formData = new FormData()
     formData.append('file', 'internal://cache/' + file.name)
@@ -93,7 +88,6 @@ struct ProfilePage {
               .borderRadius(20)
               .border({ width: 0.5, color: $r('app.color.common_gray_border') })
               .onClick(() => {
-                // TODO 更新头像
                 this.updateAvatar()
               })
           }
@@ -115,7 +109,6 @@ struct ProfilePage {
               .borderRadius(0)
               .onChange((value) => this.user.username = value)
               .onSubmit(() => {
-                // TODO 更新昵称
                 this.updateNickName()
               })
           }

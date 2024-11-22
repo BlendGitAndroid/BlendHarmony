@@ -1,5 +1,6 @@
 interface HcTagInfo {
   text: string
+
   color: ResourceColor
 }
 
@@ -15,18 +16,18 @@ const infoMap: Record<number, HcTagInfo> = {
 
 @Component
 export struct HmTag {
-  // 1-2 简单 - 文字，颜色
-  // 3-4 一般
-  //  5  困难
   @Prop
   difficulty: number = 1
+
   // 自定义文字内容 + 文字颜色
   @Prop
   text: string = ''
+
   @Prop
   color: ResourceColor = ''
 
   build() {
+    // 这里使用[]来获取值
     Text(this.text || infoMap[this.difficulty].text)
       .fontColor(this.color || infoMap[this.difficulty].color)
       .fontSize(10)

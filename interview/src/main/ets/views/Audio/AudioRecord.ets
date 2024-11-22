@@ -92,7 +92,6 @@ export struct AudioRecordComp {
           .aspectRatio(1)
           .fillColor(this.isRecording ? $r('app.color.common_green') : $r('app.color.white'))
           .onClick(async () => {
-            // TODO 开始和停止录音
             if (this.isRecording) {
               await this.stopRecord()
               this.isRecording = false

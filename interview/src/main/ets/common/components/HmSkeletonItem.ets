@@ -5,7 +5,7 @@ export struct HmSkeletonItem {
   bgColor:ResourceColor = Color.Gray
 
   build() {
-    //     骨架屏单元
+    // 骨架屏单元
     Text(this.text)
       .width(this.widthValue)
       .height(16)

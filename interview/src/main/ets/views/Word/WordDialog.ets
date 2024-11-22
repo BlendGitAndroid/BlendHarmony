@@ -3,8 +3,13 @@ import { media } from '@kit.MediaKit'
 @CustomDialog
 export struct WordDialog {
   controller: CustomDialogController
-  @Prop en: string = ''
-  @Prop zh: string = ''
+
+  @Prop
+  en: string = ''
+
+  @Prop
+  zh: string = ''
+
   avPlayer?: media.AVPlayer
 
   async aboutToAppear() {
@@ -48,7 +53,10 @@ export struct WordDialog {
       Text(this.zh)
         .fontColor($r('app.color.white'))
     }
-    .constraintSize({ minWidth: 175 })
+    .constraintSize({
+      // 设置最小宽度
+      minWidth: 175
+    })
     .padding({ left: 16, right: 16 })
     .height(90)
     .borderRadius(45)
@@ -60,9 +68,11 @@ export struct WordDialog {
 @Component
 struct WordSoundComp {
   @State flag: boolean = false
+
   timerId?: number
 
   aboutToAppear(): void {
+    // 设置颜色每隔500ms改变一次
     this.timerId = setInterval(() => {
       this.flag = !this.flag
     }, 500)

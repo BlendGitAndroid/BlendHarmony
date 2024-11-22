@@ -4,13 +4,6 @@ import { QuestionItem } from '../../model'
 @Preview
 @Component
 export struct QuestionItemComp {
-  //   配置信息：{
-  //   // 1.困难程度
-  //   // 2.标题
-  //   // 3.点赞数量
-  //   // 4.浏览数量
-  //   // 5.是否阅读过
-  // }
   @Require
   @Prop
   item: QuestionItem = {} as QuestionItem
@@ -42,8 +35,8 @@ export struct QuestionItemComp {
     .width('100%')
     .height(80)
     .padding({
-      left:16,
-      right:16
+      left: 16,
+      right: 16
     })
   }
 }

@@ -7,7 +7,9 @@ import { scanBarcode } from '@kit.ScanKit'
 
 @Component
 export struct HomePage {
-  @StorageLink('topHeight') topHeight: number = 0
+  @StorageLink('topHeight')
+  topHeight: number = 0 // 获取屏幕上安全区
+
   @StorageLink(UserStoreKey)
   user: User = {} as User
 
@@ -62,7 +64,7 @@ export struct HomePage {
     Column() {
       //头部
       Row({ space: 16 }) {
-        //   扫码
+        // 扫码
         Image($r('app.media.ic_home_scan'))
           .width(24)
           .aspectRatio(1)
@@ -72,11 +74,13 @@ export struct HomePage {
               this.scanCode()
             })
           })
+
         // 搜索框-封装组件
         HmSearchBox({
           layoutValue: 1,
           placeHolderText: '搜索关键字',
         })
+
         // 打卡
         HmClockIn({
           clockCount: this.user.clockinNumbers

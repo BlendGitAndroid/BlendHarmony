@@ -50,7 +50,7 @@ struct HDMImageScale {
         .aspectRatio(1.4)
         .onClick(() => {
           if (this.scaleValue === 1) {
-            // this.onClose()
+            this.onClose()
           } else {
             animateTo({ duration: 300 }, () => {
               this.scaleValue = 1

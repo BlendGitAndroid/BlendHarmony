@@ -4,6 +4,7 @@ import { ConfigurationConstant } from '@kit.AbilityKit'
 @CustomDialog
 export struct SettingsThemeDialog {
   controller: CustomDialogController
+
   @StorageProp(theme.themeKey)
   colorMode: ConfigurationConstant.ColorMode = ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT
 
@@ -18,17 +19,17 @@ export struct SettingsThemeDialog {
         }
         .alignItems(HorizontalAlign.Start)
 
+        // 跟随系统的Switch
         Toggle({
           type: ToggleType.Switch,
           isOn: this.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET
+        }).onChange((val) => {
+          if (val) {
+            theme.notSetTheme() // 跟随系统
+          } else {
+            theme.setLight()
+          }
         })
-          .onChange((val) => {
-            if (val) {
-              theme.notSetTheme()
-            } else {
-              theme.setLight()
-            }
-          })
       }
       .width('100%')
       .height(70)
@@ -70,7 +71,6 @@ export struct SettingsThemeDialog {
         .height(50)
         .onClick(() => {
           theme.setDark()
-          //   记录状态：深色
         })
       }
 

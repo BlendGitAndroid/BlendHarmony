@@ -10,7 +10,6 @@
     "pages/StudyTimePage",
     "pages/WordPage",
     "pages/AudioPage",
-    "pages/TaskPoolCase",
     "pages/CommonEventCase",
     "pages/SettingPage",
     "pages/ProfilePage"

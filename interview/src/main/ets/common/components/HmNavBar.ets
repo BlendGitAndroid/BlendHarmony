@@ -49,7 +49,11 @@ export struct HmNavBar {
           .width(24)
       }
     }
-    .padding({ left: 16, right: 16, top: this.topHeight })
+    .padding({
+      left: 16,
+      right: 16,
+      top: this.topHeight
+    })
     .height(56 + this.topHeight)
     .width('100%')
     .border({

@@ -17,9 +17,10 @@ export struct AudioView {
       this.updateList()
     })
   }
-  async updateList(){
-      const userId = auth.getUser().id
-      this.list = await audioDB.query(userId)
+
+  async updateList() {
+    const userId = auth.getUser().id
+    this.list = await audioDB.query(userId)
   }
 
   build() {

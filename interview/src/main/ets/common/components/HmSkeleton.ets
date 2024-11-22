@@ -13,7 +13,7 @@ export struct HmSkeleton {
 
   build() {
     Column({ space: 6 }) {
-      //     占位的结构
+      // 占位的结构
       this.defaultParam()
     }
     .opacity(this.opacityValue)
@@ -23,7 +23,7 @@ export struct HmSkeleton {
       iterations: -1,
       curve: Curve.EaseInOut
     })
-    .onAppear(() => {
+    .onAppear(() => { // 组件挂载显示后触发此回调
       this.opacityValue = 0.5
     })
   }

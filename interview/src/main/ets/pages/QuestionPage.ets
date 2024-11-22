@@ -1,6 +1,6 @@
 import { HmLoadingDialog, HmNavBar, HmTag } from '../common/components'
 import { promptAction, router } from '@kit.ArkUI'
-import { QuestionDetail, QuestionItem, QuestionOptParams, QuestionPageParams } from '../model'
+import { QuestionDetail, QuestionOptParams, QuestionPageParams } from '../model'
 import { http, logger, tracking } from '../common/utils'
 import { webview } from '@kit.ArkWeb'
 import { QuestionShareDialog } from '../views/question/QuestionShareDialog'
@@ -9,22 +9,25 @@ import { QuestionShareDialog } from '../views/question/QuestionShareDialog'
 @Component
 struct QuestionPage {
   @StorageProp('bottomHeight') bottomHeight: number = 0
-  // 传值：页面-页面 路由信息
-  // 接收点击的试题信息：基本（题干）
-  // 根据基本信息(id)获取详情
+
   @State
   item: QuestionDetail = {} as QuestionDetail
+
   list: QuestionDetail[] = []
+
   @State
   activeIndex: number = 0
+
   // 网页的控制器
   controller: WebviewController = new webview.WebviewController()
+
   // 加载的弹层
   loadingController = new CustomDialogController({
     builder: HmLoadingDialog(),
     customStyle: true,
     alignment: DialogAlignment.Center
   })
+
   // 分享的弹层
   shareController = new CustomDialogController({
     builder: QuestionShareDialog({
@@ -33,17 +36,18 @@ struct QuestionPage {
     customStyle: true,
     alignment: DialogAlignment.Center
   })
+
   startTime: number = Date.now()
 
-  // 只会触发一次
+  // 传值：页面-页面 路由信息
+  // 接收点击的试题信息：基本（题干）
+  // 根据基本信息(id)获取详情
   async aboutToAppear() {
     // 更新页面获取的参数
     const params = router.getParams() as QuestionPageParams
     this.item = params.item as QuestionDetail
     this.list = params.list as QuestionDetail[]
     this.activeIndex = this.list.findIndex(item => item.id === this.item.id)
-    // this.item.id
-    // 获取完整信息
     this.item = await this.getQuestionDetail(this.item.id)
     logger.info(JSON.stringify(this.item))
     // 必须等数据拿到之后再加载一次页面
@@ -51,16 +55,16 @@ struct QuestionPage {
   }
 
   onPageShow(): void {
-    //   记录开始的时间
+    // 记录开始的时间
     this.startTime = Date.now()
   }
 
   onPageHide(): void {
-    //   记录点
+    // 记录点
     tracking.record(this.item.id, this.startTime, Date.now())
     // 每次埋了点都是一个新的记录(防止上一题下一题没有离开页面)
     this.startTime = Date.now()
-    //   尝试上送一次
+    // 尝试上送一次
     tracking.report()
   }
 
@@ -84,15 +88,12 @@ struct QuestionPage {
       // 缓存到列表中
       this.list[index] = this.item
     }
-    // 重新加载页面
-    // this.controller.loadUrl($rawfile('question.html'))
     // 重新执行渲染内容
     this.controller.runJavaScript(`writeHtml(\`${this.item.answer}\`)`)
     tracking.record(item.id, this.startTime, Date.now())
     this.startTime = Date.now()
   }
 
-  // 父可以传递 ：abc :()=>void = ()=>{}
   async getQuestionDetail(id: string) {
     this.loadingController.open()
     const result = await http.request<QuestionDetail>({
@@ -176,40 +177,43 @@ struct QuestionPage {
       Text(this.item.stem)
         .width('100%')
         .padding(16)
-        .maxLines(2)
+        .maxLines(2)// 最多显示两行
         .textOverflow({ overflow: TextOverflow.Ellipsis })
       Row({ space: 12 }) {
         ForEach(this.item.stage, (item: string) => {
-          HmTag({ text: item, color: '#ff6600' })
+          HmTag({ text: item, color: '#ff6600' }) // Tag标签牛皮啊
         })
-        Blank()
+        Blank() // 默认撑开整个父组件
         Image($r("app.media.ic_home_more"))
           .width(20)
           .aspectRatio(1)
-          .bindMenu(this.MenuBuilder())
+          .bindMenu(this.MenuBuilder()) //菜单控制
       }
       .width('100%')
-      .padding({ bottom: 16, left: 16, right: 16 })
+      .padding({
+        bottom: 16,
+        left: 16,
+        right: 16
+      })
 
       Divider()
         .strokeWidth(8)
         .color($r('app.color.common_gray_bg'))
+
       // 内容
       this.TitleBuilder('答案：')
       Web({
         src: $rawfile('question.html'),
         controller: this.controller
-      })
-        .width('100%')
+      }).width('100%')
         .layoutWeight(1)
         .onPageEnd(() => {
           // 调用html提供的方法
           // \'是转义符，等于写了一个字符串的'
-          // `富文本` 是语法上对参数的妖气
+          // `富文本` 是语法上对参数的要求
           // const str = 'writeHtml(`' + this.item.answer + '`)'
           // 或者
           const str = `writeHtml(\`${this.item.answer}\`)`
-          // logger.info(str)
           this.controller.runJavaScript(str)
         })
       Row({ space: 80 }) {
@@ -220,8 +224,7 @@ struct QuestionPage {
             .fillColor(this.activeIndex <= 0 ? $r('app.color.common_gray_01') : $r('app.color.common_gray_03'))
           Text(' 上一题')
             .fontColor(this.activeIndex <= 0 ? $r('app.color.common_gray_01') : $r('app.color.common_gray_03'))
-        }
-        .onClick(() => {
+        }.onClick(() => {
           this.toggleQuestion(-1)
         })
 
@@ -234,8 +237,7 @@ struct QuestionPage {
             .aspectRatio(1)
             .fillColor(this.activeIndex >= this.list.length - 1 ? $r('app.color.common_gray_01') :
             $r('app.color.common_gray_03'))
-        }
-        .onClick(() => {
+        }.onClick(() => {
           this.toggleQuestion(1)
         })
       }

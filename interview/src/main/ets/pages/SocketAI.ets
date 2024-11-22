@@ -1,4 +1,3 @@
-// 1.导入包
 import { http, webSocket } from '@kit.NetworkKit'
 import { JSON, util } from '@kit.ArkTS'
 import { router } from '@kit.ArkUI'
@@ -11,53 +10,28 @@ import { logger } from '../common/utils/Logger'
 struct SocketAI {
   @StorageProp('topHeight')
   topHeight: number = 0
+
   @StorageProp('bottomHeight')
   bottomHeight: number = 0
+
   @State
   contentStr: string = ""
+
   @State
   messList: MessageItem[] = []
+
   scroller: Scroller = new Scroller()
+
   @State
   sendIng: boolean = false
+
   token: string = ""
+
   // 2.创建ws对象
   ws: webSocket.WebSocket = webSocket.createWebSocket()
 
   aboutToAppear() {
     this.getToken()
-  }
-
-  // 连接后台的方法
-  createConnect() {
-    // 1.建立连接：最核心
-    //socket地址：'ws://toutiao.itheima.net/socket.io/?EIO=4&transport=websocket&token=' + this.token
-    this.ws.connect('ws://toutiao.itheima.net/socket.io/?EIO=4&transport=websocket&token=' + this.token,
-      (err: BusinessError, value: boolean) => {
-        if (!err) {
-          logger.info('socket connect success!')
-        } else {
-          logger.info('socket connect error!')
-        }
-      })
-    //   2.消息处理
-    this.ws.on('message', (err: BusinessError, value: string | ArrayBuffer) => {
-      logger.info('socket get message:' + value)
-      //   协议1：0开头
-      if ((value as string).startsWith('0')) {
-        //   回复
-        this.ws.send('40')
-      } else if ((value as string).startsWith('2')) { //协议2：收到2必须回3
-        this.ws.send('3')
-      } else if ((value as string).startsWith('42')) { //协议342开头，类型是message就是给我的消息
-        //   消息追加到页面
-        logger.info(value as string);
-        const message = JSON.parse((value as string).replace('42','')) as [string,MessageStruct]
-        if(message[0] === 'message'){
-          this.messList.push(new MessageItem(message[1].msg,false))
-        }
-      }
-    })
   }
 
   async getToken() {
@@ -73,6 +47,40 @@ struct SocketAI {
     const tokenObj = JSON.parse(res.result as string) as ResponseResult<Token>
     this.token = tokenObj.data.token
     this.createConnect()
+  }
+
+  // 连接后台的方法
+  createConnect() {
+    // 1.建立连接：最核心
+    //socket地址：'ws://toutiao.itheima.net/socket.io/?EIO=4&transport=websocket&token=' + this.token
+    this.ws.connect('ws://toutiao.itheima.net/socket.io/?EIO=4&transport=websocket&token=' + this.token,
+      (err: BusinessError, value: boolean) => {
+        if (!err) {
+          logger.info('socket connect success!')
+        } else {
+          logger.info('socket connect error!')
+        }
+      })
+
+    // 2.消息处理
+    this.ws.on('message', (err: BusinessError, value: string | ArrayBuffer) => {
+      logger.info('socket get message:' + value)
+      // 协议1：0开头
+      if ((value as string).startsWith('0')) { //协议0：收到0必须回40
+        this.ws.send('40')
+      } else if ((value as string).startsWith('2')) { //协议2：收到2必须回3
+        this.ws.send('3')
+      } else if ((value as string).startsWith('42')) { //协议42开头，类型是message就是给我的消息
+        // 消息追加到页面
+        logger.info(value as string);
+        const message = JSON.parse((value as string).replace('42', '')) as [string, MessageStruct]  // 将其转换为一个元祖
+        if (message[0] === 'message') {
+          logger.info("push Message");
+          this.messList.push(new MessageItem(message[1].msg, false))
+          this.scroller.scrollEdge(Edge.Bottom)
+        }
+      }
+    })
   }
 
   async sendMessage() {
@@ -210,8 +218,10 @@ struct SocketAI {
 struct ChatMessage {
   @Prop
   item: MessageItem = new MessageItem('')
+
   @State
   showMenu: boolean = false
+
   delMessage: (id: string) => void = () => {
   }
 
@@ -282,13 +292,15 @@ export class MessageItem {
   constructor(content: string, self: boolean = true) {
     this.content = content
     this.self = self
-    this.avatar = self ? 'https://gips3.baidu.com/it/u=1039279337,1441343044&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1024_1024' :
+    this.avatar = self ?
+      'https://gips3.baidu.com/it/u=1039279337,1441343044&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f1024_1024' :
       'http://gips2.baidu.com/it/u=109337419,2018114866&fm=3042&app=3042&f=JPEG&wm=1,huayi,0,0,13,9&wmo=0,0&w=1024&h=1024'
   }
 }
 
 interface ResponseResult<T> {
   data: T
+
   message: string
 }
 
@@ -298,5 +310,6 @@ interface Token {
 
 interface MessageStruct {
   msg: string
+
   timestamp: number
 }

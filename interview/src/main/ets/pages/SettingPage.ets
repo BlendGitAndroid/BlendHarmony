@@ -9,9 +9,13 @@ import { fileIo, storageStatistics } from '@kit.CoreFileKit';
 
 export interface Tool {
   icon?: ResourceStr
+
   name: string
+
   value?: string
+
   onClick?: () => void,
+
   radius?: 0 | 1 | 2
 }
 
@@ -60,22 +64,24 @@ struct SettingsPage {
     builder: SettingsThemeDialog(),
     alignment: DialogAlignment.Bottom
   })
+
   @StorageProp(theme.themeKey)
   colorMode: ConfigurationConstant.ColorMode = ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT
+
   @State
   cache: string = ''
 
   @State
-  appVersion:string = ''
-  getVersion(){
-    this.appVersion = 'v'+bundleManager.getBundleInfoForSelfSync(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION).versionName
+  appVersion: string = ''
+
+  getVersion() {
+    this.appVersion = 'v' +
+    bundleManager.getBundleInfoForSelfSync(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION).versionName
   }
+
   calcCache() {
     storageStatistics.getCurrentBundleStats()
       .then(res => {
-        // 国际换算标准1000
-        // 1mb = 1000kb
-        // 1kb = 1000byte
         this.cache = (res.cacheSize / 1000 / 1000).toFixed(2) + 'MB'
       })
   }
@@ -90,16 +96,16 @@ struct SettingsPage {
     const dirPath = getContext().cacheDir
     const ctxContent = fileIo.accessSync(dirPath)
     if (ctxContent) {
-      fileIo.rmdirSync(dirPath)
+      fileIo.rmdirSync(dirPath) // 删除
     }
     // 应用的
     const appDirPath = getContext().getApplicationContext().cacheDir
     const appCtxContent = fileIo.accessSync(appDirPath)
-    if(appCtxContent){
+    if (appCtxContent) {
       fileIo.rmdirSync(appDirPath)
     }
     promptAction.showToast({
-      message:'清理完毕~'
+      message: '清理完毕~'
     })
     this.calcCache()
   }
@@ -126,13 +132,11 @@ struct SettingsPage {
           value: this.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK ? '已开启' : '已关闭',
           radius: 1,
           onClick: () => {
-            // TODO 设置主题
             this.dialog.open()
           }
         })
         this.toolsBuilder({
           name: '清除应用缓存', value: this.cache, onClick: () => {
-            // TODO 清除缓存
             this.clearCache()
           }
         })

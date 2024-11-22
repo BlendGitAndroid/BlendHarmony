@@ -1,14 +1,13 @@
-import { HmSkeleton, HmTag, QuestionItemComp, QuestionListComp } from '../../common/components'
-import axios, { AxiosResponse } from '@ohos/axios'
+import { HmSkeleton, QuestionListComp } from '../../common/components'
 import { http, UserStoreKey } from '../../common/utils'
-import { promptAction } from '@kit.ArkUI'
-import { QuestionItem, SortType } from '../../model'
+import { SortType } from '../../model'
 import { HmSkeletonItem } from '../../common/components/HmSkeletonItem'
-import { emitter } from '@kit.BasicServicesKit'
 
 export interface QuestionType {
   id: number
+
   name: string
+
   displayNewestFlag: 0 | 1
 }
 
@@ -28,24 +27,32 @@ const mockData: QuestionType[] = [
 export struct HomeCategory {
   @StorageProp('isDark')
   isDark: boolean = false
+
   // 当前的分类
   @State
   activeIndex: number = 0
+
   // 当前的排序
   @State
   sort: SortType = SortType.Default
+
   // 排序的索引
   @State
   filterIndex: number = 0
+
   @State
   filterSort: SortType = SortType.Default
+
   @State
   questionTypeList: QuestionType[] = mockData
+
   @State
   isShow: boolean = false
+
   @State
   loading: boolean = false
 
+  // 每一个选项卡的内容
   @Builder
   TabBarBuilder(item: QuestionType, index: number) {
     Row() {
@@ -58,7 +65,7 @@ export struct HomeCategory {
           .height(2)
           .width(this.activeIndex === index ? 20 : 0)
           .backgroundColor($r('app.color.black'))
-          .animation({ duration: this.activeIndex === index ? 300 : 0 })
+          .animation({ duration: this.activeIndex === index ? 300 : 0 }) // 设置宽度动画
       }
 
       if (item.displayNewestFlag === 1) {
@@ -90,12 +97,14 @@ export struct HomeCategory {
             this.sort = SortType.Default
             this.filterIndex = 0
           })
+
         Text('筛选题目')
           .layoutWeight(1)
           .fontSize(18)
           .fontWeight(500)
           .fontColor($r('app.color.black'))
           .textAlign(TextAlign.Center)
+
         Text('完成')
           .fontWeight(500)
           .fontSize(16)
@@ -103,64 +112,65 @@ export struct HomeCategory {
           .onClick(() => {
             this.isShow = false
             this.activeIndex = this.filterIndex
-            this.controller.changeIndex(this.activeIndex)
-            // 问题：里面公用一个sort
+            this.controller.changeIndex(this.activeIndex) // 设置页面的index
+            // 这里sort改变了,里面的Prop的sort就会改变,然后触发onChangeSort方法
             this.sort = this.filterSort
           })
-      }
-      .margin({ bottom: 4, top: 4 })
+      }.margin({
+        bottom: 4,
+        top: 4
+      })
 
       Text('题目排序')
         .textTitle()
-      // TODO 筛选按钮
+
       Flex() {
         FilterButton({
           text: '默认',
           isSelected: this.filterSort === SortType.Default,
           sort: this.filterSort
+        }).onClick(() => {
+          this.filterSort = SortType.Default
         })
-          .onClick(() => {
-            this.filterSort = SortType.Default
-          })
+
         FilterButton({
           text: '浏览量',
           isSort: true,
           sort: this.filterSort,
           isSelected: this.filterSort === SortType.ViewLow || this.filterSort === SortType.ViewHigh
+        }).onClick(() => {
+          if (this.filterSort === SortType.ViewLow) {
+            this.filterSort = SortType.ViewHigh
+          } else {
+            this.filterSort = SortType.ViewLow
+          }
         })
-          .onClick(() => {
-            if (this.filterSort === SortType.ViewLow) {
-              this.filterSort = SortType.ViewHigh
-            } else {
-              this.filterSort = SortType.ViewLow
-            }
-          })
+
         FilterButton({
           text: '难度',
           isSort: true,
           sort: this.filterSort,
           isSelected: this.filterSort === SortType.DifficultyLow || this.filterSort === SortType.DifficultyHigh
+        }).onClick(() => {
+          if (this.filterSort === SortType.DifficultyLow) {
+            this.filterSort = SortType.DifficultyHigh
+          } else {
+            this.filterSort = SortType.DifficultyLow
+          }
         })
-          .onClick(() => {
-            if (this.filterSort === SortType.DifficultyLow) {
-              this.filterSort = SortType.DifficultyHigh
-            } else {
-              this.filterSort = SortType.DifficultyLow
-            }
-          })
+
         FilterButton({
           text: '推荐',
           sort: this.filterSort,
           isSelected: this.filterSort === SortType.Commend
+        }).onClick(() => {
+          this.filterSort = SortType.Commend
         })
-          .onClick(() => {
-            this.filterSort = SortType.Commend
-          })
       }
 
       Text('选择分类')
         .textTitle()
-      // TODO 筛选按钮
+
       Flex({ wrap: FlexWrap.Wrap }) {
         ForEach(this.questionTypeList, (item: QuestionType, i) => {
           Column() {
@@ -168,10 +178,9 @@ export struct HomeCategory {
               text: item.name,
               isNew: item.displayNewestFlag === 1,
               isSelected: this.filterIndex === i
+            }).onClick(() => {
+              this.filterIndex = i
             })
-              .onClick(() => {
-                this.filterIndex = i
-              })
           }
         })
       }
@@ -211,6 +220,17 @@ export struct HomeCategory {
 
   controller: TabsController = new TabsController()
 
+  async aboutToAppear() {
+    // 首次进入跳转指定tab
+    this.getQuestionTypeList()
+    // 订阅 - 保证自己能更新
+    // 接收 - 线程内 -eventHub
+    getContext().eventHub.on(UserStoreKey, () => {
+      // 监听到重新刷新
+      this.getQuestionTypeList()
+    })
+  }
+
   async getQuestionTypeList() {
     this.loading = true
     const res = await http.request<QuestionType[], string>({
@@ -224,84 +244,34 @@ export struct HomeCategory {
     }, 1500)
   }
 
-  async aboutToAppear() {
-    // 首次进入跳转指定tab
-    // setTimeout(() => {
-    //   // this.activeIndex = this.questionTypeList.length-1
-    //   //只跳转不更新数据
-    //   this.controller.changeIndex(this.questionTypeList.length - 1)
-    //   // 只更新数据不跳转
-    //   this.activeIndex = this.questionTypeList.length - 1
-    // }, 1)
-    // http是自己的工具
-    // request是自己封装的方法
-    // <QuestionType[]>是响应结果的类型
-    // string请求参数的类型
-    // method是请求类型，不写默认是get请求
-    this.getQuestionTypeList()
-    //   订阅 - 保证自己能更新
-    //   接收 - 线程内 -eventHub
-    getContext().eventHub.on(UserStoreKey, () => {
-      //   监听到了，然后要干嘛
-      this.getQuestionTypeList()
-    })
-    //   接收 - 线程间 -emitter
-    // emitter.on('13166669999',()=>{
-    //   //   监听到了，然后要干嘛
-    //   this.getQuestionTypeList()
-    // })
-
-  }
-
   build() {
+    // 先加载骨架屏
     if (this.loading) {
       this.SkeletonBuilder()
     } else {
       Stack({ alignContent: Alignment.TopEnd }) {
         Tabs({ controller: this.controller }) {
+          // 设置选择Tab
           ForEach(this.questionTypeList, (item: QuestionType, index: number) => {
             TabContent() {
-              //   TODO:列表代码
-              // 测试QuestionItemComp代码
-              // Column({ space: 6 }) {
-              //   // 测试Tag代码
-              //   // HmTag({difficulty:1})
-              //   // HmTag({difficulty:2})
-              //   // HmTag({difficulty:3})
-              //   // HmTag({difficulty:4})
-              //   // HmTag({difficulty:5})
-              //   // HmTag({text:'Harmony OS NEXT',color:'#ff00ff0f'})
-              //   ForEach(new Array(10).fill(1), () => {
-              //     QuestionItemComp({
-              //       item:{
-              //         id: '100',
-              //         stem: '请说下ArkUI的容器组件有哪些？',
-              //         difficulty: 3,
-              //         likeCount: 23,
-              //         views: 423,
-              //         readFlag: 1
-              //       }
-              //     })
-              //   })
-              // }
               QuestionListComp({
                 typeId: item.id,
                 sort: this.sort,
                 activeIndex: this.activeIndex,
                 index
-              })
-                .layoutWeight(1)
+              }).layoutWeight(1)
             }.tabBar(this.TabBarBuilder(item, index))
           })
         }
-        .barMode(BarMode.Scrollable)
+        .barMode(BarMode.Scrollable) // 每一个TabBar均使用实际布局宽度，超过总长度（横向Tabs的barWidth，纵向Tabs的barHeight）后可滑动。
         .barHeight(44)
-        .scrollable(false)
+        .scrollable(false) // 设置是否可以通过滑动页面进行页面切换
         .onTabBarClick((index) => {
           this.activeIndex = index
         })
         .divider({ strokeWidth: 0.5, color: $r('app.color.common_gray_border') })
 
+        // 筛选
         Row() {
           Image($r('app.media.ic_home_filter'))
             .width(24)
@@ -311,6 +281,7 @@ export struct HomeCategory {
         .height(44)
         .justifyContent(FlexAlign.Center)
         .linearGradient({
+          // 设置渐变
           angle: 90,
           colors: [[this.isDark ? '#00131313' : '#00FFFFFF', 0], [this.isDark ? '#131313' : '#FFFFFF', 0.285]]
         })
@@ -338,10 +309,14 @@ function textTitle() {
 @Component
 struct FilterButton {
   text: string = '默认'
+
   isSort: boolean = false
+
   isNew: boolean = false
+
   @Prop
   isSelected: boolean = false
+
   // 排序模式
   @Prop
   sort: SortType = SortType.Default

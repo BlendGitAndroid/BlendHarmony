@@ -8,9 +8,12 @@ import { photoAccessHelper } from '@kit.MediaLibraryKit'
 @CustomDialog
 export struct QuestionShareDialog {
   @Prop item: QuestionDetail = {} as QuestionDetail
+
   @StorageProp(UserStoreKey) user: User = {} as User
+
   controller: CustomDialogController
 
+  // 先截图,再保存
   async saveImage() {
     // 1.截图
     const pixelMap = await componentSnapshot.get('share')
@@ -67,7 +70,7 @@ export struct QuestionShareDialog {
           .width('100%')
           .lineHeight(24)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
-        QRCode(this.item.id)
+        QRCode(this.item.id)// 生成二维码
           .width(160)
           .height(160)
         Text('扫码查看答案')
@@ -86,6 +89,7 @@ export struct QuestionShareDialog {
 
 
       Row() {
+        // 安全保存控件
         SaveButton({
           icon: SaveIconStyle.FULL_FILLED,
           text: SaveDescription.SAVE_IMAGE,

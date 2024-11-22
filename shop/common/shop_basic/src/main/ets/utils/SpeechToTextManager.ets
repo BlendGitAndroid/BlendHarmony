@@ -1,9 +1,10 @@
-import { speechRecognizer } from "@kit.CoreSpeechKit"
+import { speechRecognizer } from '@kit.CoreSpeechKit'
 import { Logger } from './Logger'
+import { util } from '@kit.ArkTS'
 
 export class SpeechToTextMananger {
   engine: speechRecognizer.SpeechRecognitionEngine | null = null
-  sessionId: string = "123456"
+  sessionId: string = util.generateRandomUUID()
   textCallBack?: (text: string) => void
 
   // 创建语音识别引擎

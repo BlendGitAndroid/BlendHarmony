@@ -1,20 +1,26 @@
 import { router } from '@kit.ArkUI'
 import { HmClockIn } from '../common/components'
-import { auth, formatTime, http, logger, requestClockIn, UserStoreKey } from '../common/utils'
+import { auth, formatTime, requestClockIn, UserStoreKey } from '../common/utils'
 import { statusBar } from '../common/utils/StatusBar'
 import { User } from '../model'
 
 interface Nav {
   icon: ResourceStr
+
   name: string
+
   onClick?: () => void
+
   other?: string
 }
 
 interface Tool {
   icon: ResourceStr
+
   name: string
+
   value?: string
+
   onClick?: () => void
 }
 
@@ -22,6 +28,7 @@ interface Tool {
 export struct MinePage {
   @StorageProp('topHeight')
   topHeight: number = 0
+
   @StorageProp(UserStoreKey)
   user: User = {} as User
 
@@ -83,14 +90,6 @@ export struct MinePage {
     })
   }
 
-  aboutToAppear(): void {
-    // 创建一次！
-  }
-
-  onPageShow(): void {
-    //   不生效！
-  }
-
   build() {
     Column({ space: 16 }) {
       Row({ space: 12 }) {
@@ -116,9 +115,9 @@ export struct MinePage {
                 .aspectRatio(1)
                 .fillColor($r('app.color.common_gray_01'))
             }
-            .onClick(()=>{
+            .onClick(() => {
               auth.checkAuth({
-                url:'@bundle:com.blend.harmony1/interview/ets/pages/SettingPage'
+                url: '@bundle:com.blend.harmony1/interview/ets/pages/SettingPage'
               })
             })
           }
@@ -166,7 +165,6 @@ export struct MinePage {
           name: '累计学时',
           other: formatTime(this.user.totalTime),
           onClick: () => {
-            // TODO
             auth.checkAuth(() => {
               router.pushUrl({
                 url: '@bundle:com.blend.harmony1/interview/ets/pages/StudyTimePage'
@@ -182,7 +180,6 @@ export struct MinePage {
       Column() {
         this.toolsBuilder({
           icon: $r('app.media.ic_mine_notes'), name: '开发常用词', onClick: () => {
-            // TODO
             router.pushUrl({
               url: '@bundle:com.blend.harmony1/interview/ets/pages/WordPage'
             })
@@ -207,7 +204,9 @@ export struct MinePage {
         this.toolsBuilder({ icon: $r('app.media.ic_mine_info'), name: '关于我们' })
         this.toolsBuilder({
           icon: $r('app.media.ic_mine_setting'), name: '设置', onClick: () => {
-            // TODO
+            auth.checkAuth({
+              url: '@bundle:com.blend.harmony1/interview/ets/pages/SettingPage'
+            })
           }
         })
       }

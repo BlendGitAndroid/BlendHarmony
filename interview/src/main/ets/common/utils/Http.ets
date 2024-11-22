@@ -1,22 +1,7 @@
-// 目标：axios二次封装
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from '@ohos/axios'
 import { promptAction, router } from '@kit.ArkUI'
-import { QuestionItem, User } from '../../model'
-import { QuestionType } from '../../views/Home/HomeCategory'
-import { buffer } from '@kit.ArkTS'
+import { User } from '../../model'
 import { auth } from '.'
-
-// 1.后台给的数据结构定死了
-// success boolean 成功标识 可选
-// code number code,10000 正常，其他为失败 可选
-// message string 消息 可选
-// data object 响应结果
-interface Res<T> {
-  success: boolean
-  code: number
-  message: string
-  data: T
-}
 
 // 请求跟地址+超时时长配置
 export const baseURL = 'https://api-harmony-teach.itheima.net/'
@@ -28,21 +13,11 @@ const instance = axios.create({
   baseURL,
   timeout
 })
-// 拦截器：
-// 请求:携带token参数
-// 响应：返回结果的处理
-// 请求发送到服务器之前的一次拦截 - 设置请求配置信息
-// 收到服务器响应结果响应之前的一次拦截 - 数据的处理，异常处理
-// 成功 和 失败 两种状态
-// config 请求配置 （请求头，地址，参数等等）
 
-
+// 请求拦截器
 instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  // 业务：.
-  // TODO:携带登录信息..
   const user = auth.getUser()
   if (user.token) {
-    //   添加token
     config.headers.Authorization = `Bearer ${user.token}`
   }
   return config
@@ -53,15 +28,8 @@ instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   return Promise.reject(err)
 })
 
-
+// 返回拦截器
 instance.interceptors.response.use((res: AxiosResponse) => {
-  // TODO:数据的加工处理
-  // 1.接口调通了
-  // 业务成功/业务失败
-  // 返回成功结果 - 返回错误结果
-  // 2.接口没调通
-  // 错误信息
-
   // 返回成功结果
   if (res.data.code === 10000) {
     return res.data.data
@@ -89,12 +57,10 @@ instance.interceptors.response.use((res: AxiosResponse) => {
   return Promise.reject(err)
 })
 
-// ----------------------------------------------------------------------
 class Http {
   // ResponseData是调用时候传递的类型，他表示返回值的类型
   request<ResponseData, RequestData = Object>(config: AxiosRequestConfig<RequestData>) {
-    // 二次封装的核心思想是传递参数，该修改的地方修改
-    // 1.只需要传递响应结果的类型即可
+    // 二次封装的核心思想是传递参数，只需要传递响应结果的类型即可
     return instance<null, ResponseData, RequestData>(config)
   }
 }
