@@ -19,7 +19,7 @@ async function getData(params1: string) {
 
 @Entry
 @Component
-struct TestPage {
+struct TaskPoolCasePage {
   // ---------------1.添加Task函数---------------
   @State
   addTaskResult: string = ''

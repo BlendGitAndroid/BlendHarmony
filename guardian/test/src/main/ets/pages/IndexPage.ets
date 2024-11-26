@@ -120,6 +120,13 @@ struct TestIndexPage {
                 url: main_page + 'pages/WebSocketTestPage'
               })
             })
+
+          Button('taskPool')
+            .onClick(() => {
+              router.pushUrl({
+                url: main_page + 'pages/TaskPoolCasePage'
+              })
+            })
         }
       }
       .width('100%')
