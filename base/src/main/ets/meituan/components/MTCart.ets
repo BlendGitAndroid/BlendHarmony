@@ -48,7 +48,7 @@ export struct MTCart {
             // () => '' // 1.只会渲染一条，因为所有的id都一样
             // (food: FoodItem, index: number) => index.toString() // 2.会产生点前面删除，索引没变的不更新，但是数据会匹配不上，不能以index作为key
             // (food: FoodItem, index: number) => JSON.stringify(food) + index // 3.鸿蒙的KEY生成的标准，item + index，但是会全部刷新
-            (item: FoodItem) => item.id.toString() // 4.唯一的id当成key，删除的时候只要id不变，UI不会重新更新
+            (item: FoodItem, index: number) => item.id.toString() // 4.唯一的id当成key，删除的时候只要id不变，UI不会重新更新
           )
         }.padding({
           top: 10,
